@@ -126,21 +126,9 @@ p { margin: 0 0 1em; }
 }
 
 /* ---------- story ---------- */
-.story {
-  max-width: var(--wrap); margin: 0 auto; padding: 130px 16px;
-  display: grid; grid-template-columns: 1fr 1.2fr; gap: 90px; align-items: center;
-}
-.story-frame {
-  aspect-ratio: 4 / 5; background: var(--navy);
-  display: grid; place-items: center; position: relative; outline: 1px solid var(--gold);
-  outline-offset: -18px;
-}
-.story-emblem { display: flex; flex-direction: column; align-items: center; text-align: center; color: var(--cream); }
-.story-emblem img { width: 168px; height: 168px; margin-bottom: 28px; }
-.story-name { font: italic 400 30px/1.1 var(--serif); }
-.story-est { margin-top: 10px; font: 400 10px/1 var(--sans); letter-spacing: .36em; text-transform: uppercase; color: var(--gold); padding-left: .36em; }
+.story { max-width: 760px; margin: 0 auto; padding: 130px 16px; text-align: center; }
 .story h2 { font-size: clamp(36px, 4.4vw, 56px); margin-bottom: 30px; }
-.story p { color: #3b4254; max-width: 34em; }
+.story p:not(.eyebrow) { color: #3b4254; max-width: 34em; margin-left: auto; margin-right: auto; }
 .signature { font: italic 400 34px/1 var(--serif); color: var(--gold) !important; margin-top: 20px; }
 
 /* ---------- menu ---------- */
@@ -297,10 +285,9 @@ p { margin: 0 0 1em; }
   .wm-mark { width: 40px; height: 40px; }
   .wordmark { gap: 11px; }
   .wm-big { font-size: 28px; }
-  .story, .emballage { grid-template-columns: 1fr; }
+  .emballage { grid-template-columns: 1fr; }
   .hero { padding-top: 70px; padding-bottom: 80px; }
-  .story { padding: 80px 16px; gap: 50px; }
-  .story-frame { aspect-ratio: 1; max-width: 420px; }
+  .story { padding: 80px 16px; }
   .strip ul { grid-template-columns: repeat(2, 1fr); row-gap: 22px; }
   .steps { grid-template-columns: 1fr; }
   .steps li { border-left: 0; border-top: 1px solid var(--line); padding: 30px 0; }
