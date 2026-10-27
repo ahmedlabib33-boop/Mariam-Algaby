@@ -13,8 +13,9 @@ It's a plain HTML/CSS/JS site with no build step, no database and no monthly cos
 
 1. Open `js/menu.js` and set `whatsapp` to Mariam's number in international format, digits only.
    `01012345678` becomes `"201012345678"`.
-2. Set `instagram` to the real account.
-3. Edit the dishes and prices. Each dish has a `cat` (mains / sweets / pastry) and an `icon` (pot / tray / tart / cake / jar).
+2. `whatsapp2` is an optional second number shown in the footer. Set it to `""` to hide it.
+3. Set `instagram` to the real account.
+4. Edit the dishes and prices. Each dish has a `cat` (mains / sweets / pastry) and an `icon` (pot / tray / tart / cake / jar).
 
 ## Hosting on Vercel (free)
 

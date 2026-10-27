@@ -185,7 +185,15 @@
   tomorrow.setDate(tomorrow.getDate() + 1);
   $("orderForm").date.min = isoDate(tomorrow);
 
+  // "201550505386" -> "0155 050 5386"
+  function localNumber(n) { return ("0" + n.slice(2)).replace(/^(\d{4})(\d{3})(\d+)$/, "$1 $2 $3"); }
   $("waLink").href = "https://wa.me/" + M.whatsapp;
+  $("waLink").textContent = localNumber(M.whatsapp);
+  if (M.whatsapp2) {
+    $("waLink2").href = "https://wa.me/" + M.whatsapp2;
+    $("waLink2").textContent = localNumber(M.whatsapp2);
+    $("wa2Row").hidden = false;
+  }
   $("igLink").href = M.instagram;
   $("year").textContent = new Date().getFullYear();
 
