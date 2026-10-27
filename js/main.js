@@ -5,6 +5,7 @@
   var STORE_KEY = "maison-mariam-box";
 
   var ICONS = {
+    plate: '<path d="M8 52h64M14 52a26 24 0 0 1 52 0M40 28v-4M35 24h10"/>',
     pot: '<path d="M14 30h52M18 30v18a8 8 0 0 0 8 8h28a8 8 0 0 0 8-8V30M10 30h4M66 30h4M30 22c0-4 4-4 4-8M40 22c0-4 4-4 4-8M50 22c0-4 4-4 4-8"/>',
     tray: '<path d="M8 40h64l-6 14H14zM16 40c2-8 10-12 24-12s22 4 24 12M28 34h2M38 32h2M48 34h2"/>',
     tart: '<path d="M10 44c0-8 13-14 30-14s30 6 30 14-13 12-30 12-30-4-30-12zM10 44c0 4 13 8 30 8s30-4 30-8M24 36l4 6M38 33l2 7M54 36l-4 6"/>',
@@ -51,7 +52,7 @@
       n++;
       var qty = box[it.id] || 0;
       return '<article class="dish">' +
-        '<div class="dish-art"><svg viewBox="0 0 80 70" aria-hidden="true">' + (ICONS[it.icon] || ICONS.pot) + "</svg>" +
+        '<div class="dish-art"><svg viewBox="0 0 80 70" aria-hidden="true">' + (ICONS[it.icon] || ICONS.plate) + "</svg>" +
           '<span class="dish-no">N° ' + String(n).padStart(2, "0") + "</span></div>" +
         '<div class="dish-body">' +
           '<h3>' + esc(it.name) + '</h3>' +

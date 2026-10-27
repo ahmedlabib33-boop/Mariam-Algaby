@@ -15,7 +15,7 @@ It's a plain HTML/CSS/JS site with no build step, no database and no monthly cos
    `01012345678` becomes `"201012345678"`.
 2. `whatsapp2` is an optional second number shown in the footer. Set it to `""` to hide it.
 3. Set `instagram` to the real account.
-4. Edit the dishes and prices. Each dish has a `cat` (mains / sweets / pastry) and an `icon` (pot / tray / tart / cake / jar).
+4. Edit the dishes and prices. Each dish has a `cat` (mains / pasta / sweets) and an `icon` (plate / pot / tray / tart / cake / jar).
 
 ## Hosting on Vercel (free)
 
