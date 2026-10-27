@@ -176,6 +176,37 @@
       "</div></details>";
   }
 
+  // The PDF is private too, so it is fetched with the password and saved from memory.
+  function downloadPdf() {
+    var btn = $("downloadPdf");
+    $("pdfError").textContent = "";
+    btn.disabled = true;
+    btn.textContent = "Preparing the PDF…";
+    fetch("api/recipes?format=pdf&t=" + Date.now(), { headers: { "x-admin-password": password } })
+      .then(function (res) {
+        if (res.status === 401) { signOut("Your password has changed. Please sign in again."); throw new Error("signed out"); }
+        if (!res.ok) throw new Error("The recipe book isn't available right now. Please try again later.");
+        return res.blob();
+      })
+      .then(function (blob) {
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "Maison-de-Gaby-Recipe-Book.pdf";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+      })
+      .catch(function (err) {
+        if (err.message !== "signed out") $("pdfError").textContent = err.message;
+      })
+      .then(function () {
+        btn.disabled = false;
+        btn.textContent = "Download the recipe book (PDF)";
+      });
+  }
+
   // ---- list -----------------------------------------------------------
   function render() {
     $("empty").hidden = items.length > 0;
@@ -410,6 +441,7 @@
     var b = e.target.closest("[data-tab]");
     if (b) showTab(b.dataset.tab);
   });
+  $("downloadPdf").addEventListener("click", downloadPdf);
   $("recipeList").addEventListener("click", function (e) {
     var step = e.target.closest(".rc-step");
     if (step) step.classList.toggle("done");

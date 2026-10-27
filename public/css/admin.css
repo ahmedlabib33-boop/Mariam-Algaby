@@ -116,6 +116,7 @@ body.admin { background: var(--cream); min-height: 100vh; padding-bottom: 110px;
 
 /* recipes */
 .rc-list { display: grid; gap: 12px; }
+.rc-pdf { margin-top: 18px; }
 .rc { background: var(--paper); border: 1px solid var(--line); }
 .rc summary { list-style: none; cursor: pointer; padding: 18px 20px; display: grid; gap: 4px; }
 .rc summary::-webkit-details-marker { display: none; }
