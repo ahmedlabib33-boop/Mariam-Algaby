@@ -41,7 +41,7 @@
     $("tabs").innerHTML = M.categories.map(function (c) {
       var on = c.id === activeCat;
       return '<button role="tab" aria-selected="' + on + '" class="tab' + (on ? " is-active" : "") +
-        '" data-cat="' + c.id + '"><span class="tab-fr">' + esc(c.fr) + '</span><span class="tab-en">' + esc(c.en) + "</span></button>";
+        '" data-cat="' + c.id + '"><span class="tab-fr">' + esc(c.name) + '</span><span class="tab-en">' + esc(c.note) + "</span></button>";
     }).join("");
   }
 
@@ -55,13 +55,12 @@
           '<span class="dish-no">N° ' + String(n).padStart(2, "0") + "</span></div>" +
         '<div class="dish-body">' +
           '<h3>' + esc(it.name) + '</h3>' +
-          '<p class="dish-ar" lang="ar" dir="rtl">' + esc(it.ar) + "</p>" +
           '<p class="dish-desc">' + esc(it.desc) + "</p>" +
           '<div class="dish-meta"><span>' + esc(it.portion) + '</span><span class="price">' + money(it.price) + "</span></div>" +
           (qty
             ? '<div class="stepper" data-id="' + it.id + '"><button data-act="dec" aria-label="Remove one">−</button><span>' + qty +
               '</span><button data-act="inc" aria-label="Add one">+</button></div>'
-            : '<button class="btn btn-outline btn-block" data-act="add" data-id="' + it.id + '">Ajouter à ma boîte</button>') +
+            : '<button class="btn btn-outline btn-block" data-act="add" data-id="' + it.id + '">Add to my box</button>') +
         "</div></article>";
     }).join("");
   }
@@ -143,7 +142,7 @@
       return;
     }
     var t = totals();
-    var lines = ["Bonjour Maison Mariam! I'd like to order:", ""];
+    var lines = ["Hello Maison Mariam! I'd like to order:", ""];
     Object.keys(box).forEach(function (id) {
       var it = byId(id);
       lines.push("• " + box[id] + " × " + it.name + " (" + it.portion + ") = " + money(it.price * box[id]));
@@ -154,7 +153,7 @@
       "Area: " + f.area.value);
     if (f.address.value.trim()) lines.push("Address: " + f.address.value.trim());
     if (f.note.value.trim()) lines.push("Note: " + f.note.value.trim());
-    lines.push("", "Merci!");
+    lines.push("", "Thank you!");
 
     var url = "https://wa.me/" + M.whatsapp + "?text=" + encodeURIComponent(lines.join("\n"));
     window.open(url, "_blank", "noopener");

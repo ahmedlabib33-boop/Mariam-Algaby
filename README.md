@@ -1,6 +1,6 @@
 # Maison Mariam
 
-Website for **Maison Mariam**, home-made food by Mariam Algaby, Héliopolis (Masr El Gedida), Cairo.
+Website for **Maison Mariam**, home-made food by Mariam Algaby, Heliopolis (Masr El Gedida), Cairo.
 
 It's a plain HTML/CSS/JS site with no build step, no database and no monthly cost. Customers fill a box from the menu and press **Send order on WhatsApp**. The full order (dishes, total, name, date, area, address, gift note) opens in WhatsApp, already written out.
 
@@ -14,7 +14,7 @@ It's a plain HTML/CSS/JS site with no build step, no database and no monthly cos
 1. Open `js/menu.js` and set `whatsapp` to Mariam's number in international format, digits only.
    `01012345678` becomes `"201012345678"`.
 2. Set `instagram` to the real account.
-3. Edit the dishes and prices. Each dish has a `cat` (plats / douceurs / patisserie) and an `icon` (pot / tray / tart / cake / jar).
+3. Edit the dishes and prices. Each dish has a `cat` (mains / sweets / pastry) and an `icon` (pot / tray / tart / cake / jar).
 
 ## Hosting on Vercel (free)
 
