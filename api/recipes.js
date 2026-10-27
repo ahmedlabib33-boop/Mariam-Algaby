@@ -75,7 +75,8 @@ export async function PUT(request) {
   if (!body || !Array.isArray(body.recipes) || body.recipes.length > 100) {
     return Response.json({ error: "The recipes could not be read." }, { status: 400, headers: noStore });
   }
-  const json = JSON.stringify({ recipes: body.recipes, updatedAt: new Date().toISOString() });
+  const guide = body.guide && typeof body.guide === "object" && !Array.isArray(body.guide) ? body.guide : null;
+  const json = JSON.stringify({ recipes: body.recipes, guide, updatedAt: new Date().toISOString() });
   if (json.length > 500000) return Response.json({ error: "The recipe book is too large." }, { status: 413, headers: noStore });
 
   await put(path, json, {

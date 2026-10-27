@@ -143,11 +143,48 @@
       var list = data.recipes || [];
       $("recipesMsg").hidden = list.length > 0;
       $("recipesMsg").textContent = "No recipes yet.";
-      $("recipeList").innerHTML = list.map(renderRecipe).join("");
+      $("recipeList").innerHTML = (data.guide ? renderGuide(data.guide) : "") + list.map(renderRecipe).join("");
     }).catch(function (err) {
       if (err.message === "signed out") return;
       $("recipesMsg").textContent = "Your recipes couldn't be loaded. Please try again in a moment.";
     });
+  }
+
+  function table(head, rows, cls) {
+    return '<table class="' + cls + '"><thead><tr>' + head.map(function (h) { return "<th>" + esc(h) + "</th>"; }).join("") +
+      "</tr></thead><tbody>" + rows.map(function (row) {
+        return "<tr>" + row.map(function (cell) { return "<td>" + esc(cell) + "</td>"; }).join("") + "</tr>";
+      }).join("") + "</tbody></table>";
+  }
+
+  function renderGuide(g) {
+    return '<details class="rc rc-guide">' +
+      '<summary><span class="rc-name">' + esc(g.title) + '</span><span class="rc-src">Costs, prices and suppliers</span></summary>' +
+      '<div class="rc-body">' +
+        (g.intro ? '<p class="rc-intro">' + esc(g.intro) + "</p>" : "") +
+        (g.summary ? "<h3>Suggested prices</h3>" + table(["Dessert", "Cost", "Now", "Suggested", "Profit", "Margin"], g.summary, "rc-money") : "") +
+        (g.method ? '<p class="rc-note">' + esc(g.method) + "</p>" : "") +
+        (g.places ? "<h3>Where to buy</h3><ul class=\"rc-bullets\">" + g.places.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>" : "") +
+        (g.prices ? "<h3>Ingredient prices</h3>" + table(["Ingredient", "Price", "Source"], g.prices, "rc-money rc-prices") : "") +
+      "</div></details>";
+  }
+
+  function renderCosting(c) {
+    var rows = c.lines.map(function (l) { return [l[0], l[1], l[2] + " EGP"]; });
+    return "<h3>Cost &amp; price</h3>" +
+      '<p class="rc-note">' + esc(c.basis) + "</p>" +
+      table(["Ingredient", "Amount", "Cost"], rows, "rc-money") +
+      '<table class="rc-money rc-total"><tbody>' +
+        "<tr><td>Ingredients</td><td>" + c.ingredients + " EGP</td></tr>" +
+        "<tr><td>Packaging (box, ribbon, seal, card)</td><td>" + c.packaging + " EGP</td></tr>" +
+        "<tr><td>Oven energy</td><td>" + c.energy + " EGP</td></tr>" +
+        '<tr class="strong"><td>Total cost</td><td>' + c.total + " EGP</td></tr>" +
+        '<tr class="strong gold"><td>Suggested price</td><td>' + c.price.toLocaleString("en-US") + " EGP</td></tr>" +
+        "<tr><td>Profit</td><td>" + c.profit + " EGP (" + c.margin + "% margin)</td></tr>" +
+      "</tbody></table>" +
+      (c.competitors && c.competitors.length ? "<h4>What others charge</h4><ul class=\"rc-bullets\">" +
+        c.competitors.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>" : "") +
+      (c.note ? '<p class="rc-note">' + esc(c.note) + "</p>" : "");
   }
 
   function renderRecipe(r) {
@@ -172,6 +209,7 @@
         '<h3>Method</h3><ol class="rc-steps">' + steps + "</ol>" +
         (r.tips && r.tips.length ? "<h3>Tips</h3>" + list(r.tips, "rc-bullets") : "") +
         (r.storage ? "<h3>Storage</h3><p>" + esc(r.storage) + "</p>" : "") +
+        (r.costing ? renderCosting(r.costing) : "") +
         (r.sourceUrl ? '<p class="rc-link">Source: <a href="' + esc(r.sourceUrl) + '" target="_blank" rel="noopener">' + esc(r.source) + "</a></p>" : "") +
       "</div></details>";
   }
