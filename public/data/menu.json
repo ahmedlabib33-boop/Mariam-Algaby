@@ -6,7 +6,7 @@
       "desc": "Dark chocolate cake with a warm, flowing centre. Warm for 15 seconds before serving.",
       "ingredients": "70% dark chocolate, unsalted butter, whole eggs and extra egg yolks, sugar, a spoonful of plain flour, a pinch of salt. Finished with a dusting of icing sugar. Contains: eggs, dairy, gluten.",
       "portion": "Box of 4",
-      "price": 380,
+      "price": 420,
       "photo": "assets/photos/molten-cake.jpg",
       "soldOut": false
     },
@@ -16,7 +16,7 @@
       "desc": "Dense, fudgy dark-chocolate brownies with a crackly top.",
       "ingredients": "Dark chocolate (60–70% cocoa), unsalted butter, white sugar, light brown sugar, eggs, plain flour, Dutch-process cocoa, a touch of espresso to deepen the chocolate, vanilla, salt. Contains: eggs, dairy, gluten.",
       "portion": "Box of 9",
-      "price": 320,
+      "price": 420,
       "photo": "assets/photos/brownies.jpg",
       "soldOut": false
     },
@@ -26,7 +26,7 @@
       "desc": "Spiced carrot and toasted pecan sponge layered with cream cheese frosting.",
       "ingredients": "Sponge: freshly grated carrots, toasted pecans, plain flour, sugar, sunflower oil, buttermilk, eggs, cinnamon, vanilla, baking powder, baking soda, salt. Frosting: cream cheese, unsalted butter, icing sugar, vanilla. Contains: eggs, dairy, gluten, nuts (pecans).",
       "portion": "20 cm cake",
-      "price": 600,
+      "price": 790,
       "photo": "assets/photos/carrot-cake.jpg",
       "soldOut": false
     },
@@ -36,7 +36,7 @@
       "desc": "Ten thin layers of burnt-honey cake with dulce de leche cream, rested overnight to soften.",
       "ingredients": "Cake layers: honey (part of it slowly caramelised), unsalted butter, sugar, eggs, plain flour, baking soda, cinnamon, salt. Cream: fresh whipping cream, dulce de leche, burnt honey, a pinch of salt. Coated in toasted honey-cake crumbs. Contains: eggs, dairy, gluten.",
       "portion": "20 cm cake",
-      "price": 650,
+      "price": 1050,
       "photo": "assets/photos/honey-cake.jpg",
       "soldOut": false
     },
@@ -46,7 +46,7 @@
       "desc": "Light, airy Japanese-style cheesecake that melts in the mouth.",
       "ingredients": "Cream cheese, fresh milk, unsalted butter, egg yolks, a meringue of egg whites and sugar, plain flour, cornflour, a squeeze of lemon. Baked slowly in a water bath, topped with fresh berries and icing sugar. Contains: eggs, dairy, gluten.",
       "portion": "20 cm cake",
-      "price": 550,
+      "price": 600,
       "photo": "assets/photos/souffle-cheesecake.jpg",
       "soldOut": false
     }
