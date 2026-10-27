@@ -9,6 +9,7 @@ body.admin { background: var(--cream); min-height: 100vh; padding-bottom: 110px;
   padding: 14px 16px; background: var(--paper); border-bottom: 1px solid var(--line);
 }
 .ad-head .wordmark { align-items: flex-start; }
+.ad-head .wm-small { padding-left: 0; }
 .ad-head .wm-big { font-size: 26px; }
 .ad-links { display: flex; gap: 18px; align-items: center; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; }
 .ad-links a { text-decoration: none; }
