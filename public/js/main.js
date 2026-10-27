@@ -165,7 +165,7 @@
       return;
     }
     var t = totals();
-    var lines = ["Hello Maison Mariam! I'd like to order:", ""];
+    var lines = ["Hello Maison de Gaby! I'd like to order:", ""];
     Object.keys(box).forEach(function (id) {
       var it = byId(id);
       lines.push("• " + box[id] + " × " + it.name + " (" + it.portion + ") = " + money(it.price * box[id]));

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="32" fill="#1E2A44"/>
   <circle cx="32" cy="32" r="27" fill="none" stroke="#B08D57" stroke-width="1.5"/>
-  <text x="32" y="44" text-anchor="middle" font-family="Didot, Georgia, serif" font-size="34" font-style="italic" fill="#F4EEE3">M</text>
+  <text x="32" y="44" text-anchor="middle" font-family="Didot, Georgia, serif" font-size="34" font-style="italic" fill="#F4EEE3">G</text>
 </svg>

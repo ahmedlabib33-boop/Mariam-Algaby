@@ -1,6 +1,6 @@
-# Maison Mariam
+# Maison de Gaby
 
-Website for **Maison Mariam**, a home patisserie by Mariam Algaby, Heliopolis (Masr El Gedida), Cairo.
+Website for **Maison de Gaby**, a home patisserie by Mariam Algaby, Heliopolis (Masr El Gedida), Cairo.
 Live at https://maison-mariam.vercel.app
 
 Customers fill a box from the menu and press **Send order on WhatsApp**. The full order (items, total,
