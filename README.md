@@ -1,12 +1,12 @@
 # Maison Mariam
 
-Website for **Maison Mariam**, home-made food by Mariam Algaby, Heliopolis (Masr El Gedida), Cairo.
+Website for **Maison Mariam**, a home patisserie by Mariam Algaby, Heliopolis (Masr El Gedida), Cairo.
 
-It's a plain HTML/CSS/JS site with no build step, no database and no monthly cost. Customers fill a box from the menu and press **Send order on WhatsApp**. The full order (dishes, total, name, date, area, address, gift note) opens in WhatsApp, already written out.
+It's a plain HTML/CSS/JS site with no build step, no database and no monthly cost. Customers fill a box from the menu and press **Send order on WhatsApp**. The full order (items, total, name, date, area, address, gift note) opens in WhatsApp, already written out.
 
 - `index.html`: home, story, menu, how to order, the box (cart)
 - `packaging.html`: the packaging guide (box, seal, label, card, bag, colours, fonts)
-- `js/menu.js`: **the only file you need to edit**: WhatsApp number, Instagram, dishes, prices
+- `js/menu.js`: **the only file you need to edit**: WhatsApp number, Instagram, cakes and prices
 - `assets/`: monogram and favicon
 
 ## Before going live
@@ -15,7 +15,7 @@ It's a plain HTML/CSS/JS site with no build step, no database and no monthly cos
    `01012345678` becomes `"201012345678"`.
 2. `whatsapp2` is an optional second number shown in the footer. Set it to `""` to hide it.
 3. Set `instagram` to the real account.
-4. Edit the dishes and prices. Each dish has a `cat` (mains / pasta / sweets) and an `icon` (plate / pot / tray / tart / cake / jar).
+4. Edit the items and prices. Each item has a `cat` (cakes / tarts / treats) and an `icon` (cake / tart / eclair / roll / macaron / cookie / brownie / jar).
 
 ## Hosting on Vercel (free)
 
