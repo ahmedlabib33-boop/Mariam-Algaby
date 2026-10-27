@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Menu Editor · Maison Mariam</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1E2A44">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin">
+
+  <header class="ad-head">
+    <a class="wordmark" href="./" target="_blank" rel="noopener" aria-label="Open the website">
+      <span class="wm-small">Maison</span>
+      <span class="wm-big">Mariam</span>
+    </a>
+    <nav class="ad-links">
+      <a href="./" target="_blank" rel="noopener">View site ↗</a>
+      <button type="button" class="link-btn" id="signOut" hidden>Sign out</button>
+    </nav>
+  </header>
+
+  <!-- SIGN IN -->
+  <main class="ad-main" id="login" hidden>
+    <form class="ad-card login-card" id="loginForm">
+      <p class="eyebrow">Menu editor</p>
+      <h1>Welcome, <em>Mariam</em></h1>
+      <p class="muted">Enter your password to edit the menu.</p>
+      <label class="field">Password
+        <input type="password" name="password" autocomplete="current-password" required>
+      </label>
+      <label class="check"><input type="checkbox" name="remember" checked> Keep me signed in on this phone</label>
+      <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+      <p class="form-error" id="loginError" role="alert"></p>
+    </form>
+  </main>
+
+  <!-- EDITOR -->
+  <main class="ad-main" id="editor" hidden>
+    <div class="ad-intro">
+      <p class="eyebrow">Menu editor</p>
+      <h1>Your <em>menu</em></h1>
+      <p class="muted">Tap a dessert to edit it. Use the switch to mark it sold out. Press <strong>Publish</strong> to put your changes on the website.</p>
+    </div>
+
+    <ul class="ad-list" id="list"></ul>
+    <p class="ad-empty muted" id="empty" hidden>No desserts yet. Add your first one below.</p>
+
+    <button type="button" class="btn btn-ghost btn-block" id="addItem">+ Add a dessert</button>
+  </main>
+
+  <footer class="ad-bar" id="bar" hidden>
+    <p class="ad-status" id="status" role="status">Everything is published.</p>
+    <button type="button" class="btn btn-primary" id="publish" disabled>Publish</button>
+  </footer>
+
+  <!-- EDIT ONE DESSERT -->
+  <dialog class="sheet" id="sheet" aria-labelledby="sheetTitle">
+    <form method="dialog" id="itemForm" novalidate>
+      <header class="sheet-head">
+        <h2 id="sheetTitle">Edit dessert</h2>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="Close">×</button>
+      </header>
+
+      <div class="sheet-body">
+        <div class="photo-pick">
+          <div class="photo-frame" id="photoFrame"><span class="muted">No photo yet</span></div>
+          <label class="btn btn-outline btn-block photo-btn">
+            <span id="photoBtnText">Choose a photo</span>
+            <input type="file" accept="image/*" id="photoInput" hidden>
+          </label>
+          <p class="small muted" id="photoNote">Landscape photos look best. They're resized for you automatically.</p>
+        </div>
+
+        <label class="field">Name
+          <input type="text" name="name" maxlength="60" required placeholder="e.g. Molten Cake">
+        </label>
+        <label class="field">Description
+          <textarea name="desc" rows="3" maxlength="300" placeholder="One or two short sentences"></textarea>
+        </label>
+        <div class="field-row">
+          <label class="field">Size
+            <input type="text" name="portion" maxlength="40" placeholder="e.g. Box of 4">
+          </label>
+          <label class="field">Price (EGP)
+            <input type="number" name="price" min="0" step="5" inputmode="numeric" required placeholder="0">
+          </label>
+        </div>
+        <label class="check"><input type="checkbox" name="soldOut"> Sold out for now</label>
+        <p class="form-error" id="itemError" role="alert"></p>
+      </div>
+
+      <footer class="sheet-foot">
+        <button type="button" class="btn btn-danger" id="deleteItem">Delete</button>
+        <button type="submit" class="btn btn-primary" id="doneItem">Done</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "id": "molten",
+      "name": "Molten Cake",
+      "desc": "Dark chocolate cake with a warm, flowing centre. Warm for 15 seconds before serving.",
+      "portion": "Box of 4",
+      "price": 380,
+      "photo": "assets/photos/molten-cake.jpg",
+      "soldOut": false
+    },
+    {
+      "id": "brownies",
+      "name": "Brownies",
+      "desc": "Dense, fudgy dark-chocolate brownies with a crackly top.",
+      "portion": "Box of 9",
+      "price": 320,
+      "photo": "assets/photos/brownies.jpg",
+      "soldOut": false
+    },
+    {
+      "id": "carrot",
+      "name": "Carrot Cake",
+      "desc": "Spiced carrot and walnut sponge layered with cream cheese frosting.",
+      "portion": "20 cm cake",
+      "price": 600,
+      "photo": "assets/photos/carrot-cake.jpg",
+      "soldOut": false
+    },
+    {
+      "id": "honey",
+      "name": "Honey Cake",
+      "desc": "Thin honey-caramel layers with a light, tangy cream, rested overnight to soften.",
+      "portion": "20 cm cake",
+      "price": 650,
+      "photo": "assets/photos/honey-cake.jpg",
+      "soldOut": false
+    },
+    {
+      "id": "souffle",
+      "name": "Soufflé Cheesecake",
+      "desc": "Light, airy Japanese-style cheesecake that melts in the mouth.",
+      "portion": "20 cm cake",
+      "price": 550,
+      "photo": "assets/photos/souffle-cheesecake.jpg",
+      "soldOut": false
+    }
+  ]
+}

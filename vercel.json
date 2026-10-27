@@ -1,9 +1,14 @@
 {
+  "outputDirectory": "public",
   "cleanUrls": true,
   "headers": [
     {
-      "source": "/(css|js|assets)/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600" }]
+      "source": "/(css|js)/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=300" }]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }]
     }
   ]
 }

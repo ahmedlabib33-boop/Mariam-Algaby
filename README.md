@@ -1,42 +1,59 @@
 # Maison Mariam
 
 Website for **Maison Mariam**, a home patisserie by Mariam Algaby, Heliopolis (Masr El Gedida), Cairo.
+Live at https://maison-mariam.vercel.app
 
-It's a plain HTML/CSS/JS site with no build step, no database and no monthly cost. Customers fill a box from the menu and press **Send order on WhatsApp**. The full order (items, total, name, date, area, address, gift note) opens in WhatsApp, already written out.
+Customers fill a box from the menu and press **Send order on WhatsApp**. The full order (items, total,
+name, date, area, address, gift note) opens in WhatsApp, already written out.
 
-- `index.html`: home, story, menu, how to order, the box (cart)
-- `packaging.html`: the packaging guide (box, seal, label, card, bag, colours, fonts)
-- `js/menu.js`: **the only file you need to edit**: WhatsApp number, Instagram, cakes and prices
-- `assets/`: monogram, favicon and dessert photos
+## Editing the menu: /admin
 
-## Before going live
+Mariam edits the menu herself at **https://maison-mariam.vercel.app/admin**, from her phone or a computer.
 
-1. Open `js/menu.js` and set `whatsapp` to Mariam's number in international format, digits only.
-   `01012345678` becomes `"201012345678"`.
-2. `whatsapp2` is an optional second number shown in the footer. Set it to `""` to hide it.
-3. Set `instagram` to the real account.
-4. Edit the desserts and prices. Each one has a `photo` in `assets/photos/` (landscape 4:3, about 900 × 675).
+- Sign in with the admin password (tick "Keep me signed in on this phone" so it's asked only once).
+- Tap a dessert to change its photo, name, description, size or price.
+- Use the **Available** switch to mark a dessert sold out for the day. It stays on the site, greyed out, and can't be ordered.
+- **↑ ↓** change the order, **+ Add a dessert** adds a new one, and **Delete** is inside each dessert.
+- Press **Publish**. Changes are live on the website within a few seconds.
 
-## Hosting on Vercel (free)
+Photos taken on the phone are shrunk automatically before upload. Every published menu is also kept as a
+backup in the Blob store under `menu/history/`.
 
-1. Sign in at vercel.com with GitHub (the free Hobby plan is enough).
-2. **Add New → Project**, then import this repository. Framework preset: **Other**. No build command.
-3. Deploy. You get a free address such as `maison-mariam.vercel.app`.
-   Every push to GitHub updates the site automatically.
-4. Optional: buy a domain such as `maisonmariam.com` and add it under **Settings → Domains**.
+**Changing the password:** Vercel → project `maison-mariam` → Settings → Environment Variables →
+`ADMIN_PASSWORD`, then redeploy.
 
-## Run locally
+## How it works
+
+- `public/`: the website (plain HTML/CSS/JS, no build step)
+  - `index.html`, `packaging.html`, `admin.html`
+  - `js/menu.js`: WhatsApp numbers and Instagram link
+  - `data/menu.json`: the starting menu, used until the first publish from /admin
+- `api/`: three small Vercel Functions
+  - `menu.js`: `GET` returns the published menu, `POST` publishes it (password required)
+  - `upload.js`: stores a dessert photo (password required)
+  - `login.js`: checks the password
+- Storage: a Vercel Blob store (`maison-mariam-menu`) holds `menu/menu.json` and the uploaded photos.
+
+Vercel settings: `BLOB_READ_WRITE_TOKEN` (added automatically when the Blob store was connected) and
+`ADMIN_PASSWORD`.
+
+## Hosting
+
+Hosted on Vercel's free plan. Every push to the production branch redeploys the site. To use a custom domain,
+such as `maisonmariam.com`, add it under **Settings → Domains**.
+
+## Previewing locally
 
 ```sh
-python3 -m http.server 8000
-# open http://localhost:8000
+cd public && python3 -m http.server 8000
+# open http://localhost:8000 (the menu comes from data/menu.json; /admin needs Vercel)
 ```
 
 ## Photos
 
-The dessert photos in `assets/photos/` are stand-ins from Unsplash (free for commercial use under the
-[Unsplash License](https://unsplash.com/license)). Replace them with photos of Mariam's own desserts,
-keeping the same file names, before the business grows. Customers should see what they will get.
+The starting photos in `public/assets/photos/` are stand-ins from Unsplash (free for commercial use under the
+[Unsplash License](https://unsplash.com/license)). Replace them with photos of Mariam's own desserts from
+/admin. Customers should see what they will get.
 
 - molten-cake.jpg: https://unsplash.com/photos/chocolate-cake-on-white-ceramic-plate-Pzjez86SsvQ
 - brownies.jpg: https://unsplash.com/photos/a-pile-of-brownies-sitting-on-top-of-a-white-plate-LjtviHokbr4 (Anna Przepiorka)

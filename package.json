@@ -1,0 +1,9 @@
+{
+  "name": "maison-mariam",
+  "private": true,
+  "type": "module",
+  "description": "Maison Mariam website: static site in public/, menu API in api/",
+  "dependencies": {
+    "@vercel/blob": "^2.8.2"
+  }
+}

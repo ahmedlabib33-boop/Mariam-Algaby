@@ -3,6 +3,7 @@
 
   var M = window.MAISON;
   var STORE_KEY = "maison-mariam-box";
+  M.items = [];
 
   // ---- state ----------------------------------------------------------
   var box = load();
@@ -27,30 +28,37 @@
   var $ = function (id) { return document.getElementById(id); };
 
   // ---- menu -----------------------------------------------------------
-  var activeCat = M.categories[0].id;
-
-  function renderTabs() {
-    $("tabs").hidden = M.categories.length < 2;
-    $("tabs").innerHTML = M.categories.map(function (c) {
-      var on = c.id === activeCat;
-      return '<button role="tab" aria-selected="' + on + '" class="tab' + (on ? " is-active" : "") +
-        '" data-cat="' + c.id + '"><span class="tab-fr">' + esc(c.name) + '</span><span class="tab-en">' + esc(c.note) + "</span></button>";
-    }).join("");
+  // The live menu is edited at /admin and served by /api/menu.
+  // data/menu.json is the starting menu (and what local previews use).
+  function loadMenu() {
+    function items(res) {
+      if (!res.ok) throw new Error(res.status);
+      return res.json().then(function (d) {
+        if (!d || !Array.isArray(d.items)) throw new Error("no items");
+        return d.items;
+      });
+    }
+    return fetch("api/menu").then(items)
+      .catch(function () { return fetch("data/menu.json").then(items); })
+      .catch(function () { return []; });
   }
 
   function renderMenu() {
     var n = 0;
-    $("menuGrid").innerHTML = M.items.filter(function (it) { return it.cat === activeCat; }).map(function (it) {
+    $("menuGrid").innerHTML = M.items.map(function (it) {
       n++;
       var qty = box[it.id] || 0;
-      return '<article class="dish">' +
-        '<div class="dish-art"><img src="' + esc(it.photo) + '" alt="' + esc(it.name) + '" width="900" height="675" loading="lazy">' +
-          '<span class="dish-no">N° ' + String(n).padStart(2, "0") + "</span></div>" +
+      return '<article class="dish' + (it.soldOut ? " is-sold-out" : "") + '">' +
+        '<div class="dish-art">' + (it.photo ? '<img src="' + esc(it.photo) + '" alt="' + esc(it.name) + '" width="900" height="675" loading="lazy">' : "") +
+          '<span class="dish-no">N° ' + String(n).padStart(2, "0") + "</span>" +
+          (it.soldOut ? '<span class="sold-tag">Sold out today</span>' : "") + "</div>" +
         '<div class="dish-body">' +
           '<h3>' + esc(it.name) + '</h3>' +
           '<p class="dish-desc">' + esc(it.desc) + "</p>" +
           '<div class="dish-meta"><span>' + esc(it.portion) + '</span><span class="price">' + money(it.price) + "</span></div>" +
-          (qty
+          (it.soldOut
+            ? '<button class="btn btn-outline btn-block" disabled>Sold out</button>'
+            : qty
             ? '<div class="stepper" data-id="' + it.id + '"><button data-act="dec" aria-label="Remove one">−</button><span>' + qty +
               '</span><button data-act="inc" aria-label="Add one">+</button></div>'
             : '<button class="btn btn-outline btn-block" data-act="add" data-id="' + it.id + '">Add to my box</button>') +
@@ -63,7 +71,7 @@
     var count = 0, sum = 0;
     Object.keys(box).forEach(function (id) {
       var it = byId(id);
-      if (!it) { delete box[id]; return; }
+      if (!it || it.soldOut) { delete box[id]; return; }
       count += box[id];
       sum += box[id] * it.price;
     });
@@ -154,9 +162,6 @@
 
   // ---- wire up --------------------------------------------------------
   document.addEventListener("click", function (e) {
-    var tab = e.target.closest("[data-cat]");
-    if (tab) { activeCat = tab.dataset.cat; renderTabs(); renderMenu(); return; }
-
     var btn = e.target.closest("[data-act]");
     if (btn) {
       var id = btn.dataset.id || btn.closest("[data-id]").dataset.id;
@@ -190,9 +195,11 @@
   $("igLink").href = M.instagram;
   $("year").textContent = new Date().getFullYear();
 
-  renderTabs();
-  renderMenu();
-  // Only animate the cards on first load, not on every add/remove.
-  setTimeout(function () { $("menuGrid").classList.add("ready"); }, 800);
-  renderBox();
+  loadMenu().then(function (items) {
+    M.items = items;
+    renderMenu();
+    // Only animate the cards on first load, not on every add/remove.
+    setTimeout(function () { $("menuGrid").classList.add("ready"); }, 800);
+    renderBox();
+  });
 })();
