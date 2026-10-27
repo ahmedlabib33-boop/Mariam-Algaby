@@ -9,6 +9,9 @@
   var dirty = false;
   var uploading = 0;
   var editing = -1; // index of the dessert open in the sheet
+  var tab = "menu";
+  var menuReady = false;
+  var recipesLoaded = false;
 
   var $ = function (id) { return document.getElementById(id); };
   function esc(s) {
@@ -74,7 +77,10 @@
   function showLogin(message) {
     $("login").hidden = false;
     $("editor").hidden = true;
+    $("recipes").hidden = true;
+    $("tabs").hidden = true;
     $("bar").hidden = true;
+    recipesLoaded = false;
     $("signOut").hidden = true;
     $("loginError").textContent = message || "";
     $("loginForm").password.focus();
@@ -83,14 +89,16 @@
   function showEditor() {
     $("login").hidden = true;
     $("signOut").hidden = false;
-    $("editor").hidden = false;
+    $("tabs").hidden = false;
     $("loadError").hidden = true;
     $("retryLoad").disabled = true;
+    menuReady = false;
+    showTab(tab);
     loadMenu().then(function (list) {
       items = list;
+      menuReady = true;
       $("list").hidden = false;
       $("addItem").hidden = false;
-      $("bar").hidden = false;
       setDirty(false);
       render();
     }).catch(function () {
@@ -98,9 +106,9 @@
       $("list").hidden = true;
       $("empty").hidden = true;
       $("addItem").hidden = true;
-      $("bar").hidden = true;
       $("loadError").hidden = false;
     }).then(function () {
+      showTab(tab);
       $("retryLoad").disabled = false;
     });
   }
@@ -111,6 +119,61 @@
     forgetPassword();
     password = "";
     showLogin(message);
+  }
+
+  function showTab(name) {
+    tab = name;
+    $("editor").hidden = name !== "menu";
+    $("recipes").hidden = name !== "recipes";
+    $("bar").hidden = !(name === "menu" && menuReady);
+    Array.prototype.forEach.call(document.querySelectorAll(".ad-tab"), function (b) {
+      var on = b.dataset.tab === name;
+      b.classList.toggle("is-active", on);
+      b.setAttribute("aria-selected", on);
+    });
+    if (name === "recipes" && !recipesLoaded) loadRecipes();
+  }
+
+  // ---- recipes (private, read-only here) --------------------------------
+  function loadRecipes() {
+    $("recipesMsg").hidden = false;
+    $("recipesMsg").textContent = "Loading your recipes…";
+    api("api/recipes?t=" + Date.now()).then(function (data) {
+      recipesLoaded = true;
+      var list = data.recipes || [];
+      $("recipesMsg").hidden = list.length > 0;
+      $("recipesMsg").textContent = "No recipes yet.";
+      $("recipeList").innerHTML = list.map(renderRecipe).join("");
+    }).catch(function (err) {
+      if (err.message === "signed out") return;
+      $("recipesMsg").textContent = "Your recipes couldn't be loaded. Please try again in a moment.";
+    });
+  }
+
+  function renderRecipe(r) {
+    function list(items, cls) {
+      return items && items.length ? '<ul class="' + cls + '">' + items.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>" : "";
+    }
+    var meta = [r.yield, r.time, r.oven].filter(Boolean).map(function (m) { return '<span class="rc-chip">' + esc(m) + "</span>"; }).join("");
+    var groups = (r.ingredients || []).map(function (g) {
+      return (g.title ? "<h4>" + esc(g.title) + "</h4>" : "") + '<table class="rc-ingr">' +
+        g.items.map(function (row) { return "<tr><td>" + esc(row[0]) + "</td><td>" + esc(row[1]) + "</td></tr>"; }).join("") + "</table>";
+    }).join("");
+    var steps = (r.steps || []).map(function (s) {
+      return '<li class="rc-step">' + (s.title ? "<strong>" + esc(s.title) + ".</strong> " : "") + esc(s.text) + "</li>";
+    }).join("");
+    return '<details class="rc">' +
+      '<summary><span class="rc-name">' + esc(r.name) + '</span><span class="rc-src">' + esc(r.source) + "</span></summary>" +
+      '<div class="rc-body">' +
+        (meta ? '<div class="rc-meta">' + meta + "</div>" : "") +
+        (r.intro ? '<p class="rc-intro">' + esc(r.intro) + "</p>" : "") +
+        (r.equipment && r.equipment.length ? "<h3>Equipment</h3>" + list(r.equipment, "rc-bullets") : "") +
+        "<h3>Ingredients</h3>" + groups +
+        '<h3>Method</h3><ol class="rc-steps">' + steps + "</ol>" +
+        (r.tips && r.tips.length ? "<h3>Tips</h3>" + list(r.tips, "rc-bullets") : "") +
+        (r.storage ? "<h3>Storage</h3><p>" + esc(r.storage) + "</p>" : "") +
+        (r.sourceUrl ? '<p class="rc-link">Source: <a href="' + esc(r.sourceUrl) + '" target="_blank" rel="noopener">' + esc(r.source) + "</a></p>" : "") +
+      "</div></details>";
   }
 
   // ---- list -----------------------------------------------------------
@@ -343,6 +406,14 @@
   });
 
   $("publish").addEventListener("click", publish);
+  $("tabs").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-tab]");
+    if (b) showTab(b.dataset.tab);
+  });
+  $("recipeList").addEventListener("click", function (e) {
+    var step = e.target.closest(".rc-step");
+    if (step) step.classList.toggle("done");
+  });
   $("retryLoad").addEventListener("click", showEditor);
 
   window.addEventListener("beforeunload", function (e) {

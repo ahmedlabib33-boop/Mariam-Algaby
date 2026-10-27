@@ -22,8 +22,9 @@ backup in the Blob store under `menu/history/`.
 **Changing the password:** Vercel → project `maison-mariam` → Settings → Environment Variables →
 `ADMIN_PASSWORD`, then redeploy.
 
-Recipes with exact quantities for the five desserts, from the best-known sources, are in
-[`docs/recipes.md`](docs/recipes.md) (private: not part of the website).
+**Recipes:** the **Recipes** tab in /admin has step-by-step recipes for the desserts. They are private:
+stored in the Blob store at a secret path (`RECIPES_KEY` in Vercel) and only shown after signing in.
+They are not in this repository.
 
 ## How it works
 
@@ -34,6 +35,7 @@ Recipes with exact quantities for the five desserts, from the best-known sources
 - `api/`: three small Vercel Functions
   - `menu.js`: `GET` returns the published menu, `POST` publishes it (password required)
   - `upload.js`: stores a dessert photo (password required)
+  - `recipes.js`: the private recipe book for the Recipes tab (password required)
   - `login.js`: checks the password
 - Storage: a Vercel Blob store (`maison-mariam-menu`) holds `menu/menu.json` and the uploaded photos.
 

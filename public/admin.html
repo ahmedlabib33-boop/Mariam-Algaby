@@ -44,6 +44,11 @@
     </form>
   </main>
 
+  <nav class="ad-tabs" id="tabs" role="tablist" hidden>
+    <button type="button" role="tab" class="ad-tab is-active" data-tab="menu" aria-selected="true">Menu</button>
+    <button type="button" role="tab" class="ad-tab" data-tab="recipes" aria-selected="false">Recipes</button>
+  </nav>
+
   <!-- EDITOR -->
   <main class="ad-main" id="editor" hidden>
     <div class="ad-intro">
@@ -61,6 +66,17 @@
     <p class="ad-empty muted" id="empty" hidden>No desserts yet. Add your first one below.</p>
 
     <button type="button" class="btn btn-ghost btn-block" id="addItem">+ Add a dessert</button>
+  </main>
+
+  <!-- RECIPES (private) -->
+  <main class="ad-main" id="recipes" hidden>
+    <div class="ad-intro">
+      <p class="eyebrow">Private · only you can see this</p>
+      <h1>Your <em>recipes</em></h1>
+      <p class="muted">Tap a recipe to open it. While you bake, tap each step to tick it off.</p>
+    </div>
+    <p class="ad-empty muted" id="recipesMsg">Loading your recipes…</p>
+    <div class="rc-list" id="recipeList"></div>
   </main>
 
   <footer class="ad-bar" id="bar" hidden>
