@@ -49,6 +49,11 @@
       <p class="muted">Tap a dessert to edit it. Use the switch to mark it sold out. Press <strong>Publish</strong> to put your changes on the website.</p>
     </div>
 
+    <div class="ad-load-error" id="loadError" hidden>
+      <p class="muted">Your menu couldn't be loaded, so editing is paused to keep it safe.</p>
+      <button type="button" class="btn btn-ghost" id="retryLoad">Try again</button>
+    </div>
+
     <ul class="ad-list" id="list"></ul>
     <p class="ad-empty muted" id="empty" hidden>No desserts yet. Add your first one below.</p>
 

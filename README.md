@@ -14,7 +14,7 @@ Mariam edits the menu herself at **https://maison-mariam.vercel.app/admin**, fro
 - Tap a dessert to change its photo, name, description, size or price.
 - Use the **Available** switch to mark a dessert sold out for the day. It stays on the site, greyed out, and can't be ordered.
 - **↑ ↓** change the order, **+ Add a dessert** adds a new one, and **Delete** is inside each dessert.
-- Press **Publish**. Changes are live on the website within a few seconds.
+- Press **Publish**. Changes are on the website within a minute.
 
 Photos taken on the phone are shrunk automatically before upload. Every published menu is also kept as a
 backup in the Blob store under `menu/history/`.

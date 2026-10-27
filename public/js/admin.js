@@ -54,14 +54,20 @@
     });
   }
 
+  // Only a 404 (nothing published yet) starts from data/menu.json. Any other
+  // failure must stop here: editing the starting menu and publishing it would
+  // replace Mariam's real menu.
   function loadMenu() {
-    function items(res) {
-      if (!res.ok) throw new Error(res.status);
-      return res.json().then(function (d) { return d.items; });
-    }
     // The time stamp skips the CDN cache, so the editor always shows the latest menu.
-    return fetch("api/menu?t=" + Date.now()).then(items)
-      .catch(function () { return fetch("data/menu.json").then(items); });
+    return fetch("api/menu?t=" + Date.now()).then(function (res) {
+      return res.status === 404 ? fetch("data/menu.json") : res;
+    }).then(function (res) {
+      if (!res.ok) throw new Error(res.status);
+      return res.json();
+    }).then(function (d) {
+      if (!d || !Array.isArray(d.items)) throw new Error("no items");
+      return d.items;
+    });
   }
 
   // ---- screens --------------------------------------------------------
@@ -77,18 +83,31 @@
   function showEditor() {
     $("login").hidden = true;
     $("signOut").hidden = false;
+    $("editor").hidden = false;
+    $("loadError").hidden = true;
+    $("retryLoad").disabled = true;
     loadMenu().then(function (list) {
-      items = Array.isArray(list) ? list : [];
-      $("editor").hidden = false;
+      items = list;
+      $("list").hidden = false;
+      $("addItem").hidden = false;
       $("bar").hidden = false;
       setDirty(false);
       render();
     }).catch(function () {
-      toast("The menu could not be loaded. Please refresh the page.");
+      items = [];
+      $("list").hidden = true;
+      $("empty").hidden = true;
+      $("addItem").hidden = true;
+      $("bar").hidden = true;
+      $("loadError").hidden = false;
+    }).then(function () {
+      $("retryLoad").disabled = false;
     });
   }
 
   function signOut(message) {
+    if ($("sheet").open) $("sheet").close();
+    editing = -1;
     forgetPassword();
     password = "";
     showLogin(message);
@@ -235,7 +254,7 @@
       render();
       setDirty(false);
       $("status").className = "ad-status ok";
-      $("status").textContent = "Published ✓ Your changes are live in a few seconds.";
+      $("status").textContent = "Published ✓ Your changes will be on the website within a minute.";
     }).catch(function (err) {
       if (err.message === "signed out") return;
       setDirty(true);
@@ -322,6 +341,7 @@
   });
 
   $("publish").addEventListener("click", publish);
+  $("retryLoad").addEventListener("click", showEditor);
 
   window.addEventListener("beforeunload", function (e) {
     if (dirty) { e.preventDefault(); e.returnValue = ""; }

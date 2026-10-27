@@ -29,21 +29,43 @@
 
   // ---- menu -----------------------------------------------------------
   // The live menu is edited at /admin and served by /api/menu.
-  // data/menu.json is the starting menu (and what local previews use).
+  // Only a 404 (nothing published yet, or a local preview) falls back to the
+  // starting menu in data/menu.json; any other failure must not show it, or
+  // customers would see old prices and desserts marked sold out.
   function loadMenu() {
-    function items(res) {
+    return fetch("api/menu").then(function (res) {
+      return res.status === 404 ? fetch("data/menu.json") : res;
+    }).then(function (res) {
       if (!res.ok) throw new Error(res.status);
-      return res.json().then(function (d) {
-        if (!d || !Array.isArray(d.items)) throw new Error("no items");
-        return d.items;
-      });
-    }
-    return fetch("api/menu").then(items)
-      .catch(function () { return fetch("data/menu.json").then(items); })
-      .catch(function () { return []; });
+      return res.json();
+    }).then(function (d) {
+      if (!d || !Array.isArray(d.items)) throw new Error("no items");
+      return d.items;
+    });
+  }
+
+  var PLACEHOLDERS = '<div class="dish placeholder"></div><div class="dish placeholder"></div><div class="dish placeholder"></div>';
+
+  function start() {
+    $("menuGrid").innerHTML = PLACEHOLDERS;
+    loadMenu().then(function (items) {
+      M.items = items;
+      renderMenu();
+      // Only animate the cards on first load, not on every add/remove.
+      setTimeout(function () { $("menuGrid").classList.add("ready"); }, 800);
+      renderBox();
+    }).catch(function () {
+      // The saved box is left untouched, so nothing is lost when the menu comes back.
+      $("menuGrid").innerHTML = '<p class="menu-note">The menu couldn\'t load just now. ' +
+        '<button type="button" class="link-btn" data-retry>Try again</button></p>';
+    });
   }
 
   function renderMenu() {
+    if (!M.items.length) {
+      $("menuGrid").innerHTML = '<p class="menu-note">There are no desserts on the menu right now. Please check back soon.</p>';
+      return;
+    }
     var n = 0;
     $("menuGrid").innerHTML = M.items.map(function (it) {
       n++;
@@ -59,9 +81,9 @@
           (it.soldOut
             ? '<button class="btn btn-outline btn-block" disabled>Sold out</button>'
             : qty
-            ? '<div class="stepper" data-id="' + it.id + '"><button data-act="dec" aria-label="Remove one">−</button><span>' + qty +
+            ? '<div class="stepper" data-id="' + esc(it.id) + '"><button data-act="dec" aria-label="Remove one">−</button><span>' + qty +
               '</span><button data-act="inc" aria-label="Add one">+</button></div>'
-            : '<button class="btn btn-outline btn-block" data-act="add" data-id="' + it.id + '">Add to my box</button>') +
+            : '<button class="btn btn-outline btn-block" data-act="add" data-id="' + esc(it.id) + '">Add to my box</button>') +
         "</div></article>";
     }).join("");
   }
@@ -89,7 +111,7 @@
     $("boxList").innerHTML = Object.keys(box).map(function (id) {
       var it = byId(id);
       return '<li><div><strong>' + esc(it.name) + '</strong><span class="muted small">' + esc(it.portion) + " · " + money(it.price) + "</span></div>" +
-        '<div class="stepper small" data-id="' + id + '"><button data-act="dec" aria-label="Remove one">−</button><span>' + box[id] +
+        '<div class="stepper small" data-id="' + esc(id) + '"><button data-act="dec" aria-label="Remove one">−</button><span>' + box[id] +
         '</span><button data-act="inc" aria-label="Add one">+</button></div></li>';
     }).join("");
   }
@@ -162,6 +184,7 @@
 
   // ---- wire up --------------------------------------------------------
   document.addEventListener("click", function (e) {
+    if (e.target.closest("[data-retry]")) { start(); return; }
     var btn = e.target.closest("[data-act]");
     if (btn) {
       var id = btn.dataset.id || btn.closest("[data-id]").dataset.id;
@@ -195,11 +218,5 @@
   $("igLink").href = M.instagram;
   $("year").textContent = new Date().getFullYear();
 
-  loadMenu().then(function (items) {
-    M.items = items;
-    renderMenu();
-    // Only animate the cards on first load, not on every add/remove.
-    setTimeout(function () { $("menuGrid").classList.add("ready"); }, 800);
-    renderBox();
-  });
+  start();
 })();

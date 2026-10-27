@@ -105,21 +105,11 @@ p { margin: 0 0 1em; }
 .box-count.has { background: var(--gold); color: #fff; }
 
 /* ---------- hero ---------- */
-.hero {
-  max-width: var(--wrap); margin: 0 auto; padding: 90px 16px 70px;
-  display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center;
-}
+.hero { max-width: 880px; margin: 0 auto; padding: 120px 16px 110px; text-align: center; }
 .hero h1 { font-size: clamp(48px, 7vw, 92px); letter-spacing: -.01em; margin-bottom: 28px; }
 .lead { font-size: 18px; max-width: 30em; color: #3b4254; }
-.hero-cta { margin-top: 36px; display: flex; gap: 14px; flex-wrap: wrap; }
-.hero-visual { position: relative; }
-.hero-box { width: 100%; max-width: 480px; margin-left: auto; animation: float 7s ease-in-out infinite; }
-.hero-seal {
-  position: absolute; width: 120px; right: 4%; top: 2%;
-  animation: spin 40s linear infinite; filter: drop-shadow(0 8px 18px rgba(30,42,68,.12));
-}
-@keyframes float { 50% { transform: translateY(-10px); } }
-@keyframes spin { to { transform: rotate(360deg); } }
+.hero .lead { margin: 0 auto; }
+.hero-cta { margin-top: 36px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 
 /* ---------- strip ---------- */
 .strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--cream); }
@@ -179,6 +169,8 @@ p { margin: 0 0 1em; }
 .dish.placeholder { min-height: 520px; background: linear-gradient(100deg, var(--paper) 40%, #fff 50%, var(--paper) 60%) 0 0 / 300% 100%; animation: shimmer 1.4s linear infinite; }
 @keyframes shimmer { to { background-position: -150% 0; } }
 .btn-outline:disabled { opacity: .5; cursor: not-allowed; }
+.menu-note { flex-basis: 100%; text-align: center; padding: 40px 0; font: italic 400 22px/1.5 var(--serif); color: var(--muted); }
+.link-btn { background: none; border: 0; padding: 0; font: inherit; color: var(--navy); text-decoration: underline; cursor: pointer; }
 .btn-outline:disabled:hover { background: transparent; color: var(--navy); }
 .dish-no {
   position: absolute; top: 14px; left: 14px; padding: 6px 10px 5px;
@@ -297,10 +289,8 @@ p { margin: 0 0 1em; }
   .nav-right { gap: 18px; }
   .wordmark { text-align: left; align-items: flex-start; }
   .wm-big { font-size: 28px; }
-  .hero, .story, .emballage { grid-template-columns: 1fr; }
-  .hero { padding-top: 50px; gap: 10px; }
-  .hero-visual { order: -1; max-width: 360px; margin: 0 auto; }
-  .hero-seal { width: 84px; }
+  .story, .emballage { grid-template-columns: 1fr; }
+  .hero { padding-top: 70px; padding-bottom: 80px; }
   .story { padding: 80px 16px; gap: 50px; }
   .story-frame { aspect-ratio: 1; max-width: 420px; }
   .strip ul { grid-template-columns: repeat(2, 1fr); row-gap: 22px; }

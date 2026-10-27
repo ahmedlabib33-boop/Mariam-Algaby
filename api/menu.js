@@ -5,9 +5,15 @@ const MENU_PATH = "menu/menu.json";
 const MAX_ITEMS = 60;
 
 // GET /api/menu: the published menu, or 404 before the first publish
-// (the site then falls back to data/menu.json).
+// (the site then falls back to data/menu.json). A storage outage is a 503,
+// never a 404, so nobody is shown or edits the starting menu by mistake.
 export async function GET() {
-  const result = await get(MENU_PATH, { access: "public", useCache: false });
+  let result;
+  try {
+    result = await get(MENU_PATH, { access: "public", useCache: false });
+  } catch {
+    return Response.json({ error: "The menu is unavailable right now." }, { status: 503, headers: { "Cache-Control": "no-store" } });
+  }
   if (!result || result.statusCode !== 200) {
     return Response.json({ items: null }, { status: 404, headers: { "Cache-Control": "no-store" } });
   }
