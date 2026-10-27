@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maison Mariam · Cuisine Maison, Héliopolis</title>
+  <meta name="description" content="Maison Mariam — home-made food, cooked by hand in small batches in Heliopolis, Cairo. Order your box on WhatsApp.">
+  <meta property="og:title" content="Maison Mariam · Cuisine Maison">
+  <meta property="og:description" content="Home-made food, cooked by hand in Heliopolis, Cairo. Order 24 hours ahead.">
+  <meta name="theme-color" content="#1E2A44">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&family=Amiri:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="topbar">
+    <span>Commandes 24h à l'avance</span>
+    <span class="dot">·</span>
+    <span>Livraison à Héliopolis &amp; Le Caire</span>
+  </div>
+
+  <header class="nav" id="top">
+    <nav class="nav-links nav-left" aria-label="Primary">
+      <a href="#carte">La Carte</a>
+      <a href="#histoire">Notre Histoire</a>
+    </nav>
+    <a class="wordmark" href="#top" aria-label="Maison Mariam home">
+      <span class="wm-small">Maison</span>
+      <span class="wm-big">Mariam</span>
+    </a>
+    <nav class="nav-links nav-right" aria-label="Secondary">
+      <a href="packaging.html">L'Emballage</a>
+      <button class="box-btn" id="openBox" aria-label="Open your box">
+        Ma Boîte <span class="box-count" id="boxCount">0</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">Cuisine Maison · Héliopolis · Le Caire</p>
+        <h1>Home cooking,<br><em>dressed in French.</em></h1>
+        <p class="lead">Every dish is cooked by hand, in small batches, in Mariam's kitchen in Masr El Gedida. It is packed like a gift and delivered warm to your door.</p>
+        <p class="arabic" lang="ar" dir="rtl">أكل بيتي… بلمسة فرنسية</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#carte">Découvrir la carte</a>
+          <a class="btn btn-ghost" href="#commander">How to order</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 420 420" class="hero-box">
+          <!-- shadow -->
+          <ellipse cx="210" cy="372" rx="150" ry="16" fill="#1E2A44" opacity=".08"/>
+          <!-- box body -->
+          <path d="M70 170 L210 225 L350 170 L350 320 L210 375 L70 320 Z" fill="#EFE6D6"/>
+          <path d="M210 225 L350 170 L350 320 L210 375 Z" fill="#E4D8C3"/>
+          <!-- lid -->
+          <path d="M60 150 L210 92 L360 150 L210 208 Z" fill="#F7F2E9"/>
+          <path d="M60 150 L210 208 L210 228 L60 170 Z" fill="#EADFCB"/>
+          <path d="M210 208 L360 150 L360 170 L210 228 Z" fill="#DDCFB6"/>
+          <!-- ribbon across lid -->
+          <path d="M128 124 L278 182 L292 177 L142 119 Z" fill="#1E2A44"/>
+          <path d="M278 182 L292 177 L292 197 L278 202 Z" fill="#15203A"/>
+          <path d="M278 202 L292 197 L292 345 L278 350 Z" fill="#1E2A44"/>
+          <!-- bow -->
+          <path d="M210 150 C185 128 168 140 180 156 C190 168 205 160 210 150 Z" fill="#1E2A44"/>
+          <path d="M210 150 C235 128 256 138 244 156 C234 170 215 160 210 150 Z" fill="#26355A"/>
+          <circle cx="210" cy="151" r="6" fill="#B08D57"/>
+          <!-- seal -->
+          <circle cx="135" cy="262" r="30" fill="#1E2A44"/>
+          <circle cx="135" cy="262" r="25" fill="none" stroke="#B08D57" stroke-width="1"/>
+          <text x="135" y="273" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="30" fill="#B08D57">M</text>
+          <!-- lid wordmark -->
+          <text x="125" y="168" font-family="Cormorant Garamond, Georgia, serif" font-size="13" letter-spacing="4" fill="#1E2A44" transform="rotate(21 125 168)">MAISON MARIAM</text>
+        </svg>
+        <img src="assets/monogram.svg" alt="" class="hero-seal">
+      </div>
+    </section>
+
+    <!-- VALUES STRIP -->
+    <section class="strip" aria-label="Our promise">
+      <ul>
+        <li><span>I</span>Fait main</li>
+        <li><span>II</span>Ingrédients frais</li>
+        <li><span>III</span>Petites séries</li>
+        <li><span>IV</span>Livré avec soin</li>
+      </ul>
+    </section>
+
+    <!-- STORY -->
+    <section class="story" id="histoire">
+      <div class="story-frame">
+        <img src="assets/monogram.svg" alt="Maison Mariam monogram" width="220" height="220">
+      </div>
+      <div class="story-text">
+        <p class="eyebrow">Notre Histoire</p>
+        <h2>A kitchen in Héliopolis,<br><em>a table for Cairo.</em></h2>
+        <p>Héliopolis was built in 1905 as a Belle Époque city, with arcades, cafés and a French way of setting the table. Maison Mariam comes from that spirit.</p>
+        <p>Founded in 2026 by <strong>Mariam Algaby</strong> at eighteen, the house cooks the recipes she grew up with. Mahshi is rolled one by one, béchamel is made from scratch and the desserts are baked the morning they leave. Each one is finished with the care of a Parisian pâtisserie.</p>
+        <p class="signature">— Mariam</p>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section class="carte" id="carte">
+      <header class="section-head">
+        <p class="eyebrow">La Carte</p>
+        <h2>This week's menu</h2>
+        <p class="muted">Cooked to order. Prices are in Egyptian pounds.</p>
+      </header>
+      <div class="tabs" role="tablist" id="tabs"></div>
+      <div class="menu-grid" id="menuGrid"></div>
+    </section>
+
+    <!-- PACKAGING TEASER -->
+    <section class="emballage">
+      <div class="emb-text">
+        <p class="eyebrow light">L'Art de Recevoir</p>
+        <h2>Delivered like a gift.</h2>
+        <p>Every order comes in a cream box with a navy ribbon and a gold wax seal, along with a handwritten note from Mariam. You can hand it straight to someone as a gift.</p>
+        <a class="btn btn-light" href="packaging.html">See the packaging</a>
+      </div>
+      <div class="emb-visual" aria-hidden="true">
+        <div class="tag">
+          <span class="tag-hole"></span>
+          <span class="tag-small">Fait main pour</span>
+          <span class="tag-name">vous</span>
+          <span class="tag-line"></span>
+          <span class="tag-small">Maison Mariam</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW TO ORDER -->
+    <section class="commander" id="commander">
+      <header class="section-head">
+        <p class="eyebrow">Commander</p>
+        <h2>How to order</h2>
+      </header>
+      <ol class="steps">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Compose your box</h3>
+          <p>Add your dishes from La Carte. You can mix savoury and sweet in one order.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Choose your day</h3>
+          <p>Pick a delivery date at least 24 hours ahead. Everything is cooked fresh for you.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Confirm on WhatsApp</h3>
+          <p>Your order opens in WhatsApp, already written out. Mariam confirms it and arranges delivery.</p>
+        </li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="wm-small">Maison</span>
+      <span class="wm-big">Mariam</span>
+      <p class="arabic" lang="ar" dir="rtl">ميزون مريم · مصر الجديدة</p>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <h4>Visit</h4>
+        <p>Héliopolis (Masr El Gedida)<br>Cairo, Egypt</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a id="waLink" href="#">WhatsApp</a><br><a id="igLink" href="#" target="_blank" rel="noopener">Instagram</a></p>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <p>Orders: daily, 10:00 to 20:00<br>Deliveries: 13:00 to 21:00</p>
+      </div>
+    </div>
+    <p class="copyright">© <span id="year"></span> Maison Mariam · Fait main au Caire</p>
+  </footer>
+
+  <!-- BOX DRAWER -->
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="drawer" id="drawer" aria-label="Your box" aria-hidden="true">
+    <header class="drawer-head">
+      <h2>Ma Boîte</h2>
+      <button class="icon-btn" id="closeBox" aria-label="Close">×</button>
+    </header>
+    <div class="drawer-body">
+      <ul class="box-list" id="boxList"></ul>
+      <p class="box-empty" id="boxEmpty">Your box is empty.<br><a href="#carte" data-close>Discover La Carte →</a></p>
+
+      <form class="order-form" id="orderForm" novalidate>
+        <label>Your name
+          <input type="text" name="name" required autocomplete="name">
+        </label>
+        <label>Delivery date
+          <input type="date" name="date" required>
+        </label>
+        <label>Area
+          <select name="area" required>
+            <option>Héliopolis / Masr El Gedida</option>
+            <option>Nasr City</option>
+            <option>El Nozha / Sheraton</option>
+            <option>New Cairo / Fifth Settlement</option>
+            <option>Other (we'll confirm)</option>
+          </select>
+        </label>
+        <label>Address
+          <input type="text" name="address" autocomplete="street-address" placeholder="Street, building, floor, flat">
+        </label>
+        <label>Note or gift message <span class="opt">(optional)</span>
+          <textarea name="note" rows="2" placeholder="Allergies, or a few words for the gift card"></textarea>
+        </label>
+      </form>
+    </div>
+    <footer class="drawer-foot">
+      <div class="total-row"><span>Total</span><span id="boxTotal">0 EGP</span></div>
+      <p class="muted small">Delivery fee is confirmed on WhatsApp.</p>
+      <button class="btn btn-primary btn-block" id="sendOrder" disabled>Send order on WhatsApp</button>
+      <p class="form-error" id="formError" role="alert"></p>
+    </footer>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/menu.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
