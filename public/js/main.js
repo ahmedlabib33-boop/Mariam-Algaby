@@ -66,6 +66,9 @@
       $("menuGrid").innerHTML = '<p class="menu-note">There are no desserts on the menu right now. Please check back soon.</p>';
       return;
     }
+    // Keep any open ingredients lists open when the cards are redrawn.
+    var open = {};
+    document.querySelectorAll(".dish-ingr[open]").forEach(function (d) { open[d.dataset.id] = true; });
     var n = 0;
     $("menuGrid").innerHTML = M.items.map(function (it) {
       n++;
@@ -77,6 +80,7 @@
         '<div class="dish-body">' +
           '<h3>' + esc(it.name) + '</h3>' +
           '<p class="dish-desc">' + esc(it.desc) + "</p>" +
+          (it.ingredients ? '<details class="dish-ingr" data-id="' + esc(it.id) + '"' + (open[it.id] ? " open" : "") + '><summary>Ingredients</summary><p>' + esc(it.ingredients) + "</p></details>" : "") +
           '<div class="dish-meta"><span>' + esc(it.portion) + '</span><span class="price">' + money(it.price) + "</span></div>" +
           (it.soldOut
             ? '<button class="btn btn-outline btn-block" disabled>Sold out</button>'

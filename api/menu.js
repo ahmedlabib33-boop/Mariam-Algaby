@@ -76,6 +76,7 @@ function clean(items) {
       id,
       name,
       desc: text(raw.desc, 300),
+      ingredients: text(raw.ingredients, 600),
       portion: text(raw.portion, 40),
       price: Math.round(price),
       photo,

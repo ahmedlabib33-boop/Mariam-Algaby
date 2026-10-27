@@ -173,6 +173,15 @@ p { margin: 0 0 1em; }
 .dish-body { padding: 24px 24px 26px; display: flex; flex-direction: column; flex: 1; }
 .dish h3 { font-size: 27px; margin-bottom: 12px; }
 .dish-desc { font-size: 14.5px; color: #4c5262; flex: 1; }
+.dish-ingr { margin: -4px 0 16px; font-size: 13px; color: #4c5262; }
+.dish-ingr summary {
+  cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 8px;
+  font: 400 10.5px/1 var(--sans); letter-spacing: .24em; text-transform: uppercase; color: var(--gold);
+}
+.dish-ingr summary::-webkit-details-marker { display: none; }
+.dish-ingr summary::after { content: "+"; font-size: 14px; letter-spacing: 0; transition: transform .25s; }
+.dish-ingr[open] summary::after { transform: rotate(45deg); }
+.dish-ingr p { margin: 12px 0 0; line-height: 1.65; }
 .dish-meta {
   display: flex; justify-content: space-between; align-items: baseline;
   border-top: 1px solid var(--line); padding-top: 14px; margin-bottom: 18px;

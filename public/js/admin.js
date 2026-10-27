@@ -150,6 +150,7 @@
     var f = $("itemForm");
     f.name.value = it.name || "";
     f.desc.value = it.desc || "";
+    f.ingredients.value = it.ingredients || "";
     f.portion.value = it.portion || "";
     f.price.value = it.price || "";
     f.soldOut.checked = !!it.soldOut;
@@ -173,6 +174,7 @@
     var it = items[editing];
     it.name = name;
     it.desc = f.desc.value.trim();
+    it.ingredients = f.ingredients.value.trim();
     it.portion = f.portion.value.trim();
     it.price = Math.round(price);
     it.soldOut = f.soldOut.checked;
@@ -309,7 +311,7 @@
   });
 
   $("addItem").addEventListener("click", function () {
-    items.push({ id: "d" + Date.now().toString(36), name: "", desc: "", portion: "", price: 0, photo: "", soldOut: false });
+    items.push({ id: "d" + Date.now().toString(36), name: "", desc: "", ingredients: "", portion: "", price: 0, photo: "", soldOut: false });
     openSheet(items.length - 1);
   });
 

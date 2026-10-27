@@ -11,7 +11,7 @@ name, date, area, address, gift note) opens in WhatsApp, already written out.
 Mariam edits the menu herself at **https://maison-mariam.vercel.app/admin**, from her phone or a computer.
 
 - Sign in with the admin password (tick "Keep me signed in on this phone" so it's asked only once).
-- Tap a dessert to change its photo, name, description, size or price.
+- Tap a dessert to change its photo, name, description, ingredients, size or price.
 - Use the **Available** switch to mark a dessert sold out for the day. It stays on the site, greyed out, and can't be ordered.
 - **↑ ↓** change the order, **+ Add a dessert** adds a new one, and **Delete** is inside each dessert.
 - Press **Publish**. Changes are on the website within a minute.
@@ -21,6 +21,9 @@ backup in the Blob store under `menu/history/`.
 
 **Changing the password:** Vercel → project `maison-mariam` → Settings → Environment Variables →
 `ADMIN_PASSWORD`, then redeploy.
+
+Recipes with exact quantities for the five desserts, from the best-known sources, are in
+[`docs/recipes.md`](docs/recipes.md) (private: not part of the website).
 
 ## How it works
 
