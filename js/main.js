@@ -4,17 +4,6 @@
   var M = window.MAISON;
   var STORE_KEY = "maison-mariam-box";
 
-  var ICONS = {
-    cake: '<path d="M16 30h48v24H16zM16 42h48M10 54h60M16 30c4 6 8 0 12 5s8-5 12 0 8 5 12 0 8 5 12-2M40 30v-8M40 22c-3-3 0-6 0-8"/>',
-    tart: '<path d="M10 44c0-8 13-14 30-14s30 6 30 14-13 12-30 12-30-4-30-12zM10 44c0 4 13 8 30 8s30-4 30-8M24 36l4 6M38 33l2 7M54 36l-4 6"/>',
-    eclair: '<path d="M22 32h36a8 8 0 0 1 0 16H22a8 8 0 0 1 0-16zM18 37c10-3 34-3 44 0"/>',
-    roll: '<path d="M40 36a3 3 0 1 1 6 0a9 9 0 1 1 -18 0a15 15 0 1 1 30 0a19 19 0 1 1 -38 0"/>',
-    macaron: '<path d="M18 32a22 9 0 0 1 44 0zM16 37h48M18 42a22 9 0 0 0 44 0z"/>',
-    cookie: '<path d="M40 18a18 18 0 1 0 .1 0M32 28l2 2M45 30l2 1M34 41l2 2M46 43l2 1M40 35l1 2"/>',
-    brownie: '<path d="M18 26h44v28H18zM18 40h44M32.7 26v28M47.3 26v28"/>',
-    jar: '<path d="M28 22h24M30 22v6c-6 2-8 6-8 12v10a6 6 0 0 0 6 6h24a6 6 0 0 0 6-6V40c0-6-2-10-8-12v-6M22 42h36"/>'
-  };
-
   // ---- state ----------------------------------------------------------
   var box = load();
 
@@ -41,6 +30,7 @@
   var activeCat = M.categories[0].id;
 
   function renderTabs() {
+    $("tabs").hidden = M.categories.length < 2;
     $("tabs").innerHTML = M.categories.map(function (c) {
       var on = c.id === activeCat;
       return '<button role="tab" aria-selected="' + on + '" class="tab' + (on ? " is-active" : "") +
@@ -54,7 +44,7 @@
       n++;
       var qty = box[it.id] || 0;
       return '<article class="dish">' +
-        '<div class="dish-art"><svg viewBox="0 0 80 70" aria-hidden="true">' + (ICONS[it.icon] || ICONS.cake) + "</svg>" +
+        '<div class="dish-art"><img src="' + esc(it.photo) + '" alt="' + esc(it.name) + '" width="900" height="675" loading="lazy">' +
           '<span class="dish-no">N° ' + String(n).padStart(2, "0") + "</span></div>" +
         '<div class="dish-body">' +
           '<h3>' + esc(it.name) + '</h3>' +
@@ -202,5 +192,7 @@
 
   renderTabs();
   renderMenu();
+  // Only animate the cards on first load, not on every add/remove.
+  setTimeout(function () { $("menuGrid").classList.add("ready"); }, 800);
   renderBox();
 })();

@@ -7,7 +7,7 @@ It's a plain HTML/CSS/JS site with no build step, no database and no monthly cos
 - `index.html`: home, story, menu, how to order, the box (cart)
 - `packaging.html`: the packaging guide (box, seal, label, card, bag, colours, fonts)
 - `js/menu.js`: **the only file you need to edit**: WhatsApp number, Instagram, cakes and prices
-- `assets/`: monogram and favicon
+- `assets/`: monogram, favicon and dessert photos
 
 ## Before going live
 
@@ -15,7 +15,7 @@ It's a plain HTML/CSS/JS site with no build step, no database and no monthly cos
    `01012345678` becomes `"201012345678"`.
 2. `whatsapp2` is an optional second number shown in the footer. Set it to `""` to hide it.
 3. Set `instagram` to the real account.
-4. Edit the items and prices. Each item has a `cat` (cakes / tarts / treats) and an `icon` (cake / tart / eclair / roll / macaron / cookie / brownie / jar).
+4. Edit the desserts and prices. Each one has a `photo` in `assets/photos/` (landscape 4:3, about 900 × 675).
 
 ## Hosting on Vercel (free)
 
@@ -31,3 +31,15 @@ It's a plain HTML/CSS/JS site with no build step, no database and no monthly cos
 python3 -m http.server 8000
 # open http://localhost:8000
 ```
+
+## Photos
+
+The dessert photos in `assets/photos/` are stand-ins from Unsplash (free for commercial use under the
+[Unsplash License](https://unsplash.com/license)). Replace them with photos of Mariam's own desserts,
+keeping the same file names, before the business grows. Customers should see what they will get.
+
+- molten-cake.jpg: https://unsplash.com/photos/chocolate-cake-on-white-ceramic-plate-Pzjez86SsvQ
+- brownies.jpg: https://unsplash.com/photos/a-pile-of-brownies-sitting-on-top-of-a-white-plate-LjtviHokbr4 (Anna Przepiorka)
+- carrot-cake.jpg: https://unsplash.com/photos/a-piece-of-carrot-cake-on-a-plate-with-a-fork-EvfXG4aK9d8 (Orkun Orcan)
+- honey-cake.jpg: https://unsplash.com/photos/sliced-of-cake-on-white-ceramic-plate-diVU8-tGO0U (Diliara Garifullina)
+- souffle-cheesecake.jpg: https://unsplash.com/photos/a-cake-with-berries-and-powdered-sugar-on-a-plate-AHKlSCTEf3c
