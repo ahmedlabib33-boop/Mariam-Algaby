@@ -89,7 +89,10 @@ p { margin: 0 0 1em; }
 }
 .nav-links a:hover::after { right: 0; }
 
-.wordmark { text-decoration: none; text-align: center; display: flex; flex-direction: column; line-height: 1; }
+.wordmark { text-decoration: none; display: flex; align-items: center; gap: 13px; line-height: 1; }
+.wm-mark { width: 46px; height: 46px; flex: none; }
+.wm-text { display: flex; flex-direction: column; align-items: flex-start; }
+.wm-text .wm-small { padding-left: 0; margin-bottom: 3px; }
 .wm-small { font: 400 10px/1 var(--sans); letter-spacing: .5em; text-transform: uppercase; color: var(--gold); padding-left: .5em; }
 .wm-big { font: italic 400 34px/1.05 var(--serif); letter-spacing: .02em; white-space: nowrap; }
 
@@ -132,7 +135,10 @@ p { margin: 0 0 1em; }
   display: grid; place-items: center; position: relative; outline: 1px solid var(--gold);
   outline-offset: -18px;
 }
-.story-frame img { width: 52%; height: auto; }
+.story-emblem { display: flex; flex-direction: column; align-items: center; text-align: center; color: var(--cream); }
+.story-emblem img { width: 168px; height: 168px; margin-bottom: 28px; }
+.story-name { font: italic 400 30px/1.1 var(--serif); }
+.story-est { margin-top: 10px; font: 400 10px/1 var(--sans); letter-spacing: .36em; text-transform: uppercase; color: var(--gold); padding-left: .36em; }
 .story h2 { font-size: clamp(36px, 4.4vw, 56px); margin-bottom: 30px; }
 .story p { color: #3b4254; max-width: 34em; }
 .signature { font: italic 400 34px/1 var(--serif); color: var(--gold) !important; margin-top: 20px; }
@@ -233,6 +239,7 @@ p { margin: 0 0 1em; }
 .footer { background: var(--navy-deep); color: #cfd3dc; padding: 80px max(16px, calc((100vw - var(--wrap)) / 2)) 30px; }
 .footer-brand { display: flex; flex-direction: column; align-items: center; text-align: center; color: var(--cream); margin-bottom: 56px; }
 .footer-brand .wm-big { font-size: 54px; }
+.footer-mark { width: 56px; height: 56px; margin-bottom: 18px; }
 .footer-tag { margin-top: 14px !important; font-size: 10.5px !important; letter-spacing: .32em; text-transform: uppercase; color: var(--gold); }
 .footer-cols {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; text-align: center;
@@ -287,8 +294,8 @@ p { margin: 0 0 1em; }
   .nav { grid-template-columns: auto 1fr; padding-top: 12px; padding-bottom: 12px; }
   .nav-left { display: none; }
   .nav-right { gap: 18px; }
-  .wordmark { text-align: left; align-items: flex-start; }
-  .wordmark .wm-small { padding-left: 0; }
+  .wm-mark { width: 40px; height: 40px; }
+  .wordmark { gap: 11px; }
   .wm-big { font-size: 28px; }
   .story, .emballage { grid-template-columns: 1fr; }
   .hero { padding-top: 70px; padding-bottom: 80px; }
