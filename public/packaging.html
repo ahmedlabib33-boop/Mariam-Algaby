@@ -9,7 +9,9 @@
   <link rel="icon" href="assets/favicon-g.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="stylesheet" href="css/style.css?v=4">
-  <link rel="stylesheet" href="css/packaging.css?v=5">
+  <link rel="stylesheet" href="css/packaging.css?v=6">
+  <link rel="stylesheet" href="css/cards.css?v=1">
+  <script src="js/cards.js?v=1" defer></script>
 </head>
 <body class="packaging-page">
   <a class="skip" href="#main">Skip to content</a>
@@ -104,8 +106,18 @@
         <p class="eyebrow">03 / In your own words</p>
         <h2 id="card-title">Some things are<br><em>better handwritten.</em></h2>
         <p>A birthday wish. A little thank-you. Or simply, “I thought of you.” Add your message when you order, and let the card say the rest.</p>
-        <p class="piece-footnote">Select “Send it as a gift” in your box.</p>
+        <p class="piece-footnote">Select “Send it as a gift” in your box, or <a href="#card-collection">find a few words in our card collection</a>.</p>
       </div>
+    </section>
+
+    <section class="card-collection" id="card-collection" aria-labelledby="card-collection-title">
+      <header class="card-collection-head">
+        <p class="eyebrow">The card collection</p>
+        <h2 id="card-collection-title">A few words,<br><em>beautifully chosen.</em></h2>
+        <p>Choose an occasion, pick one of two literary messages, then make it your own at checkout.</p>
+      </header>
+      <div class="card-library" data-card-library data-card-mode="gallery"></div>
+      <noscript><p class="card-collection-note">You can always add a personal message when you order your gift.</p></noscript>
     </section>
 
     <section class="pk-cta" aria-labelledby="giving-title">

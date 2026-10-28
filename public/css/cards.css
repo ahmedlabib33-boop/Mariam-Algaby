@@ -1,0 +1,53 @@
+/* Literary gift cards: the quotation is borrowed; the personal words are yours. */
+.card-library-toolbar { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+.card-occasion-label { display: grid; gap: 9px; color: var(--gold); font: 400 10px/1.5 var(--sans); letter-spacing: .12em; text-transform: uppercase; }
+.card-occasion-select { min-height: 48px; max-width: 100%; min-width: 280px; padding: 10px 38px 10px 14px; border: 1px solid var(--line); border-radius: 2px; background: var(--paper); color: var(--ink); font: 400 15px/1.5 var(--sans); letter-spacing: 0; text-transform: none; }
+.card-library-count { color: var(--muted); font: italic 400 23px/1.3 var(--serif); margin: 0 0 10px; }
+.literary-card-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 28px; }
+.literary-card { display: flex; flex-direction: column; min-width: 0; }
+.literary-card-sheet { position: relative; flex: 1; padding: clamp(26px,3vw,42px); border: 1px solid var(--gold-soft); background: var(--paper); }
+.literary-card-sheet::before { content: ""; position: absolute; inset: 7px; border: 1px solid var(--line); pointer-events: none; }
+.literary-card-eyebrow { color: var(--gold); font: 400 9px/1.6 var(--sans); letter-spacing: .13em; text-transform: uppercase; margin: 0 0 15px; }
+.literary-card-title { color: var(--muted); font: 400 11px/1.5 var(--sans); letter-spacing: .03em; margin: 0 0 30px; }
+.literary-card-quote { margin: 0 0 24px; padding: 0; border: 0; }
+.literary-card-quote p { font: italic 400 clamp(25px,2.4vw,34px)/1.25 var(--serif); margin: 0 0 14px; white-space: pre-line; text-wrap: pretty; }
+.literary-card-quote cite { display: block; color: var(--gold); font: 400 10px/1.5 var(--sans); letter-spacing: .06em; }
+.literary-card-message { position: relative; color: var(--ink); font: 400 14px/1.8 var(--sans); margin: 0; padding-top: 22px; }
+.literary-card-message::before { content: ""; position: absolute; top: 0; left: 0; width: 35px; height: 1px; background: var(--gold-soft); }
+.literary-card-actions { display: grid; grid-template-columns: 1fr auto; gap: 10px; padding-top: 15px; align-items: baseline; }
+.literary-card-work { min-width: 0; color: var(--muted); font: italic 400 15px/1.5 var(--serif); }
+.literary-card-source { color: var(--gold); font: 400 10px/1.5 var(--sans); text-underline-offset: 3px; }
+.literary-card-choose { grid-column: 1 / -1; width: 100%; min-height: 46px; font-size: 10px; letter-spacing: .08em; }
+.literary-card-choose[aria-pressed="true"] { background: var(--navy); color: var(--paper); border-color: var(--navy); }
+.card-library-status { min-height: 1.5em; margin: 20px 0 0; color: var(--muted); font: 400 12px/1.7 var(--sans); }
+.card-library-loading, .card-library-error { color: var(--muted); font: 400 13px/1.8 var(--sans); }
+.card-chooser { padding: 14px 16px; border: 1px solid var(--line); background: var(--paper); }
+.card-chooser > summary { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 30px; color: var(--ink); font: 400 13px/1.5 var(--sans); cursor: pointer; list-style: none; }
+.card-chooser > summary::-webkit-details-marker { display: none; }
+.card-chooser > summary::after { content: "+"; color: var(--gold); font-size: 20px; }
+.card-chooser[open] > summary::after { content: "−"; }
+.card-chooser-intro { color: var(--muted); font: 400 12px/1.7 var(--sans); margin: 14px 0 20px; }
+[data-card-mode="checkout"] .card-library-toolbar { display: block; margin-bottom: 18px; }
+[data-card-mode="checkout"] .card-occasion-label { font-size: 9px; letter-spacing: .08em; }
+[data-card-mode="checkout"] .card-occasion-select { min-width: 0; width: 100%; border: 1px solid var(--line); padding: 10px 8px; background: var(--cream); font-size: 16px; }
+[data-card-mode="checkout"] .card-library-count { display: none; }
+[data-card-mode="checkout"] .literary-card-grid { grid-template-columns: minmax(0,1fr); gap: 28px; }
+[data-card-mode="checkout"] .literary-card-sheet { padding: 24px 20px; }
+[data-card-mode="checkout"] .literary-card-title { margin-bottom: 18px; }
+[data-card-mode="checkout"] .literary-card-quote p { font-size: 25px; }
+[data-card-mode="checkout"] .literary-card-message { font-size: 12px; padding-top: 16px; }
+[data-card-mode="checkout"] .literary-card-actions { grid-template-columns: minmax(0,1fr); gap: 6px; }
+[data-card-mode="checkout"] .literary-card-choose { margin-top: 6px; }
+.card-personalise-hint { color: var(--muted); font-size: 11px; margin: -4px 0 0; }
+.gift-card-notice { max-width: 32em; color: var(--gold); border-left: 1px solid var(--gold-soft); padding-left: 12px; margin: 18px 0 0; font: 400 12px/1.7 var(--sans); }
+@media (max-width: 680px) {
+  .card-library-toolbar { display: block; margin-bottom: 24px; }
+  .card-occasion-select { min-width: 0; width: 100%; font-size: 16px; }
+  .card-library-count { font-size: 21px; margin: 15px 0 0; }
+  .literary-card-grid { grid-template-columns: minmax(0,1fr); gap: 36px; }
+  .literary-card-sheet { padding: 30px 25px; }
+  .literary-card-quote p { font-size: 30px; }
+  .literary-card-message { font-size: 13px; }
+  .card-chooser { padding: 12px; }
+  .literary-card-actions { grid-template-columns: minmax(0,1fr); gap: 7px; }
+}

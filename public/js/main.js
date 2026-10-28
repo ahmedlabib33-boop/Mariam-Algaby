@@ -328,6 +328,7 @@
     ["date", "toName", "toPhone", "card", "note"].forEach(function (k) { f[k].value = ""; });
     f.gift.checked = false;
     $("giftFields").hidden = true;
+    document.dispatchEvent(new Event("maison:new-box"));
     $("sentNote").hidden = true;
     $("dateHint").textContent = "";
     renderMenu();

@@ -22,6 +22,8 @@
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" as="image" href="assets/photos/creme-brulee.jpg" fetchpriority="high">
   <link rel="stylesheet" href="css/style.css?v=4">
+  <link rel="stylesheet" href="css/cards.css?v=1">
+  <script src="js/cards.js?v=1" defer></script>
   <link rel="preload" href="assets/fonts/cormorant-garamond-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/jost-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <script>document.documentElement.classList.add("js");</script>
@@ -145,7 +147,7 @@
         <p class="eyebrow light">03 / The finishing touch</p>
         <h2 id="giftTitle">The joy begins<br><em>before the first bite.</em></h2>
         <p>A cream box. A navy ribbon. A handwritten note.<br>Every order arrives with a little ceremony.</p>
-        <a class="text-link light" href="packaging">Discover the details <span class="arrow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a>
+        <a class="text-link light" href="packaging#card-collection">Choose a card for your gift <span class="arrow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a>
       </div>
       <div class="emb-visual reveal" aria-hidden="true">
         <div class="gift-orbit"></div>
@@ -302,9 +304,15 @@
           <label>Their phone
             <input type="tel" name="toPhone" inputmode="tel" maxlength="20" placeholder="01x xxxx xxxx">
           </label>
+          <details class="card-chooser">
+            <summary>Choose a literary card</summary>
+            <p class="card-chooser-intro">Two thoughtful messages for every occasion. Choose one, then make it your own.</p>
+            <div class="card-library" data-card-library data-card-mode="checkout"></div>
+          </details>
           <label>Message for the card
-            <textarea name="card" rows="2" maxlength="200" placeholder="Happy birthday, with love…"></textarea>
+            <textarea name="card" rows="5" maxlength="400" placeholder="Choose a literary card, or write a few words of your own…"></textarea>
           </label>
+          <p class="card-personalise-hint">Add a name, a signature, or a little something only you would say. We’ll handwrite your message.</p>
           <p class="small muted">Put their address in the Address field above.</p>
         </div>
 
@@ -329,6 +337,6 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="js/menu.js?v=4"></script>
-  <script src="js/main.js?v=5"></script>
+  <script src="js/main.js?v=6"></script>
 </body>
 </html>

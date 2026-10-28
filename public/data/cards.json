@@ -1,0 +1,396 @@
+{
+  "version": 1,
+  "editorialNote": "Literary excerpts keep the source wording. Printed line breaks, quotation marks, and terminal punctuation are lightly normalized for cards. Personal messages are original Maison de Gaby wording and are not attributed to the quoted authors.",
+  "occasions": [
+    {
+      "id": "birthday",
+      "label": "Birthday",
+      "cards": [
+        {
+          "id": "birthday-1",
+          "title": "Always you",
+          "quote": "To me, fair friend, you never can be old",
+          "author": "William Shakespeare",
+          "message": "Another year of your warmth, your wonder, your irreplaceable light. Happy birthday, with all my love.",
+          "source": {
+            "title": "Sonnets",
+            "url": "https://www.gutenberg.org/ebooks/1041",
+            "locator": "Sonnet 104"
+          }
+        },
+        {
+          "id": "birthday-2",
+          "title": "Little wonders",
+          "quote": "To me every hour of the light and dark is a miracle",
+          "author": "Walt Whitman",
+          "message": "May this year bring you small wonders, brave wishes, and all the love you so easily give. Happy birthday.",
+          "source": {
+            "title": "Leaves of Grass",
+            "url": "https://www.gutenberg.org/ebooks/1322",
+            "locator": "Miracles"
+          }
+        }
+      ]
+    },
+    {
+      "id": "anniversary",
+      "label": "Anniversary",
+      "cards": [
+        {
+          "id": "anniversary-1",
+          "title": "Still my favourite",
+          "quote": "All, everything that I understand, I understand only because I love.",
+          "author": "Leo Tolstoy",
+          "message": "Another year, and still you make the ordinary feel extraordinary. Happy anniversary, my love.",
+          "source": {
+            "title": "War and Peace",
+            "url": "https://www.gutenberg.org/ebooks/2600",
+            "locator": "Book XII, Chapter XVI; Louise and Aylmer Maude translation"
+          }
+        },
+        {
+          "id": "anniversary-2",
+          "title": "Always us",
+          "quote": "Love is not love\nWhich alters when it alteration finds",
+          "author": "William Shakespeare",
+          "message": "For all we have been, all we are, and all we have yet to become. Still you. Still us.",
+          "source": {
+            "title": "Sonnets",
+            "url": "https://www.gutenberg.org/ebooks/1041",
+            "locator": "Sonnet 116"
+          }
+        }
+      ]
+    },
+    {
+      "id": "valentine",
+      "label": "Valentine’s Day",
+      "cards": [
+        {
+          "id": "valentine-1",
+          "title": "Ardently yours",
+          "quote": "You must allow me to tell you how ardently I admire and love you.",
+          "author": "Jane Austen",
+          "message": "Of all the ways life could have unfolded, finding you is still my favourite. Happy Valentine’s Day.",
+          "source": {
+            "title": "Pride and Prejudice",
+            "url": "https://www.gutenberg.org/ebooks/1342",
+            "locator": "Chapter 34"
+          }
+        },
+        {
+          "id": "valentine-2",
+          "title": "The sweetest ordinary",
+          "quote": "Love gives naught but itself and takes naught but from itself.",
+          "author": "Kahlil Gibran",
+          "message": "With you, even an ordinary afternoon feels like something worth keeping. All my love, today and always.",
+          "source": {
+            "title": "The Prophet",
+            "url": "https://www.gutenberg.org/ebooks/58585",
+            "locator": "On Love"
+          }
+        }
+      ]
+    },
+    {
+      "id": "success",
+      "label": "Success & congratulations",
+      "cards": [
+        {
+          "id": "success-1",
+          "title": "You rose",
+          "quote": "We never know how high we are\nTill we are called to rise",
+          "author": "Emily Dickinson",
+          "message": "For the quiet work no one saw, and this wonderful moment everyone can celebrate. I am so proud of you.",
+          "source": {
+            "title": "Poems: Three Series, Complete",
+            "url": "https://www.gutenberg.org/ebooks/12242",
+            "locator": "Aspiration"
+          }
+        },
+        {
+          "id": "success-2",
+          "title": "Beautifully earned",
+          "quote": "Work is love made visible.",
+          "author": "Kahlil Gibran",
+          "message": "Today, all that care has a name: success. You earned every lovely part of this. Congratulations.",
+          "source": {
+            "title": "The Prophet",
+            "url": "https://www.gutenberg.org/ebooks/58585",
+            "locator": "On Work"
+          }
+        }
+      ]
+    },
+    {
+      "id": "graduation",
+      "label": "Graduation",
+      "cards": [
+        {
+          "id": "graduation-1",
+          "title": "Your own verse",
+          "quote": "That the powerful play goes on, and you may contribute a verse.",
+          "author": "Walt Whitman",
+          "message": "The world has room for your voice. Here’s to the extraordinary verse you will write. Congratulations, graduate.",
+          "source": {
+            "title": "Leaves of Grass",
+            "url": "https://www.gutenberg.org/ebooks/1322",
+            "locator": "O Me! O Life!"
+          }
+        },
+        {
+          "id": "graduation-2",
+          "title": "Beyond the last page",
+          "quote": "Our statures touch the skies.",
+          "author": "Emily Dickinson",
+          "message": "Every page, every effort, every late night brought you here. Now let curiosity lead you somewhere wonderful.",
+          "source": {
+            "title": "Poems: Three Series, Complete",
+            "url": "https://www.gutenberg.org/ebooks/12242",
+            "locator": "Aspiration"
+          }
+        }
+      ]
+    },
+    {
+      "id": "wedding",
+      "label": "Wedding & engagement",
+      "cards": [
+        {
+          "id": "wedding-1",
+          "title": "A home in each other",
+          "quote": "You were born together, and together you shall be forevermore.",
+          "author": "Kahlil Gibran",
+          "message": "May your home be rich in laughter, gentle in difficult hours, and always a place to return to.",
+          "source": {
+            "title": "The Prophet",
+            "url": "https://www.gutenberg.org/ebooks/58585",
+            "locator": "On Marriage"
+          }
+        },
+        {
+          "id": "wedding-2",
+          "title": "A beautiful beginning",
+          "quote": "Let me not to the marriage of true minds\nAdmit impediments.",
+          "author": "William Shakespeare",
+          "message": "Two lives, one beautiful beginning. Wishing you a love that grows more generous with the years.",
+          "source": {
+            "title": "Sonnets",
+            "url": "https://www.gutenberg.org/ebooks/1041",
+            "locator": "Sonnet 116"
+          }
+        }
+      ]
+    },
+    {
+      "id": "thank-you",
+      "label": "Thank you",
+      "cards": [
+        {
+          "id": "thank-you-1",
+          "title": "A little love returned",
+          "quote": "It is when you give of yourself that you truly give.",
+          "author": "Kahlil Gibran",
+          "message": "You have given so much of yourself. Today, let a little sweetness come back to you. Thank you, from my heart.",
+          "source": {
+            "title": "The Prophet",
+            "url": "https://www.gutenberg.org/ebooks/58585",
+            "locator": "On Giving"
+          }
+        },
+        {
+          "id": "thank-you-2",
+          "title": "The kindness that stays",
+          "quote": "If I can stop one heart from breaking,\nI shall not live in vain",
+          "author": "Emily Dickinson",
+          "message": "You made a difficult day softer and an ordinary moment kinder. Some kindnesses stay with us. Yours will.",
+          "source": {
+            "title": "Poems: Three Series, Complete",
+            "url": "https://www.gutenberg.org/ebooks/12242",
+            "locator": "First Series, Life, VI"
+          }
+        }
+      ]
+    },
+    {
+      "id": "friendship",
+      "label": "Friendship & just because",
+      "cards": [
+        {
+          "id": "friendship-1",
+          "title": "One of my people",
+          "quote": "Your friend is your needs answered.",
+          "author": "Kahlil Gibran",
+          "message": "Some people make life easier to carry and brighter to remember. I’m so glad you are one of mine.",
+          "source": {
+            "title": "The Prophet",
+            "url": "https://www.gutenberg.org/ebooks/58585",
+            "locator": "On Friendship"
+          }
+        },
+        {
+          "id": "friendship-2",
+          "title": "The comfort of you",
+          "quote": "But if the while I think on thee, dear friend,\nAll losses are restor’d and sorrows end.",
+          "author": "William Shakespeare",
+          "message": "For the conversations, the laughter, and the simple comfort of being understood. So lucky to have you.",
+          "source": {
+            "title": "Sonnets",
+            "url": "https://www.gutenberg.org/ebooks/1041",
+            "locator": "Sonnet 30"
+          }
+        }
+      ]
+    },
+    {
+      "id": "new-beginnings",
+      "label": "New beginnings & new homes",
+      "cards": [
+        {
+          "id": "new-beginnings-1",
+          "title": "A chapter of your own",
+          "quote": "Things do not change; we change.",
+          "author": "Henry David Thoreau",
+          "message": "This new chapter need not have every answer. May it bring you closer to the life you wish to make.",
+          "source": {
+            "title": "Walden",
+            "url": "https://www.gutenberg.org/ebooks/205",
+            "locator": "Conclusion"
+          }
+        },
+        {
+          "id": "new-beginnings-2",
+          "title": "Fresh light",
+          "quote": "Afoot and light-hearted I take to the open road",
+          "author": "Walt Whitman",
+          "message": "New doors. Fresh light. A little courage. May you find a place that feels beautifully your own.",
+          "source": {
+            "title": "Leaves of Grass",
+            "url": "https://www.gutenberg.org/ebooks/1322",
+            "locator": "Song of the Open Road"
+          }
+        }
+      ]
+    },
+    {
+      "id": "get-well",
+      "label": "Get well & encouragement",
+      "cards": [
+        {
+          "id": "get-well-1",
+          "title": "A little hope",
+          "quote": "Hope is the thing with feathers\nThat perches in the soul",
+          "author": "Emily Dickinson",
+          "message": "Wishing you gentler days, unhurried rest, and small reasons to smile. You are loved, exactly as you are.",
+          "source": {
+            "title": "Poems: Three Series, Complete",
+            "url": "https://www.gutenberg.org/ebooks/12242",
+            "locator": "Hope"
+          }
+        },
+        {
+          "id": "get-well-2",
+          "title": "Rest gently",
+          "quote": "For in the dew of little things the heart finds its morning and is refreshed.",
+          "author": "Kahlil Gibran",
+          "message": "A small comfort for a quieter day. Rest gently; you are loved, and there is no need to hurry.",
+          "source": {
+            "title": "The Prophet",
+            "url": "https://www.gutenberg.org/ebooks/58585",
+            "locator": "On Friendship"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mothers-day",
+      "label": "Mother’s Day",
+      "cards": [
+        {
+          "id": "mothers-day-1",
+          "title": "The heart of home",
+          "quote": "There is no charm equal to tenderness of heart",
+          "author": "Jane Austen",
+          "message": "For every ordinary day you filled with extraordinary care. You are the heart of so much that is good in my life. Happy Mother’s Day.",
+          "source": {
+            "title": "Emma",
+            "url": "https://www.gutenberg.org/ebooks/158",
+            "locator": "Volume II, Chapter XIII"
+          }
+        },
+        {
+          "id": "mothers-day-2",
+          "title": "My first kind of love",
+          "quote": "Love is life.",
+          "author": "Leo Tolstoy",
+          "message": "Before I knew the word for love, I knew you. Thank you for the warmth I still carry everywhere. Happy Mother’s Day.",
+          "source": {
+            "title": "War and Peace",
+            "url": "https://www.gutenberg.org/ebooks/2600",
+            "locator": "Book XII, Chapter XVI; Louise and Aylmer Maude translation"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fathers-day",
+      "label": "Father’s Day",
+      "cards": [
+        {
+          "id": "fathers-day-1",
+          "title": "The goodness you gave",
+          "quote": "Goodness is the only investment that never fails.",
+          "author": "Henry David Thoreau",
+          "message": "For the steady love, the quiet lessons, and the goodness you taught me to carry. Happy Father’s Day.",
+          "source": {
+            "title": "Walden",
+            "url": "https://www.gutenberg.org/ebooks/205",
+            "locator": "Higher Laws"
+          }
+        },
+        {
+          "id": "fathers-day-2",
+          "title": "Because you believed",
+          "quote": "You are the bows from which your children as living arrows are sent forth.",
+          "author": "Kahlil Gibran",
+          "message": "For helping me find my own way, and making sure I always knew the way home. With love, this Father’s Day.",
+          "source": {
+            "title": "The Prophet",
+            "url": "https://www.gutenberg.org/ebooks/58585",
+            "locator": "On Children"
+          }
+        }
+      ]
+    },
+    {
+      "id": "eid",
+      "label": "Eid & family celebrations",
+      "cards": [
+        {
+          "id": "eid-1",
+          "title": "The joy of gathering",
+          "quote": "And in the sweetness of friendship let there be laughter, and sharing of pleasures.",
+          "author": "Kahlil Gibran",
+          "message": "Eid Mubarak. May our table be full, our hearts lighter, and our time together beautiful.",
+          "source": {
+            "title": "The Prophet",
+            "url": "https://www.gutenberg.org/ebooks/58585",
+            "locator": "On Friendship"
+          }
+        },
+        {
+          "id": "eid-2",
+          "title": "Goodness at every table",
+          "quote": "And there is no greatness where simplicity, goodness, and truth are absent.",
+          "author": "Leo Tolstoy",
+          "message": "Eid Mubarak. May goodness fill our homes, love gather us close, and joy find room at every table.",
+          "source": {
+            "title": "War and Peace",
+            "url": "https://www.gutenberg.org/ebooks/2600",
+            "locator": "Book XIV, Chapter XVIII; Louise and Aylmer Maude translation"
+          }
+        }
+      ]
+    }
+  ]
+}

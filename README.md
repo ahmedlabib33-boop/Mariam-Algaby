@@ -14,6 +14,8 @@ What the site does for customers:
   "Contains:" line accurate in /admin.
 - A **Send it as a gift** option, a delivery time window, and name/area/address remembered on the customer's
   own phone (only there, never sent anywhere else).
+- A literary gift-card collection: two editable messages for each of 13 occasions. Browse the collection on
+  `/packaging#card-collection`, or choose a card directly in the gift order form.
 - On phones, a bar at the bottom shows the box total; a **Questions?** button opens a WhatsApp chat.
 - An FAQ, an occasions section, a preview image for links shared on WhatsApp (`assets/og.jpg`), icons for
   "Add to Home Screen", a sitemap and a branded 404 page.
@@ -55,6 +57,19 @@ They are not in this repository.
 
 Vercel settings: `BLOB_READ_WRITE_TOKEN` (added automatically when the Blob store was connected) and
 `ADMIN_PASSWORD`.
+
+## Handwritten gift cards
+
+`public/data/cards.json` contains 26 cards grouped by occasion. Each card separates a verified literary
+quotation and author credit from an original personal message. Customers can choose a card on the packaging
+page or in their box, then edit or sign the complete message before it is included in the WhatsApp order.
+A choice from the packaging page stays in that browser tab until the customer edits it, disables the gift
+option, or starts a new box. If the collection is unavailable, writing a custom message still works.
+
+To update the wording, edit the card data and keep exactly two choices per occasion. Preserve the quotation's
+wording, credit, and source link; the personal message is not attributed to the author. The readable collection
+and source references are in [docs/gift-cards.md](docs/gift-cards.md). `public/js/cards.js` renders both places;
+`public/css/cards.css` styles the collection. No new service or build step is required.
 
 ## Hosting
 
