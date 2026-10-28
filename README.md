@@ -3,8 +3,22 @@
 Website for **Maison de Gaby**, a home patisserie by Mariam Algaby, Heliopolis (Masr El Gedida), Cairo.
 Live at https://maison-mariam.vercel.app
 
-Customers fill a box from the menu and press **Send order on WhatsApp**. The full order (items, total,
-name, date, area, address, gift note) opens in WhatsApp, already written out.
+Customers fill a box from the menu and press **Send order on WhatsApp**. The full order opens in WhatsApp,
+already written out, with an order number (e.g. `MG-2810-K4F`), the items and total, the delivery day and time
+window, the area and address, and, for gifts, the recipient's name and phone and the card message.
+
+What the site does for customers:
+
+- Menu filters (Whole cakes / Boxes / Gluten-free) and allergen tags, read from the "Contains:" part of each
+  dessert's ingredients. A dessert whose allergens don't include gluten gets a **Gluten-free** badge, so keep the
+  "Contains:" line accurate in /admin.
+- A **Send it as a gift** option, a delivery time window, and name/area/address remembered on the customer's
+  own phone (only there, never sent anywhere else).
+- On phones, a bar at the bottom shows the box total; a **Questions?** button opens a WhatsApp chat.
+- An FAQ, an occasions section, a preview image for links shared on WhatsApp (`assets/og.jpg`), icons for
+  "Add to Home Screen", a sitemap and a branded 404 page.
+
+The hero photos (crème brûlée and honey cake) are set in `index.html`, not in /admin.
 
 ## Editing the menu: /admin
 
@@ -29,7 +43,7 @@ They are not in this repository.
 ## How it works
 
 - `public/`: the website (plain HTML/CSS/JS, no build step)
-  - `index.html`, `packaging.html`, `admin.html`
+  - `index.html`, `packaging.html`, `admin.html`, `404.html`
   - `js/menu.js`: WhatsApp numbers and Instagram link
   - `data/menu.json`: the starting menu, used until the first publish from /admin
 - `api/`: three small Vercel Functions
@@ -65,5 +79,6 @@ The starting photos in `public/assets/photos/` are stand-ins from Unsplash (free
 - carrot-cake.jpg: https://unsplash.com/photos/a-piece-of-carrot-cake-on-a-plate-with-a-fork-EvfXG4aK9d8 (Orkun Orcan)
 - honey-cake.jpg: https://unsplash.com/photos/sliced-of-cake-on-white-ceramic-plate-diVU8-tGO0U (Diliara Garifullina)
 - souffle-cheesecake.jpg: https://unsplash.com/photos/a-cake-with-berries-and-powdered-sugar-on-a-plate-AHKlSCTEf3c
+- `assets/og.jpg` (link preview) is made from creme-brulee.jpg and honey-cake.jpg.
 - creme-caramel.jpg: https://unsplash.com/photos/sweet-flan-dessert-with-caramel-sauce-and-a-spoon-gynfA2P1dis
 - creme-brulee.jpg: https://unsplash.com/photos/creme-brulee-dessert-with-strawberry-6We0b1jY6ms

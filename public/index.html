@@ -2,30 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Maison de Gaby · Patisserie, Heliopolis</title>
-  <meta name="description" content="Maison de Gaby: desserts baked by hand in small batches in Heliopolis, Cairo. Order your box on WhatsApp.">
+  <meta name="description" content="Maison de Gaby: French-style desserts baked by hand in small batches in Heliopolis, Cairo. Crème brûlée, honey cake, molten cake and more. Order your box on WhatsApp.">
+  <link rel="canonical" href="https://maison-mariam.vercel.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Maison de Gaby">
+  <meta property="og:url" content="https://maison-mariam.vercel.app/">
   <meta property="og:title" content="Maison de Gaby · Desserts worth the wait">
-  <meta property="og:description" content="Desserts baked by hand in Heliopolis, Cairo. Order 24 hours ahead.">
+  <meta property="og:description" content="Desserts baked by hand in Heliopolis, Cairo, boxed like a gift. Order a day ahead on WhatsApp.">
+  <meta property="og:image" content="https://maison-mariam.vercel.app/assets/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Maison de Gaby, patisserie in Heliopolis, Cairo">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#1E2A44">
   <link rel="icon" href="assets/favicon-g.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="preload" as="image" href="assets/photos/creme-brulee.jpg" fetchpriority="high">
+  <link rel="stylesheet" href="css/style.css?v=3">
+  <script>document.documentElement.classList.add("js");</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Bakery",
+    "name": "Maison de Gaby",
+    "description": "Home patisserie in Heliopolis, Cairo. Desserts baked to order and delivered across Cairo.",
+    "url": "https://maison-mariam.vercel.app/",
+    "image": "https://maison-mariam.vercel.app/assets/og.jpg",
+    "logo": "https://maison-mariam.vercel.app/assets/icon-512.png",
+    "telephone": "+201550505386",
+    "servesCuisine": "French patisserie",
+    "priceRange": "EGP",
+    "founder": { "@type": "Person", "name": "Mariam Algaby" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Heliopolis (Masr El Gedida)", "addressRegion": "Cairo", "addressCountry": "EG" },
+    "areaServed": "Cairo",
+    "openingHours": "Mo-Su 10:00-20:00",
+    "acceptsReservations": false
+  }
+  </script>
 </head>
 <body>
+  <a class="skip" href="#menu">Skip to the menu</a>
 
   <div class="topbar">
     <span>Order 24 hours ahead</span>
     <span class="dot">·</span>
     <span>Delivery across Heliopolis &amp; Cairo</span>
+    <span class="dot">·</span>
+    <span>Every box gift-wrapped</span>
   </div>
 
   <header class="nav" id="top">
     <nav class="nav-links nav-left" aria-label="Primary">
       <a href="#menu">Menu</a>
       <a href="#story">Our Story</a>
+      <a href="#faq">Questions</a>
     </nav>
     <a class="wordmark" href="#top" aria-label="Maison de Gaby home">
       <img class="wm-mark" src="assets/mark.svg" alt="" width="46" height="46">
@@ -35,8 +71,8 @@
       </span>
     </a>
     <nav class="nav-links nav-right" aria-label="Secondary">
-      <a href="packaging.html">Packaging</a>
-      <button class="box-btn" id="openBox" aria-label="Open your box">
+      <a href="packaging">Packaging</a>
+      <button class="box-btn" id="openBox" aria-label="Open your box" aria-controls="drawer" aria-expanded="false">
         My Box <span class="box-count" id="boxCount">0</span>
       </button>
     </nav>
@@ -50,24 +86,34 @@
         <h1>Desserts worth<br><em>the wait.</em></h1>
         <p class="lead">Every dessert is baked to order, by hand, in Mariam's kitchen in Masr El Gedida. Order a day ahead and it arrives fresh, boxed like a gift.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="#menu">View the menu</a>
+          <a class="btn btn-primary" href="#menu">Choose your desserts</a>
           <a class="btn btn-ghost" href="#order">How to order</a>
         </div>
+        <p class="hero-next" id="nextDelivery">Order today, delivered from tomorrow.</p>
       </div>
+      <figure class="hero-art">
+        <div class="arch">
+          <img src="assets/photos/creme-brulee.jpg" alt="Crème brûlée with a caramelised sugar crust" width="900" height="675" fetchpriority="high">
+        </div>
+        <div class="hero-inset">
+          <img src="assets/photos/honey-cake.jpg" alt="A slice of layered honey cake" width="900" height="675">
+        </div>
+        <figcaption><em>Crème brûlée,</em> torched the hour it leaves</figcaption>
+      </figure>
     </section>
 
     <!-- VALUES STRIP -->
     <section class="strip" aria-label="Our promise">
       <ul>
         <li><span>I</span>Handmade</li>
-        <li><span>II</span>Real butter</li>
+        <li><span>II</span>Real butter &amp; cream</li>
         <li><span>III</span>Baked to order</li>
         <li><span>IV</span>Delivered with care</li>
       </ul>
     </section>
 
     <!-- STORY -->
-    <section class="story" id="story">
+    <section class="story reveal" id="story">
       <div class="story-text">
         <p class="eyebrow">Our Story</p>
         <h2>A kitchen in Heliopolis,<br><em>a patisserie for Cairo.</em></h2>
@@ -79,21 +125,22 @@
 
     <!-- MENU -->
     <section class="carte" id="menu">
-      <header class="section-head">
+      <header class="section-head reveal">
         <p class="eyebrow">The Menu</p>
         <h2>Our desserts</h2>
         <p class="muted">Baked to order. Prices are in Egyptian pounds.</p>
       </header>
-      <div class="menu-grid" id="menuGrid"></div>
+      <div class="filters" id="filters" role="group" aria-label="Filter the menu" hidden></div>
+      <div class="menu-grid" id="menuGrid" aria-live="polite"></div>
     </section>
 
     <!-- PACKAGING TEASER -->
     <section class="emballage">
-      <div class="emb-text">
+      <div class="emb-text reveal">
         <p class="eyebrow light">The Packaging</p>
         <h2>Delivered like a gift.</h2>
-        <p>Every order comes in a cream box with a navy ribbon and a gold wax seal, along with a handwritten note from Mariam. You can hand it straight to someone as a gift.</p>
-        <a class="btn btn-light" href="packaging.html">See the packaging</a>
+        <p>Every order comes in a cream box with a navy ribbon and a gold wax seal, along with a handwritten note from Mariam. Sending it to someone else? Tick <em>Send it as a gift</em> in your box and we'll deliver it to them, with your message on the card.</p>
+        <a class="btn btn-light" href="packaging">See the packaging</a>
       </div>
       <div class="emb-visual" aria-hidden="true">
         <div class="tag">
@@ -106,29 +153,78 @@
       </div>
     </section>
 
+    <!-- OCCASIONS -->
+    <section class="occasions" aria-labelledby="occTitle">
+      <header class="section-head reveal">
+        <p class="eyebrow">For every occasion</p>
+        <h2 id="occTitle">Made for the table,<br><em>and for giving.</em></h2>
+      </header>
+      <ul class="occ-list">
+        <li class="reveal"><span class="occ-no">i</span><h3>Birthdays</h3><p>A whole honey cake or carrot cake, with a message from you on the card.</p></li>
+        <li class="reveal"><span class="occ-no">ii</span><h3>Visits</h3><p>Never arrive empty-handed. A box of brownies or crèmes caramel, ready to hand over.</p></li>
+        <li class="reveal"><span class="occ-no">iii</span><h3>Eid &amp; family days</h3><p>Mix several desserts in one order, so there's something for everyone.</p></li>
+        <li class="reveal"><span class="occ-no">iv</span><h3>Thank-you gifts</h3><p>Sent straight to them, gift-wrapped, with your words on the card.</p></li>
+      </ul>
+    </section>
+
     <!-- HOW TO ORDER -->
     <section class="commander" id="order">
-      <header class="section-head">
+      <header class="section-head reveal">
         <p class="eyebrow">Ordering</p>
         <h2>How to order</h2>
       </header>
       <ol class="steps">
-        <li>
+        <li class="reveal">
           <span class="step-num">01</span>
           <h3>Compose your box</h3>
           <p>Add desserts from the menu. Mix as many as you like in one order.</p>
         </li>
-        <li>
+        <li class="reveal">
           <span class="step-num">02</span>
           <h3>Choose your day</h3>
-          <p>Pick a delivery date at least 24 hours ahead. Everything is baked fresh for you.</p>
+          <p>Pick a delivery date at least 24 hours ahead, and a time that suits you. Everything is baked fresh for you.</p>
         </li>
-        <li>
+        <li class="reveal">
           <span class="step-num">03</span>
           <h3>Confirm on WhatsApp</h3>
-          <p>Your order opens in WhatsApp, already written out. Mariam confirms it and arranges delivery.</p>
+          <p>Your order opens in WhatsApp, already written out. Mariam confirms it, the delivery fee and the time.</p>
         </li>
       </ol>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+      <header class="section-head reveal">
+        <p class="eyebrow">Good to know</p>
+        <h2>Questions</h2>
+      </header>
+      <div class="faq-list reveal">
+        <details>
+          <summary>How far ahead should I order?</summary>
+          <p>At least 24 hours, because everything is baked for your order. For large orders or events, message us a few days ahead so we can keep the day for you.</p>
+        </details>
+        <details>
+          <summary>Where do you deliver, and how much does it cost?</summary>
+          <p>Across Heliopolis (Masr El Gedida) and the rest of Cairo, between 13:00 and 21:00. The delivery fee depends on the area, and Mariam confirms it on WhatsApp before your order is baked.</p>
+        </details>
+        <details>
+          <summary>Can I send it as a gift?</summary>
+          <p>Yes. In your box, tick <em>Send it as a gift</em>, add their name and number and a message for the card. It arrives gift-wrapped, with your message on the card.</p>
+        </details>
+        <details>
+          <summary>I have an allergy. What's in each dessert?</summary>
+          <p>Every dessert lists its ingredients and allergens on the menu: tap <em>Ingredients</em>. The crème caramel and crème brûlée are made without gluten. Our kitchen also uses nuts, gluten, eggs and dairy, so we can't promise a dessert is completely free of traces. Tell us about any allergy in your order note.</p>
+        </details>
+        <details>
+          <summary>How should I keep my desserts?</summary>
+          <p>In the fridge, covered. Cakes keep for 3 days and the crème caramel for 3 days. Eat the crème brûlée within an hour or two of delivery, while the top still cracks. Warm a molten cake for 15 seconds in the microwave before serving.</p>
+        </details>
+        <details>
+          <summary>Can I write a message on a cake, or change a dessert?</summary>
+          <p>Write what you'd like in the order note. Mariam will tell you on WhatsApp what's possible for your date.</p>
+        </details>
+      </div>
+      <p class="faq-more reveal">Anything else? <a id="askLink2" href="#" target="_blank" rel="noopener">Ask Mariam on WhatsApp →</a></p>
     </section>
   </main>
 
@@ -153,14 +249,25 @@
         <p>Orders: daily, 10:00 to 20:00<br>Deliveries: 13:00 to 21:00</p>
       </div>
     </div>
-    <p class="copyright">© <span id="year"></span> Maison de Gaby · Handmade in Cairo</p>
+    <p class="copyright">© <span id="year"></span> Maison de Gaby · Handmade in Cairo · <a href="packaging">Packaging</a></p>
   </footer>
+
+  <!-- QUICK ACCESS -->
+  <a class="ask" id="askLink" href="#" target="_blank" rel="noopener" aria-label="Ask a question on WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.2 3.6c-.5.4-1.3.1-1.3-.6V16A2.5 2.5 0 0 1 4 13.5z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8.5 9.5h7M8.5 12h4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+    <span>Questions?</span>
+  </a>
+  <button class="mbar" id="mbar" type="button" hidden>
+    <span class="mbar-count" id="mbarCount">0 items</span>
+    <span class="mbar-label">View my box</span>
+    <span class="mbar-total" id="mbarTotal">0 EGP</span>
+  </button>
 
   <!-- BOX DRAWER -->
   <div class="scrim" id="scrim" hidden></div>
-  <aside class="drawer" id="drawer" aria-label="Your box" aria-hidden="true">
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
     <header class="drawer-head">
-      <h2>My Box</h2>
+      <h2 id="drawerTitle">My Box</h2>
       <button class="icon-btn" id="closeBox" aria-label="Close">×</button>
     </header>
     <div class="drawer-body">
@@ -168,12 +275,25 @@
       <p class="box-empty" id="boxEmpty">Your box is empty.<br><a href="#menu" data-close>View the menu →</a></p>
 
       <form class="order-form" id="orderForm" novalidate>
+        <p class="form-title">Delivery</p>
         <label>Your name
-          <input type="text" name="name" required autocomplete="name">
+          <input type="text" name="name" required autocomplete="name" maxlength="60">
         </label>
-        <label>Delivery date
-          <input type="date" name="date" required>
-        </label>
+        <div class="form-row">
+          <label>Date
+            <input type="date" name="date" required>
+          </label>
+          <label>Time
+            <select name="slot">
+              <option>13:00 – 15:00</option>
+              <option>15:00 – 17:00</option>
+              <option>17:00 – 19:00</option>
+              <option>19:00 – 21:00</option>
+              <option selected>Any time</option>
+            </select>
+          </label>
+        </div>
+        <p class="date-hint small" id="dateHint"></p>
         <label>Area
           <select name="area" required>
             <option>Heliopolis / Masr El Gedida</option>
@@ -184,24 +304,44 @@
           </select>
         </label>
         <label>Address
-          <input type="text" name="address" autocomplete="street-address" placeholder="Street, building, floor, flat">
+          <input type="text" name="address" autocomplete="street-address" maxlength="160" placeholder="Street, building, floor, flat">
         </label>
-        <label>Note or gift message <span class="opt">(optional)</span>
-          <textarea name="note" rows="2" placeholder="Allergies, a message on the cake, or words for the gift card"></textarea>
+
+        <label class="check-row"><input type="checkbox" name="gift" id="giftToggle"> <span>Send it as a gift</span></label>
+        <div class="gift-fields" id="giftFields" hidden>
+          <label>Their name
+            <input type="text" name="toName" maxlength="60">
+          </label>
+          <label>Their phone
+            <input type="tel" name="toPhone" inputmode="tel" maxlength="20" placeholder="01x xxxx xxxx">
+          </label>
+          <label>Message for the card
+            <textarea name="card" rows="2" maxlength="200" placeholder="Happy birthday, with love…"></textarea>
+          </label>
+          <p class="small muted">Put their address in the Address field above.</p>
+        </div>
+
+        <label><span>Note <span class="opt">(optional)</span></span>
+          <textarea name="note" rows="2" maxlength="300" placeholder="Allergies, a message on the cake, anything we should know"></textarea>
         </label>
+        <label class="check-row"><input type="checkbox" name="remember" checked> <span>Remember my details on this device</span></label>
       </form>
     </div>
-    <footer class="drawer-foot">
+    <footer class="drawer-foot" id="drawerFoot">
       <div class="total-row"><span>Total</span><span id="boxTotal">0 EGP</span></div>
-      <p class="muted small">Delivery fee is confirmed on WhatsApp.</p>
+      <p class="muted small">Plus delivery, confirmed on WhatsApp before baking.</p>
       <button class="btn btn-primary btn-block" id="sendOrder" disabled>Send order on WhatsApp</button>
       <p class="form-error" id="formError" role="alert"></p>
+      <div class="sent-note" id="sentNote" hidden>
+        <p>Your order is written out in WhatsApp. Press <strong>send</strong> there and Mariam will confirm it.</p>
+        <p class="small"><button type="button" class="link-btn" id="resend">Open WhatsApp again</button> · <button type="button" class="link-btn" id="newBox">Start a new box</button></p>
+      </div>
     </footer>
   </aside>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="js/menu.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/menu.js?v=3"></script>
+  <script src="js/main.js?v=3"></script>
 </body>
 </html>
