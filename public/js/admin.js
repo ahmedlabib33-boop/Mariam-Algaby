@@ -162,7 +162,7 @@
       '<summary><span class="rc-name">' + esc(g.title) + '</span><span class="rc-src">Costs, prices and suppliers</span></summary>' +
       '<div class="rc-body">' +
         (g.intro ? '<p class="rc-intro">' + esc(g.intro) + "</p>" : "") +
-        (g.summary ? "<h3>Suggested prices</h3>" + table(["Dessert", "Cost", "Now", "Suggested", "Profit", "Margin"], g.summary, "rc-money") : "") +
+        (g.summary ? "<h3>Prices &amp; profit</h3>" + table(["Dessert", "Cost", "Price", "Profit", "Margin"], g.summary, "rc-money") : "") +
         (g.method ? '<p class="rc-note">' + esc(g.method) + "</p>" : "") +
         (g.places ? "<h3>Where to buy</h3><ul class=\"rc-bullets\">" + g.places.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>" : "") +
         (g.prices ? "<h3>Ingredient prices</h3>" + table(["Ingredient", "Price", "Source"], g.prices, "rc-money rc-prices") : "") +
