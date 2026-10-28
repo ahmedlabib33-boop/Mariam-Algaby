@@ -95,10 +95,10 @@
       <div class="sheet-body">
         <div class="photo-pick">
           <div class="photo-frame" id="photoFrame"><span class="muted">No photo yet</span></div>
-          <label class="btn btn-outline btn-block photo-btn">
+          <button type="button" class="btn btn-outline btn-block photo-btn" id="choosePhoto">
             <span id="photoBtnText">Choose a photo</span>
-            <input type="file" accept="image/*" id="photoInput" hidden>
-          </label>
+          </button>
+          <input type="file" accept="image/*" id="photoInput" hidden>
           <p class="small muted" id="photoNote">Landscape photos look best. They're resized for you automatically.</p>
         </div>
 
@@ -117,7 +117,7 @@
             <input type="text" name="portion" maxlength="40" placeholder="e.g. Box of 4">
           </label>
           <label class="field">Price (EGP)
-            <input type="number" name="price" min="0" step="5" inputmode="numeric" required placeholder="0">
+            <input type="number" name="price" min="0" max="1000000" step="1" inputmode="numeric" required placeholder="0">
           </label>
         </div>
         <label class="check"><input type="checkbox" name="soldOut"> Sold out for now</label>
@@ -133,6 +133,6 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="js/admin.js"></script>
+  <script src="js/admin.js?v=2"></script>
 </body>
 </html>

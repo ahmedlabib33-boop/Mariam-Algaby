@@ -34,8 +34,13 @@ Mariam edits the menu herself at **https://maison-mariam.vercel.app/admin**, fro
 - **↑ ↓** change the order, **+ Add a dessert** adds a new one, and **Delete** is inside each dessert.
 - Press **Publish**. Changes are on the website within a minute.
 
-Photos taken on the phone are shrunk automatically before upload. Every published menu is also kept as a
-backup in the Blob store under `menu/history/`.
+Menu controls pause while publishing. If another device has published a newer menu, the editor keeps your
+draft and asks you to reload rather than overwriting it. Menu storage failures pause editing; **Try again**
+loads the current version safely.
+
+Photos taken on the phone are shrunk automatically before upload. A new photo is applied when you press
+**Done**; closing the dessert sheet discards it. Published menus are backed up in the Blob store under
+`menu/history/`. If only the backup fails, the editor confirms that the live menu was published and shows a warning.
 
 **Changing the password:** Vercel → project `maison-mariam` → Settings → Environment Variables →
 `ADMIN_PASSWORD`, then redeploy.
@@ -50,7 +55,7 @@ They are not in this repository.
   - `index.html`, `packaging.html`, `admin.html`, `404.html`
   - `js/menu.js`: WhatsApp numbers and Instagram link
   - `data/menu.json`: the starting menu, used until the first publish from /admin
-- `api/`: three small Vercel Functions
+- `api/`: four small Vercel Functions
   - `menu.js`: `GET` returns the published menu, `POST` publishes it (password required)
   - `upload.js`: stores a dessert photo (password required)
   - `recipes.js`: the private recipe book for the Recipes tab (password required)
@@ -103,6 +108,9 @@ such as `maisonmariam.com`, add it under **Settings → Domains**.
 cd public && python3 -m http.server 8000
 # open http://localhost:8000 (the menu comes from data/menu.json; /admin needs Vercel)
 ```
+
+Run `npm ci` then `npm test` for the admin menu API regression checks. They use local storage fixtures with
+network access disabled, and do not read real admin credentials or change the production menu.
 
 ## Photos
 

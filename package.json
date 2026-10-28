@@ -3,7 +3,13 @@
   "private": true,
   "type": "module",
   "description": "Maison Mariam website: static site in public/, menu API in api/",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
   "dependencies": {
     "@vercel/blob": "^2.8.2"
+  },
+  "devDependencies": {
+    "undici": "6.29.1"
   }
 }

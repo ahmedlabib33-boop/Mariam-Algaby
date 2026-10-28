@@ -12,6 +12,14 @@
   var tab = "menu";
   var menuReady = false;
   var recipesLoaded = false;
+  var recipesLoading = false;
+  var session = 0;
+  var signedIn = false;
+  var menuRequest = 0;
+  var photoRequest = 0;
+  var publishing = false;
+  var draft = null;
+  var menuETag = null;
 
   var $ = function (id) { return document.getElementById(id); };
   function esc(s) {
@@ -32,24 +40,35 @@
 
   // ---- storage of the password on this device -------------------------
   function storedPassword() {
-    try { return localStorage.getItem(PW_KEY) || sessionStorage.getItem(PW_KEY) || ""; }
-    catch (e) { return ""; }
+    var stores = ["localStorage", "sessionStorage"];
+    for (var i = 0; i < stores.length; i++) {
+      try { var value = window[stores[i]].getItem(PW_KEY); if (value) return value; } catch (e) { /* try the other store */ }
+    }
+    return "";
   }
   function storePassword(pw, remember) {
+    forgetPassword();
     try {
       (remember ? localStorage : sessionStorage).setItem(PW_KEY, pw);
     } catch (e) { /* private mode: stays signed in for this page only */ }
   }
   function forgetPassword() {
-    try { localStorage.removeItem(PW_KEY); sessionStorage.removeItem(PW_KEY); } catch (e) { /* ignore */ }
+    ["localStorage", "sessionStorage"].forEach(function (name) {
+      try { window[name].removeItem(PW_KEY); } catch (e) { /* ignore */ }
+    });
   }
+
+  function currentSession(value) { return signedIn && session === value; }
+  function cancelled(err) { return err.message === "signed out" || err.message === "session ended"; }
 
   // ---- API ------------------------------------------------------------
   function api(path, options) {
+    var requestSession = session;
     options = options || {};
     options.headers = Object.assign({ "x-admin-password": password }, options.headers || {});
     return fetch(path, options).then(function (res) {
       return res.json().catch(function () { return {}; }).then(function (data) {
+        if (!currentSession(requestSession)) throw new Error("session ended");
         if (res.status === 401) { signOut("Your password has changed. Please sign in again."); throw new Error("signed out"); }
         if (!res.ok) throw new Error(data.error || "Something went wrong. Please try again.");
         return data;
@@ -61,15 +80,19 @@
   // failure must stop here: editing the starting menu and publishing it would
   // replace Mariam's real menu.
   function loadMenu() {
-    // The time stamp skips the CDN cache, so the editor always shows the latest menu.
-    return fetch("api/menu?t=" + Date.now()).then(function (res) {
-      return res.status === 404 ? fetch("data/menu.json") : res;
+    var etag = null;
+    // Authenticated reads verify the stored version; publishes use its ETag.
+    return fetch("api/menu?t=" + Date.now(), { headers: { "x-admin-password": password }, cache: "no-store" }).then(function (res) {
+      if (res.status === 404) return fetch("data/menu.json");
+      etag = res.headers.get("ETag");
+      if (res.ok && !etag) throw new Error("Reload the editor to load the current menu version.");
+      return res;
     }).then(function (res) {
       if (!res.ok) throw new Error(res.status);
       return res.json();
     }).then(function (d) {
       if (!d || !Array.isArray(d.items)) throw new Error("no items");
-      return d.items;
+      return { items: d.items, etag: etag };
     });
   }
 
@@ -87,41 +110,75 @@
   }
 
   function showEditor() {
+    var requestSession = session;
+    var request = ++menuRequest;
     $("login").hidden = true;
     $("signOut").hidden = false;
     $("tabs").hidden = false;
     $("loadError").hidden = true;
     $("retryLoad").disabled = true;
     menuReady = false;
+    $("list").hidden = true;
+    $("empty").hidden = true;
+    $("addItem").hidden = true;
     showTab(tab);
-    loadMenu().then(function (list) {
-      items = list;
+    loadMenu().then(function (data) {
+      if (!currentSession(requestSession) || request !== menuRequest) return;
+      items = data.items;
+      menuETag = data.etag;
       menuReady = true;
       $("list").hidden = false;
       $("addItem").hidden = false;
       setDirty(false);
       render();
     }).catch(function () {
+      if (!currentSession(requestSession) || request !== menuRequest) return;
       items = [];
       $("list").hidden = true;
       $("empty").hidden = true;
       $("addItem").hidden = true;
       $("loadError").hidden = false;
     }).then(function () {
+      if (!currentSession(requestSession) || request !== menuRequest) return;
       showTab(tab);
       $("retryLoad").disabled = false;
     });
   }
 
   function signOut(message) {
+    session++;
+    signedIn = false;
+    menuRequest++;
+    photoRequest++;
     if ($("sheet").open) $("sheet").close();
     editing = -1;
+    draft = null;
+    items = [];
+    menuETag = null;
+    menuReady = false;
+    uploading = 0;
+    publishing = false;
+    dirty = false;
+    recipesLoading = false;
+    tab = "menu";
+    $("list").textContent = "";
+    $("recipeList").textContent = "";
+    $("itemForm").reset();
+    $("loginForm").reset();
+    $("photoFrame").textContent = "";
+    $("photoFrame").classList.remove("busy");
+    $("doneItem").disabled = false;
+    $("choosePhoto").disabled = false;
+    $("pdfError").textContent = "";
+    $("downloadPdf").disabled = false;
+    $("downloadPdf").textContent = "Download the recipe book (PDF)";
     forgetPassword();
     password = "";
     showLogin(message);
   }
 
   function showTab(name) {
+    if (!signedIn) return;
     tab = name;
     $("editor").hidden = name !== "menu";
     $("recipes").hidden = name !== "recipes";
@@ -131,21 +188,26 @@
       b.classList.toggle("is-active", on);
       b.setAttribute("aria-selected", on);
     });
-    if (name === "recipes" && !recipesLoaded) loadRecipes();
+    if (name === "recipes" && !recipesLoaded && !recipesLoading) loadRecipes();
   }
 
   // ---- recipes (private, read-only here) --------------------------------
   function loadRecipes() {
+    var requestSession = session;
+    recipesLoading = true;
     $("recipesMsg").hidden = false;
     $("recipesMsg").textContent = "Loading your recipes…";
     api("api/recipes?t=" + Date.now()).then(function (data) {
+      if (!currentSession(requestSession)) return;
+      recipesLoading = false;
       recipesLoaded = true;
       var list = data.recipes || [];
       $("recipesMsg").hidden = list.length > 0;
       $("recipesMsg").textContent = "No recipes yet.";
       $("recipeList").innerHTML = (data.guide ? renderGuide(data.guide) : "") + list.map(renderRecipe).join("");
     }).catch(function (err) {
-      if (err.message === "signed out") return;
+      if (!currentSession(requestSession) || cancelled(err)) return;
+      recipesLoading = false;
       $("recipesMsg").textContent = "Your recipes couldn't be loaded. Please try again in a moment.";
     });
   }
@@ -216,17 +278,20 @@
 
   // The PDF is private too, so it is fetched with the password and saved from memory.
   function downloadPdf() {
+    var requestSession = session;
     var btn = $("downloadPdf");
     $("pdfError").textContent = "";
     btn.disabled = true;
     btn.textContent = "Preparing the PDF…";
     fetch("api/recipes?format=pdf&t=" + Date.now(), { headers: { "x-admin-password": password } })
       .then(function (res) {
+        if (!currentSession(requestSession)) throw new Error("session ended");
         if (res.status === 401) { signOut("Your password has changed. Please sign in again."); throw new Error("signed out"); }
         if (!res.ok) throw new Error("The recipe book isn't available right now. Please try again later.");
         return res.blob();
       })
       .then(function (blob) {
+        if (!currentSession(requestSession)) return;
         var url = URL.createObjectURL(blob);
         var a = document.createElement("a");
         a.href = url;
@@ -237,9 +302,10 @@
         setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
       })
       .catch(function (err) {
-        if (err.message !== "signed out") $("pdfError").textContent = err.message;
+        if (currentSession(requestSession) && !cancelled(err)) $("pdfError").textContent = err.message;
       })
       .then(function () {
+        if (!currentSession(requestSession)) return;
         btn.disabled = false;
         btn.textContent = "Download the recipe book (PDF)";
       });
@@ -265,6 +331,18 @@
           "</div>" +
         "</div></li>";
     }).join("");
+    updateControls();
+  }
+
+  function updateControls() {
+    $("publish").disabled = !menuReady || !dirty || uploading > 0 || publishing;
+    $("addItem").disabled = publishing || items.length >= 60;
+    Array.prototype.forEach.call($("list").querySelectorAll("button, input"), function (control) {
+      var boundary = control.dataset.move !== undefined &&
+        (Number(control.dataset.move) + Number(control.dataset.dir) < 0 ||
+         Number(control.dataset.move) + Number(control.dataset.dir) >= items.length);
+      control.disabled = publishing || boundary;
+    });
   }
 
   function setDirty(value) {
@@ -272,19 +350,21 @@
     var el = $("status");
     el.className = "ad-status" + (value ? " dirty" : "");
     el.textContent = value ? "You have changes that aren't on the website yet." : "Everything is published.";
-    $("publish").disabled = !value || uploading > 0;
+    updateControls();
   }
 
   // ---- edit sheet -----------------------------------------------------
   function openSheet(i) {
+    if (publishing || !menuReady) return;
     editing = i;
     var it = items[i];
+    draft = Object.assign({}, it);
     var f = $("itemForm");
     f.name.value = it.name || "";
     f.desc.value = it.desc || "";
     f.ingredients.value = it.ingredients || "";
     f.portion.value = it.portion || "";
-    f.price.value = it.price || "";
+    f.price.value = it.price == null ? "" : it.price;
     f.soldOut.checked = !!it.soldOut;
     $("itemError").textContent = "";
     showPhoto(it.photo);
@@ -302,7 +382,9 @@
     var name = f.name.value.trim();
     var price = Number(f.price.value);
     if (!name) { $("itemError").textContent = "Please give the dessert a name."; f.name.focus(); return false; }
-    if (!f.price.value || !(price >= 0)) { $("itemError").textContent = "Please add a price."; f.price.focus(); return false; }
+    if (!f.price.value || !Number.isFinite(price) || price < 0 || price > 1000000) {
+      $("itemError").textContent = "Please enter a price from 0 to 1,000,000 EGP."; f.price.focus(); return false;
+    }
     var it = items[editing];
     it.name = name;
     it.desc = f.desc.value.trim();
@@ -310,10 +392,17 @@
     it.portion = f.portion.value.trim();
     it.price = Math.round(price);
     it.soldOut = f.soldOut.checked;
+    it.photo = draft.photo;
     return true;
   }
 
   function closeSheet() {
+    photoRequest++;
+    uploading = 0;
+    draft = null;
+    $("photoFrame").classList.remove("busy");
+    $("doneItem").disabled = false;
+    $("choosePhoto").disabled = false;
     // A brand-new dessert that was never named is dropped.
     if (editing > -1 && !items[editing].name) items.splice(editing, 1);
     editing = -1;
@@ -347,50 +436,65 @@
   }
 
   function uploadPhoto(file) {
-    var it = items[editing];
-    uploading++;
+    if (editing < 0 || uploading || !draft) return;
+    var requestSession = session;
+    var request = ++photoRequest;
+    var photoDraft = draft;
+    function active() { return currentSession(requestSession) && request === photoRequest && draft === photoDraft; }
+    uploading = 1;
     $("publish").disabled = true;
     $("doneItem").disabled = true;
+    $("choosePhoto").disabled = true;
     $("photoFrame").classList.add("busy");
     $("itemError").textContent = "";
     shrink(file)
       .then(function (blob) {
+        if (!active()) throw new Error("session ended");
         return api("api/upload", { method: "POST", headers: { "Content-Type": "image/jpeg" }, body: blob });
       })
       .then(function (data) {
-        it.photo = data.url;
-        if (items[editing] === it) showPhoto(it.photo);
-        setDirty(true);
+        if (!active()) return;
+        photoDraft.photo = data.url;
+        showPhoto(photoDraft.photo);
       })
       .catch(function (err) {
-        if (err.message !== "signed out") $("itemError").textContent = err.message;
+        if (active() && !cancelled(err)) $("itemError").textContent = err.message;
       })
       .then(function () {
-        uploading--;
+        if (!active()) return;
+        uploading = 0;
         $("photoFrame").classList.remove("busy");
         $("doneItem").disabled = false;
-        setDirty(dirty);
+        $("choosePhoto").disabled = false;
+        updateControls();
       });
   }
 
   // ---- publish --------------------------------------------------------
   function publish() {
+    if (!signedIn || !menuReady || publishing || uploading || !dirty) return;
+    var requestSession = session;
     var missing = items.filter(function (it) { return !it.name; });
     if (missing.length) { toast("Every dessert needs a name before publishing."); return; }
-    $("publish").disabled = true;
+    publishing = true;
+    updateControls();
     $("status").textContent = "Publishing…";
     api("api/menu", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: Object.assign({ "Content-Type": "application/json" }, menuETag ? { "If-Match": menuETag } : { "If-None-Match": "*" }),
       body: JSON.stringify({ items: items })
     }).then(function (data) {
+      if (!currentSession(requestSession)) return;
+      publishing = false;
       items = data.items;
+      menuETag = data.etag;
       render();
       setDirty(false);
       $("status").className = "ad-status ok";
-      $("status").textContent = "Published ✓ Your changes will be on the website within a minute.";
+      $("status").textContent = data.warning || "Published ✓ Your changes will be on the website within a minute.";
     }).catch(function (err) {
-      if (err.message === "signed out") return;
+      if (!currentSession(requestSession) || cancelled(err)) return;
+      publishing = false;
       setDirty(true);
       $("status").textContent = err.message;
     });
@@ -399,15 +503,18 @@
   // ---- events ---------------------------------------------------------
   $("loginForm").addEventListener("submit", function (e) {
     e.preventDefault();
+    var requestSession = session;
     var f = e.target;
     var pw = f.password.value;
     $("loginError").textContent = "";
     f.querySelector("button").disabled = true;
     fetch("api/login", { method: "POST", headers: { "x-admin-password": pw } })
       .then(function (res) {
+        if (requestSession !== session) return;
         if (res.status === 401) throw new Error("That password isn't right. Please try again.");
         if (!res.ok) throw new Error("The editor isn't available right now. Please try again later.");
         password = pw;
+        signedIn = true;
         storePassword(pw, f.remember.checked);
         f.reset();
         showEditor();
@@ -423,6 +530,7 @@
   });
 
   $("list").addEventListener("click", function (e) {
+    if (!signedIn || !menuReady || publishing) return;
     var edit = e.target.closest("[data-edit]");
     if (edit) { openSheet(Number(edit.dataset.edit)); return; }
     var move = e.target.closest("[data-move]");
@@ -435,6 +543,7 @@
   });
 
   $("list").addEventListener("change", function (e) {
+    if (!signedIn || !menuReady || publishing) return;
     var t = e.target;
     if (t.dataset.avail === undefined) return;
     items[Number(t.dataset.avail)].soldOut = !t.checked;
@@ -443,6 +552,7 @@
   });
 
   $("addItem").addEventListener("click", function () {
+    if (!signedIn || !menuReady || publishing || items.length >= 60) return;
     items.push({ id: "d" + Date.now().toString(36), name: "", desc: "", ingredients: "", portion: "", price: 0, photo: "", soldOut: false });
     openSheet(items.length - 1);
   });
@@ -461,13 +571,14 @@
   $("deleteItem").addEventListener("click", function () {
     var it = items[editing];
     if (it.name && !confirm("Delete " + it.name + " from the menu?")) return;
+    var named = !!it.name;
     items.splice(editing, 1);
     editing = -1;
-    $("sheet").close();
-    setDirty(true);
-    render();
+    if (named) setDirty(true);
+    closeSheet();
   });
 
+  $("choosePhoto").addEventListener("click", function () { $("photoInput").click(); });
   $("photoInput").addEventListener("change", function (e) {
     var file = e.target.files && e.target.files[0];
     e.target.value = "";
@@ -493,7 +604,13 @@
   // ---- start ----------------------------------------------------------
   password = storedPassword();
   if (!password) { showLogin(); return; }
+  var initialSession = session;
   fetch("api/login", { method: "POST", headers: { "x-admin-password": password } })
-    .then(function (res) { res.ok ? showEditor() : signOut(); })
+    .then(function (res) {
+      if (initialSession !== session) return;
+      if (res.ok) { signedIn = true; showEditor(); }
+      else if (res.status === 401) signOut();
+      else showLogin("The editor isn't available right now. Please try again later.");
+    })
     .catch(function () { showLogin("The editor isn't available right now. Please try again later."); });
 })();
