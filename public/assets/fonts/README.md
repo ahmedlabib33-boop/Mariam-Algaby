@@ -1,0 +1,1 @@
+Local Latin-subset webfonts from @fontsource/cormorant-garamond 5.3.0 and @fontsource/jost 5.3.0, distributed under the SIL Open Font License. Original license notices are included alongside the fonts. Downloaded npm archives were verified against their registry SHA-512 integrity metadata.
