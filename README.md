@@ -65,3 +65,5 @@ The starting photos in `public/assets/photos/` are stand-ins from Unsplash (free
 - carrot-cake.jpg: https://unsplash.com/photos/a-piece-of-carrot-cake-on-a-plate-with-a-fork-EvfXG4aK9d8 (Orkun Orcan)
 - honey-cake.jpg: https://unsplash.com/photos/sliced-of-cake-on-white-ceramic-plate-diVU8-tGO0U (Diliara Garifullina)
 - souffle-cheesecake.jpg: https://unsplash.com/photos/a-cake-with-berries-and-powdered-sugar-on-a-plate-AHKlSCTEf3c
+- creme-caramel.jpg: https://unsplash.com/photos/sweet-flan-dessert-with-caramel-sauce-and-a-spoon-gynfA2P1dis
+- creme-brulee.jpg: https://unsplash.com/photos/creme-brulee-dessert-with-strawberry-6We0b1jY6ms

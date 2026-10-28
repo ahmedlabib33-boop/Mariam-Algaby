@@ -49,6 +49,26 @@
       "price": 600,
       "photo": "assets/photos/souffle-cheesecake.jpg",
       "soldOut": false
+    },
+    {
+      "id": "caramel",
+      "name": "Crème Caramel",
+      "desc": "Silky vanilla custard under a dark, glossy caramel that turns to sauce as it rests. Run a knife around and turn it onto a plate.",
+      "ingredients": "Fresh milk, cream, whole eggs and egg yolks, sugar, vanilla; a dark caramel of sugar and water. Baked gently in a water bath. Contains: eggs, dairy. Gluten-free.",
+      "portion": "Box of 4",
+      "price": 360,
+      "photo": "assets/photos/creme-caramel.jpg",
+      "soldOut": false
+    },
+    {
+      "id": "brulee",
+      "name": "Crème Brûlée",
+      "desc": "Rich vanilla custard with a thin sugar crust, torched just before it leaves our kitchen. Keep chilled and enjoy within two hours for the crack.",
+      "ingredients": "Fresh cream, egg yolks, sugar, vanilla, a pinch of salt; topped with demerara sugar caramelised by flame. Contains: eggs, dairy. Gluten-free.",
+      "portion": "Box of 4",
+      "price": 480,
+      "photo": "assets/photos/creme-brulee.jpg",
+      "soldOut": false
     }
   ]
 }
