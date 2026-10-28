@@ -23,6 +23,9 @@
   <link rel="preload" as="image" href="assets/photos/creme-brulee.jpg" fetchpriority="high">
   <link rel="stylesheet" href="css/style.css?v=4">
   <link rel="stylesheet" href="css/cards.css?v=1">
+  <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="css/delivery.css?v=1">
+  <script src="js/delivery.js?v=1" defer></script>
   <script src="js/cards.js?v=1" defer></script>
   <link rel="preload" href="assets/fonts/cormorant-garamond-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/jost-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -292,7 +295,29 @@
             <option>Other (we'll confirm)</option>
           </select>
         </label>
-        <label>Address
+        <section class="delivery-location" aria-labelledby="deliveryLocationTitle">
+          <p class="delivery-location-title" id="deliveryLocationTitle">Where shall we deliver?</p>
+          <p class="delivery-location-help">Use your current location, or choose another destination on the map.</p>
+          <div class="delivery-location-actions">
+            <button type="button" class="btn btn-outline" id="useMyLocation" aria-pressed="false" aria-controls="deliveryMapPanel" aria-expanded="false">Use my location</button>
+            <button type="button" class="btn btn-outline" id="chooseDeliveryLocation" aria-pressed="false" aria-controls="deliveryMapPanel" aria-expanded="false">Choose another address</button>
+          </div>
+          <div class="delivery-map-panel" id="deliveryMapPanel" hidden>
+            <div class="delivery-map" id="deliveryMap" role="region" aria-label="Delivery location map" aria-describedby="deliveryMapHelp" tabindex="0"></div>
+            <p class="delivery-map-instructions" id="deliveryMapHelp">Tap the map or drag the pin to the entrance. You can also pan with the arrow keys and choose the map centre.</p>
+            <div class="delivery-map-actions">
+              <button type="button" class="link-btn" id="useMapCenter" disabled>Use map centre</button>
+              <button type="button" class="link-btn" id="clearDeliveryLocation" hidden>Remove pin</button>
+            </div>
+          </div>
+          <div class="delivery-location-summary" id="deliveryLocationSummary" hidden>
+            <p id="deliveryCoordinates"></p>
+            <a id="deliveryMapLink" target="_blank" rel="noopener noreferrer">Check this location in Google Maps</a>
+          </div>
+          <p class="delivery-location-status" id="deliveryLocationStatus" role="status" aria-live="polite"></p>
+          <p class="delivery-location-error" id="deliveryLocationError" role="alert"></p>
+        </section>
+        <label>Address details
           <input type="text" name="address" autocomplete="street-address" maxlength="160" placeholder="Street, building, floor, flat">
         </label>
 
@@ -313,7 +338,7 @@
             <textarea name="card" rows="5" maxlength="400" placeholder="Choose a literary card, or write a few words of your own…"></textarea>
           </label>
           <p class="card-personalise-hint">Add a name, a signature, or a little something only you would say. We’ll handwrite your message.</p>
-          <p class="small muted">Put their address in the Address field above.</p>
+          <p class="small muted">Choose the recipient’s location on the map, or enter their full address above.</p>
         </div>
 
         <label><span>Note <span class="opt">(optional)</span></span>
@@ -337,6 +362,6 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="js/menu.js?v=4"></script>
-  <script src="js/main.js?v=6"></script>
+  <script src="js/main.js?v=7"></script>
 </body>
 </html>

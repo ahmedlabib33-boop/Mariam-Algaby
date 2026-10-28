@@ -283,13 +283,14 @@
     var f = $("orderForm");
     var name = f.name.value.trim(), date = f.date.value;
     var gift = f.gift.checked;
+    var location = window.MAISON_DELIVERY ? window.MAISON_DELIVERY.getLocation() : null;
     $("formError").textContent = "";
     var problem =
       !name ? ["name", "Please add your name."] :
       !date ? ["date", "Please choose a delivery date."] :
       date < minDate ? ["date", "Orders need 24 hours, so please pick tomorrow or later."] :
       gift && !f.toName.value.trim() ? ["toName", "Please add the name of the person receiving the gift."] :
-      gift && !f.address.value.trim() ? ["address", "Please add the address the gift goes to."] :
+      gift && !f.address.value.trim() && !location ? ["address", "Please choose the gift’s location on the map or add the full address."] :
       null;
     if (problem) {
       $("formError").textContent = problem[1];
@@ -308,6 +309,7 @@
       "Delivery: " + niceDate(date) + ", " + f.slot.value,
       "Area: " + f.area.value);
     if (f.address.value.trim()) lines.push("Address: " + f.address.value.trim());
+    if (location) lines.push("Delivery map: " + location.url);
     if (gift) {
       lines.push("", "It's a gift for: " + f.toName.value.trim() + (f.toPhone.value.trim() ? " (" + f.toPhone.value.trim() + ")" : ""));
       if (f.card.value.trim()) lines.push("Card message: \"" + f.card.value.trim() + "\"");

@@ -1,0 +1,1 @@
+Leaflet 1.9.4, vendored from the published leaflet npm package. The archive SHA-512 was verified against npm integrity metadata. Upstream: https://leafletjs.com/ and https://github.com/Leaflet/Leaflet. Copyright and BSD-2-Clause license are retained in LICENSE.

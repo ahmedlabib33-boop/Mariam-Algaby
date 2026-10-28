@@ -16,6 +16,8 @@ What the site does for customers:
   own phone (only there, never sent anywhere else).
 - A literary gift-card collection: two editable messages for each of 13 occasions. Browse the collection on
   `/packaging#card-collection`, or choose a card directly in the gift order form.
+- A delivery map: use the customer's current location with browser permission, or choose another address
+  by placing or dragging a pin. The WhatsApp order includes a Google Maps link and any written address details.
 - On phones, a bar at the bottom shows the box total; a **Questions?** button opens a WhatsApp chat.
 - An FAQ, an occasions section, a preview image for links shared on WhatsApp (`assets/og.jpg`), icons for
   "Add to Home Screen", a sitemap and a branded 404 page.
@@ -70,6 +72,25 @@ To update the wording, edit the card data and keep exactly two choices per occas
 wording, credit, and source link; the personal message is not attributed to the author. The readable collection
 and source references are in [docs/gift-cards.md](docs/gift-cards.md). `public/js/cards.js` renders both places;
 `public/css/cards.css` styles the collection. No new service or build step is required.
+
+## Delivery locations
+
+The checkout's **Use my location** button requests browser location permission and shows the delivery pin.
+**Choose another address** opens a map where customers can tap, drag the pin, or pan with the arrow keys and
+select **Use map centre**. The initial area view is only a starting point; it is not a selected address.
+Written street/building/floor/flat details remain editable, and a gift can use either a selected map pin or a
+full written address. For gifts, customers choose the recipient's destination themselves.
+
+`public/js/delivery.js` lazy-loads the locally vendored Leaflet 1.9.4 library. Interactive map tiles come from
+OpenStreetMap with attribution; there is no geocoder, API key, or paid mapping dependency. GPS provides a
+coordinate pin, not a street-address lookup. Map pins stay in the current page's memory and reset with a new
+box; they are not added to remembered customer details. The selected map link is included in the WhatsApp
+order. If location permission or the map is unavailable, written-address ordering still works.
+
+The browser location API needs HTTPS in production (localhost is supported for development). Map imagery
+requires access to `tile.openstreetmap.org`. For automated browser checks, intercept tiles with local fixtures
+rather than generating automated traffic to the public tile service. Vendor license and asset information are
+in `public/assets/vendor/leaflet/`.
 
 ## Hosting
 
