@@ -9,7 +9,8 @@ window.MAISON = {
   whatsapp: "201550505386",
   // Optional second number, shown in the footer only. Set to "" to hide it.
   whatsapp2: "201012710244",
-  instagram: "https://instagram.com/maisondegaby",
+  // Instagram profile link, e.g. "https://instagram.com/maisondegaby". Leave "" to hide it until the account exists.
+  instagram: "",
 
   currency: "EGP"
 };

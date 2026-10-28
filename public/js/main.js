@@ -397,7 +397,10 @@
   var ask = waBase + "?text=" + encodeURIComponent("Hello Maison de Gaby! I have a question:");
   $("askLink").href = ask;
   $("askLink2").href = ask;
-  $("igLink").href = M.instagram;
+  if (M.instagram) {
+    $("igLink").href = M.instagram;
+    $("igLink").hidden = false;
+  }
   $("year").textContent = new Date().getFullYear();
 
   // Sections fade in as they scroll into view.
