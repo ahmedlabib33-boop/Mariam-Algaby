@@ -49,6 +49,23 @@ Photos taken on the phone are shrunk automatically before upload. A new photo is
 stored in the Blob store at a secret path (`RECIPES_KEY` in Vercel) and only shown after signing in.
 They are not in this repository.
 
+## Individual delivery riders
+
+In **Admin → Couriers**, add the names and mobile numbers of individual riders Mariam works with. Each
+contact has a vehicle, service areas, notes, and an availability setting maintained by Mariam. Use **Call**
+or **WhatsApp** to contact a rider, or **Use for delivery** to prepare a request for a confirmed customer order.
+
+The delivery form includes the pickup address and time, recipient name and phone, destination address or
+the Google Maps link from the customer's WhatsApp order, contents, handling notes, and any agreed cash
+amount. Review the preview, then open the request in WhatsApp or copy it. Send the message there and agree
+the fee, timing and acceptance with the rider. Opening a draft does not confirm a delivery booking.
+
+Rider contacts are **saved on the current device/browser**. Use **Back up contacts** and **Import contacts**
+to transfer them; imports add new numbers and keep existing contacts. Contacts stay on the device after
+sign-out, while the displayed directory and recipient details are cleared. Customer delivery drafts are
+never saved. Browser storage failures show a notice and leave contacts usable for the current session;
+export a backup before leaving. This feature uses the rider's phone and WhatsApp, with no courier API account.
+
 ## How it works
 
 - `public/`: the website (plain HTML/CSS/JS, no build step)
@@ -111,6 +128,11 @@ cd public && python3 -m http.server 8000
 
 Run `npm ci` then `npm test` for the admin menu API regression checks. They use local storage fixtures with
 network access disabled, and do not read real admin credentials or change the production menu.
+
+For the courier browser checks, install Python Playwright (`python3 -m pip install playwright` and
+`python3 -m playwright install chromium`), then run `npm run test:browser`. The test starts its own local
+preview and uses fixture sign-in/menu responses. It intercepts WhatsApp opens and never sends a message
+or calls a rider; an existing system Chromium is used when available.
 
 ## Photos
 

@@ -23,13 +23,13 @@ body.admin { background: var(--cream); min-height: 100vh; padding-bottom: 110px;
 
 /* form fields */
 .field { display: grid; gap: 6px; font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
-.field input, .field textarea {
+.field input, .field textarea, .field select {
   font: 300 16px/1.45 var(--sans); color: var(--ink); letter-spacing: 0; text-transform: none;
-  border: 1px solid var(--line); background: #fff; padding: 12px 14px; border-radius: 0; width: 100%;
+  border: 1px solid var(--line); background: #fff; padding: 12px 14px; border-radius: 0; width: 100%; min-width: 0;
 }
 .field textarea { resize: vertical; }
 .field-hint { font-size: 12px; letter-spacing: 0; text-transform: none; color: var(--muted); }
-.field input:focus, .field textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(176,141,87,.18); }
+.field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(176,141,87,.18); }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .check { display: flex; gap: 10px; align-items: center; font-size: 15px; cursor: pointer; }
 .check input { width: 20px; height: 20px; accent-color: var(--navy); }
@@ -157,8 +157,64 @@ body.admin { background: var(--cream); min-height: 100vh; padding-bottom: 110px;
 .rc-total tr.gold td { color: var(--gold); font: 500 18px/1.2 var(--serif); }
 .rc-guide .rc-money { font-size: 12.5px; }
 
+/* Individual riders and temporary delivery requests */
+.courier-directory { margin-bottom: 42px; }
+.courier-section-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.courier-section-head h2, .courier-request h2 { font: 400 32px/1.1 var(--serif); margin: 0 0 8px; }
+.courier-section-head p { margin: 0; }
+.courier-section-head .btn { flex: none; }
+.courier-list { display: grid; gap: 12px; list-style: none; padding: 0; margin: 0; }
+.courier-card { min-width: 0; padding: 20px; border: 1px solid var(--line); background: var(--paper); }
+.courier-card.courier-selected { border-color: var(--gold); box-shadow: inset 3px 0 0 var(--gold); }
+.courier-card-head { display: flex; justify-content: space-between; align-items: start; gap: 14px; }
+.courier-name { font: 400 27px/1.15 var(--serif); color: var(--navy); margin: 0; overflow-wrap: anywhere; }
+.courier-availability { display: inline-block; flex: none; max-width: 100%; font-size: 11px; line-height: 1.4; color: var(--muted); border: 1px solid var(--line); padding: 4px 8px; }
+.courier-card-meta { font-size: 13px; color: var(--muted); margin: 9px 0 0; overflow-wrap: anywhere; }
+.courier-card-note { margin: 10px 0 0; font-size: 14px; color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
+.courier-card-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 16px; }
+.courier-card-actions .btn { min-height: 44px; padding: 11px 14px; font-size: 10px; letter-spacing: .12em; }
+.courier-card-actions .link-btn { min-height: 44px; padding: 10px; font-size: 12px; }
+.courier-card button:focus-visible, .courier-card a:focus-visible, .courier-backup button:focus-visible,
+.courier-request-actions .link-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.courier-empty { margin: 0; padding: 28px 20px; border: 1px dashed var(--line); text-align: center; font-size: 15px; }
+.courier-status { font-size: 14px; color: var(--navy); margin: 12px 0 0; overflow-wrap: anywhere; }
+.courier-status:empty, .courier-storage-notice:empty { display: none; }
+.courier-storage { margin-top: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.courier-storage p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.6; }
+.courier-storage strong { color: var(--navy); font-weight: 500; }
+.courier-backup { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; margin-top: 6px; }
+.courier-backup button { min-height: 44px; font-size: 12px; color: var(--navy); text-decoration: underline; text-underline-offset: 4px; }
+.courier-storage .courier-storage-notice { color: #9b3b2f; margin-top: 8px; }
+.courier-request .ad-intro { margin-bottom: 22px; }
+.courier-request .ad-intro .eyebrow { margin-bottom: 10px; }
+.courier-request-form { display: grid; gap: 18px; }
+.courier-request-form .field-row { min-width: 0; }
+.courier-optional { font-size: 10px; font-weight: 400; letter-spacing: .08em; color: var(--muted); text-transform: none; }
+.courier-preview-wrap { border: 1px solid var(--line); background: var(--paper); padding: 20px; min-width: 0; }
+.courier-preview-wrap .eyebrow { margin-bottom: 14px; }
+.courier-preview { font: 400 14px/1.65 var(--sans); color: var(--ink); margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.courier-preview:empty::before { content: "Your delivery request will appear here as you fill in the details."; color: var(--muted); }
+.courier-request-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; }
+.courier-request-actions .link-btn { min-height: 44px; font-size: 12px; }
+.courier-request-form > .form-error, .courier-request-form > .courier-status { margin: 0; }
+.courier-request-form > .small { margin: 0; }
+.courier-sheet .sheet-head .icon-btn { width: 44px; height: 44px; flex: none; }
+.courier-sheet .sheet-head h2 { margin: 0; }
+
 @media (max-width: 600px) {
   .sheet { margin: auto 0 0; width: 100vw; }
   .ad-item { grid-template-columns: 1fr; }
   .ad-tools { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); padding-top: 8px; }
+  .courier-section-head { align-items: start; flex-direction: column; gap: 12px; }
+  .courier-section-head .btn { width: 100%; }
+  .courier-card { padding: 16px; }
+  .courier-card-head { flex-direction: column; gap: 8px; }
+  .courier-request-form .field-row { grid-template-columns: 1fr; gap: 18px; }
+  .courier-request-form > .btn-primary { padding: 15px 12px; letter-spacing: .1em; line-height: 1.5; white-space: normal; }
+  .courier-preview-wrap { padding: 16px; }
+  .courier-sheet .sheet-foot .btn { padding-left: 14px; padding-right: 14px; }
+}
+
+@media (max-width: 360px) {
+  .ad-tab { font-size: 10px; letter-spacing: .16em; }
 }

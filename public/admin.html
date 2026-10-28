@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Menu Editor · Maison de Gaby</title>
+  <title>Studio Admin · Maison de Gaby</title>
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#1E2A44">
   <link rel="icon" href="assets/favicon-g.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="stylesheet" href="css/style.css?v=4">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v=2">
 </head>
 <body class="admin">
 
@@ -30,9 +30,9 @@
   <!-- SIGN IN -->
   <main class="ad-main" id="login" hidden>
     <form class="ad-card login-card" id="loginForm">
-      <p class="eyebrow">Menu editor</p>
+      <p class="eyebrow">Your studio</p>
       <h1>Welcome, <em>Mariam</em></h1>
-      <p class="muted">Enter your password to edit the menu.</p>
+      <p class="muted">Sign in to manage your menu, recipes and couriers.</p>
       <label class="field">Password
         <input type="password" name="password" autocomplete="current-password" required>
       </label>
@@ -42,13 +42,14 @@
     </form>
   </main>
 
-  <nav class="ad-tabs" id="tabs" role="tablist" hidden>
-    <button type="button" role="tab" class="ad-tab is-active" data-tab="menu" aria-selected="true">Menu</button>
-    <button type="button" role="tab" class="ad-tab" data-tab="recipes" aria-selected="false">Recipes</button>
+  <nav class="ad-tabs" id="tabs" role="tablist" aria-label="Admin sections" hidden>
+    <button type="button" role="tab" class="ad-tab is-active" id="menuTab" data-tab="menu" aria-controls="editor" aria-selected="true">Menu</button>
+    <button type="button" role="tab" class="ad-tab" id="recipesTab" data-tab="recipes" aria-controls="recipes" aria-selected="false" tabindex="-1">Recipes</button>
+    <button type="button" role="tab" class="ad-tab" id="couriersTab" data-tab="couriers" aria-controls="couriers" aria-selected="false" tabindex="-1">Couriers</button>
   </nav>
 
   <!-- EDITOR -->
-  <main class="ad-main" id="editor" hidden>
+  <main class="ad-main" id="editor" role="tabpanel" aria-labelledby="menuTab" hidden>
     <div class="ad-intro">
       <p class="eyebrow">Menu editor</p>
       <h1>Your <em>menu</em></h1>
@@ -67,7 +68,7 @@
   </main>
 
   <!-- RECIPES (private) -->
-  <main class="ad-main" id="recipes" hidden>
+  <main class="ad-main" id="recipes" role="tabpanel" aria-labelledby="recipesTab" hidden>
     <div class="ad-intro">
       <p class="eyebrow">Private · only you can see this</p>
       <h1>Your <em>recipes</em></h1>
@@ -77,6 +78,98 @@
     </div>
     <p class="ad-empty muted" id="recipesMsg">Loading your recipes…</p>
     <div class="rc-list" id="recipeList"></div>
+  </main>
+
+  <!-- INDIVIDUAL COURIERS (saved on this device) -->
+  <main class="ad-main" id="couriers" role="tabpanel" aria-labelledby="couriersTab" hidden>
+    <div class="ad-intro">
+      <p class="eyebrow">People you trust</p>
+      <h1>Your <em>couriers</em></h1>
+      <p class="muted">Keep your delivery riders close. Call them, open a chat, or prepare a delivery request for a confirmed order.</p>
+    </div>
+
+    <section class="courier-directory" aria-labelledby="courierDirectoryTitle">
+      <div class="courier-section-head">
+        <div>
+          <h2 id="courierDirectoryTitle">Your riders</h2>
+          <p class="small muted">Availability is updated by you.</p>
+        </div>
+        <button type="button" class="btn btn-outline" id="addCourier">+ Add a rider</button>
+      </div>
+      <ul class="courier-list" id="courierList"></ul>
+      <p class="courier-empty muted" id="courierEmpty">No riders saved yet. Add someone you work with to get started.</p>
+      <p class="courier-status" id="courierStatus" role="status" aria-live="polite"></p>
+      <div class="courier-storage">
+        <p><strong>Saved on this device.</strong> Your rider contacts stay in this browser and do not sync to the cloud. Back them up to move them to another device.</p>
+        <div class="courier-backup">
+          <button type="button" class="link-btn" id="exportCouriers">Back up contacts</button>
+          <button type="button" class="link-btn" id="importCouriers">Import contacts</button>
+          <input type="file" id="courierImportInput" accept="application/json,.json" hidden>
+        </div>
+        <p class="courier-storage-notice" id="courierStorageNotice" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="courier-request" aria-labelledby="courierRequestTitle">
+      <div class="ad-intro">
+        <p class="eyebrow">Ready to go</p>
+        <h2 id="courierRequestTitle">Prepare a delivery</h2>
+        <p class="muted">Use the details from an order you have confirmed on WhatsApp. Choose a rider and review the message before opening their chat.</p>
+      </div>
+      <form class="courier-request-form" id="deliveryRequestForm" novalidate autocomplete="off">
+        <label class="field">Rider
+          <select id="deliveryCourier" name="courierId" required>
+            <option value="">Choose a rider</option>
+          </select>
+        </label>
+        <label class="field"><span>Order reference <span class="courier-optional">Optional</span></span>
+          <input type="text" name="orderRef" maxlength="60" placeholder="MG-…">
+        </label>
+        <label class="field">Pickup address
+          <input type="text" name="pickup" maxlength="180" required placeholder="Street, building and pickup instructions">
+        </label>
+        <label class="field">Pickup time
+          <input type="text" name="pickupTime" maxlength="80" required placeholder="Today at 5pm">
+        </label>
+        <div class="field-row">
+          <label class="field">Recipient's name
+            <input type="text" name="recipientName" maxlength="60" required>
+          </label>
+          <label class="field">Recipient's phone
+            <input type="tel" name="recipientPhone" maxlength="24" inputmode="tel" required>
+          </label>
+        </div>
+        <label class="field">Delivery address
+          <input type="text" name="address" maxlength="200" placeholder="Street, building, floor and flat">
+        </label>
+        <label class="field">Delivery map link
+          <input type="url" name="mapUrl" maxlength="400" placeholder="Google Maps link" inputmode="url">
+          <span class="field-hint">Paste the customer's map link from their WhatsApp order. Add an address or a map link.</span>
+        </label>
+        <label class="field"><span>What is being delivered <span class="courier-optional">Optional</span></span>
+          <textarea name="contents" rows="2" maxlength="300" placeholder="Desserts, number of boxes and any handling needs"></textarea>
+        </label>
+        <label class="field"><span>Cash to collect (EGP) <span class="courier-optional">Optional</span></span>
+          <input type="number" name="collect" min="0" max="1000000" step="0.01" inputmode="decimal" placeholder="Leave blank if not agreed">
+          <span class="field-hint">Enter only an amount already agreed with the customer.</span>
+        </label>
+        <label class="field"><span>Note for the rider <span class="courier-optional">Optional</span></span>
+          <textarea name="note" rows="3" maxlength="300">Fragile desserts — please keep upright and handle gently.</textarea>
+        </label>
+        <div class="courier-preview-wrap">
+          <p class="eyebrow">Message preview</p>
+          <pre class="courier-preview" id="deliveryRequestPreview"></pre>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="sendCourierRequest">Open delivery request in WhatsApp</button>
+        <div class="courier-request-actions">
+          <button type="button" class="btn btn-outline" id="copyCourierRequest">Copy request</button>
+          <button type="button" class="link-btn" id="clearCourierRequest">Clear delivery details</button>
+        </div>
+        <p class="form-error" id="courierRequestError" role="alert"></p>
+        <p class="courier-status" id="courierRequestStatus" role="status" aria-live="polite"></p>
+        <p class="small muted">This opens a WhatsApp draft. Send it there and wait for the rider to accept the delivery and confirm the fee. Recipient details are not saved here.</p>
+      </form>
+    </section>
   </main>
 
   <footer class="ad-bar" id="bar" hidden>
@@ -131,8 +224,48 @@
     </form>
   </dialog>
 
+  <!-- EDIT ONE RIDER -->
+  <dialog class="sheet courier-sheet" id="courierSheet" aria-labelledby="courierSheetTitle">
+    <form id="courierForm" novalidate autocomplete="off">
+      <header class="sheet-head">
+        <h2 id="courierSheetTitle">Add a rider</h2>
+        <button type="button" class="icon-btn" data-courier-close aria-label="Close rider details">×</button>
+      </header>
+      <div class="sheet-body">
+        <label class="field">Name
+          <input type="text" name="name" maxlength="60" required>
+        </label>
+        <label class="field">Mobile / WhatsApp number
+          <input type="tel" name="phone" maxlength="24" inputmode="tel" required>
+        </label>
+        <label class="field">Vehicle
+          <select name="vehicle">
+            <option>Motorcycle</option>
+            <option>Car</option>
+            <option>Van</option>
+            <option>Bicycle</option>
+          </select>
+        </label>
+        <label class="field"><span>Delivery areas <span class="courier-optional">Optional</span></span>
+          <input type="text" name="area" maxlength="160" placeholder="Areas this rider covers">
+        </label>
+        <label class="field"><span>Notes <span class="courier-optional">Optional</span></span>
+          <textarea name="notes" rows="3" maxlength="240" placeholder="Useful details about working with this rider"></textarea>
+        </label>
+        <label class="check"><input type="checkbox" name="available" checked> Available for requests</label>
+        <p class="small muted">You update availability yourself. The rider still needs to accept each delivery.</p>
+        <p class="form-error" id="courierFormError" role="alert"></p>
+      </div>
+      <footer class="sheet-foot">
+        <button type="button" class="btn btn-danger" id="deleteCourier" hidden>Remove rider</button>
+        <button type="submit" class="btn btn-primary" id="saveCourier">Save rider</button>
+      </footer>
+    </form>
+  </dialog>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="js/admin.js?v=2"></script>
+  <script src="js/admin-couriers.js?v=1"></script>
+  <script src="js/admin.js?v=3"></script>
 </body>
 </html>

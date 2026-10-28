@@ -101,6 +101,7 @@
     $("login").hidden = false;
     $("editor").hidden = true;
     $("recipes").hidden = true;
+    $("couriers").hidden = true;
     $("tabs").hidden = true;
     $("bar").hidden = true;
     recipesLoaded = false;
@@ -148,6 +149,7 @@
   function signOut(message) {
     session++;
     signedIn = false;
+    window.MAISON_COURIERS.signOut();
     menuRequest++;
     photoRequest++;
     if ($("sheet").open) $("sheet").close();
@@ -178,17 +180,20 @@
   }
 
   function showTab(name) {
-    if (!signedIn) return;
+    if (!signedIn || ["menu", "recipes", "couriers"].indexOf(name) < 0) return;
     tab = name;
     $("editor").hidden = name !== "menu";
     $("recipes").hidden = name !== "recipes";
+    $("couriers").hidden = name !== "couriers";
     $("bar").hidden = !(name === "menu" && menuReady);
     Array.prototype.forEach.call(document.querySelectorAll(".ad-tab"), function (b) {
       var on = b.dataset.tab === name;
       b.classList.toggle("is-active", on);
       b.setAttribute("aria-selected", on);
+      b.tabIndex = on ? 0 : -1;
     });
     if (name === "recipes" && !recipesLoaded && !recipesLoading) loadRecipes();
+    if (name === "couriers") window.MAISON_COURIERS.show();
   }
 
   // ---- recipes (private, read-only here) --------------------------------
@@ -515,6 +520,7 @@
         if (!res.ok) throw new Error("The editor isn't available right now. Please try again later.");
         password = pw;
         signedIn = true;
+        window.MAISON_COURIERS.signIn();
         storePassword(pw, f.remember.checked);
         f.reset();
         showEditor();
@@ -590,6 +596,19 @@
     var b = e.target.closest("[data-tab]");
     if (b) showTab(b.dataset.tab);
   });
+  $("tabs").addEventListener("keydown", function (e) {
+    var tabs = Array.prototype.slice.call($("tabs").querySelectorAll("[data-tab]"));
+    var index = tabs.indexOf(e.target);
+    if (index < 0) return;
+    if (e.key === "ArrowRight") index = (index + 1) % tabs.length;
+    else if (e.key === "ArrowLeft") index = (index + tabs.length - 1) % tabs.length;
+    else if (e.key === "Home") index = 0;
+    else if (e.key === "End") index = tabs.length - 1;
+    else return;
+    e.preventDefault();
+    showTab(tabs[index].dataset.tab);
+    tabs[index].focus();
+  });
   $("downloadPdf").addEventListener("click", downloadPdf);
   $("recipeList").addEventListener("click", function (e) {
     var step = e.target.closest(".rc-step");
@@ -608,7 +627,7 @@
   fetch("api/login", { method: "POST", headers: { "x-admin-password": password } })
     .then(function (res) {
       if (initialSession !== session) return;
-      if (res.ok) { signedIn = true; showEditor(); }
+      if (res.ok) { signedIn = true; window.MAISON_COURIERS.signIn(); showEditor(); }
       else if (res.status === 401) signOut();
       else showLogin("The editor isn't available right now. Please try again later.");
     })
