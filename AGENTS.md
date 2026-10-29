@@ -57,6 +57,9 @@ If you need to change the other agent's area, keep the change small and note it 
 
 Newest first. One or two lines each: date, agent, what changed, what's left.
 
+- 2026-10-29 · Claude: private recipe book now 18 recipes in three groups (current menu, six famous house recipes from
+  La Viña, Magnolia Bakery, The River Café, Milk Bar, Pierre Hermé and the Palmer House, previous menu); recipes have
+  a `section` field. The admin password was changed by the owner (Vercel env); nothing in the repo depends on it.
 - 2026-10-29 · Claude: published "20 × 20 cm cake" as the size of all five desserts on the live menu (owner's request);
   nothing else changed.
 - 2026-10-29 · Claude: new admin tab **Apps** (`js/admin-partners.js`, styles at the end of `admin.css`): sign-up
