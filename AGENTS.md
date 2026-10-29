@@ -60,9 +60,11 @@ Newest first. One or two lines each: date, agent, what changed, what's left.
 - 2026-10-29 · Claude: recipe photos. Each private recipe has `photo` (site path or Blob URL), `photoCredit` and
   `photoPage`; the admin Recipes tab shows a thumbnail and a photo (small change in `renderRecipe`, styles at the end
   of `admin.css`), and the PDF shows them beside each title. Twelve new Unsplash photos uploaded via `/api/upload`.
-- 2026-10-29 · Claude: private recipe book now 24 recipes in three groups (current menu; twelve famous house recipes from
-  La Viña, Magnolia Bakery, The River Café, Milk Bar, Pierre Hermé, the Palmer House, Le Beccherie, Joe's Stone Crab,
-  Chez Panisse, Angelina, Ladurée and the Toll House Inn; previous menu); recipes have a `section` field. The admin password was changed by the owner (Vercel env); nothing in the repo depends on it.
+- 2026-10-29 · Claude: private recipe book now 30 recipes, each with a photo: current menu; eighteen famous house
+  recipes (La Viña, Magnolia Bakery ×2, The River Café, Milk Bar, Pierre Hermé, the Palmer House, Le Beccherie, Joe's
+  Stone Crab, Chez Panisse, Angelina, Ladurée, the Toll House Inn, DoubleTree, the Waldorf Astoria, Escoffier,
+  Brennan's, Serendipity 3); previous menu. Recipes have a `section` field. The admin password was changed by the
+  owner (Vercel env); nothing in the repo depends on it.
 - 2026-10-29 · Claude: published "20 × 20 cm cake" as the size of all five desserts on the live menu (owner's request);
   nothing else changed.
 - 2026-10-29 · Claude: new admin tab **Apps** (`js/admin-partners.js`, styles at the end of `admin.css`): sign-up
