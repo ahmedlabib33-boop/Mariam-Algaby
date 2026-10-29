@@ -57,6 +57,8 @@ If you need to change the other agent's area, keep the change small and note it 
 
 Newest first. One or two lines each: date, agent, what changed, what's left.
 
+- 2026-10-29 · Codex: simplified the logo to a geometric G and Jost wordmark across the site, packaging, icons and OG.
+  Added SVG/transparent PNG exports and an optional renderer; responsive, menu, 19 API and 8 courier checks pass.
 - 2026-10-29 · Codex: owner confirmed all five cakes are 20 × 20 cm; updated public menu introduction and starter data.
   Per-item sizes in the separately stored live menu still need admin publication; no live menu was overwritten.
 - 2026-10-29 · Codex: reviewed the five-dessert menu; fixed saved-cart cleanup. 19 API and customer browser checks pass.

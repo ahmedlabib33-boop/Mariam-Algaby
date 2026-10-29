@@ -10,6 +10,7 @@ body.admin { background: var(--cream); min-height: 100vh; padding-bottom: 110px;
 }
 .ad-head .wm-mark { width: 40px; height: 40px; }
 .ad-head .wm-big { font-size: 26px; }
+.ad-head .wordmark { gap: 8px; }
 .ad-links { display: flex; gap: 18px; align-items: center; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; }
 .ad-links a { text-decoration: none; }
 .link-btn { background: none; border: 0; padding: 0; font: inherit; letter-spacing: inherit; text-transform: inherit; color: var(--muted); text-decoration: none; cursor: pointer; }
@@ -216,5 +217,10 @@ body.admin { background: var(--cream); min-height: 100vh; padding-bottom: 110px;
 }
 
 @media (max-width: 360px) {
+  .ad-head { padding-inline: 12px; }
+  .ad-head .wordmark { gap: 6px; }
+  .ad-head .wm-mark { width: 36px; height: 36px; }
+  .ad-head .wm-big { font-size: 24px; }
+  .ad-links { gap: 12px; font-size: 10px; letter-spacing: .12em; white-space: nowrap; }
   .ad-tab { font-size: 10px; letter-spacing: .16em; }
 }

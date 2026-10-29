@@ -140,6 +140,18 @@ or calls a rider; an existing system Chromium is used when available.
 With the same Playwright setup, `npm run test:menu` checks the customer menu on mobile and desktop,
 cart totals, WhatsApp drafts, removal of saved retired/sold-out items, and cart preservation during menu outages.
 
+## Logo assets
+
+The identity pairs a geometric G with an uppercase Jost wordmark. `public/assets/mark.svg` and
+`mark-light.svg` are the monochrome symbols; `logo.svg` and `logo-light.svg` are complete, outlined SVG
+logos for reuse without installing fonts. Matching `logo.png` and `logo-light.png` have transparent backgrounds.
+The website wordmark uses accessible text and the bundled Jost font.
+
+The favicon, touch/app icons and link preview use the same mark. The optional `scripts/render-brand.py`
+utility regenerates the outlined logos, PNG icons and `og.jpg` from the mark, bundled fonts and existing
+stock photos. It requires Python Playwright with Chromium, FontTools and Brotli. Hosting uses the committed
+assets directly.
+
 ## Photos
 
 The starting photos in `public/assets/photos/` are stand-ins from Unsplash (free for commercial use under the
