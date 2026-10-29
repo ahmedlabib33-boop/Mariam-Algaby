@@ -57,10 +57,11 @@ If you need to change the other agent's area, keep the change small and note it 
 
 Newest first. One or two lines each: date, agent, what changed, what's left.
 
+- 2026-10-29 · Claude: published "20 × 20 cm cake" as the size of all five desserts on the live menu (owner's request);
+  nothing else changed.
 - 2026-10-29 · Claude: new admin tab **Apps** (`js/admin-partners.js`, styles at the end of `admin.css`): sign-up
   links, requirements checklists and copy/CSV export for Talabat, Mrsool, elmenus, Google and Instagram; saved in
-  localStorage. Small hook in `admin.js` (`showTab`, `showLogin`). Live per-item sizes still unpublished: needs
-  the owner's go-ahead to publish to the live menu.
+  localStorage. Small hook in `admin.js` (`showTab`, `showLogin`).
 - 2026-10-29 · Codex: owner selected Precision G (option 1); applied the round G and detached diagonal detail
   across the site, packaging, icons and OG. Added stacked SVG/PNG exports; responsive and 19 API checks pass.
 - 2026-10-29 · Codex: simplified the logo to a geometric G and Jost wordmark across the site, packaging, icons and OG.
@@ -89,7 +90,7 @@ Newest first. One or two lines each: date, agent, what changed, what's left.
 
 ## Open tasks
 
-- Menu: publish confirmed 20 × 20 cm sizes in /admin; confirm Milk Cloud's almond-extract allergen declaration.
+- Menu: confirm Milk Cloud's almond-extract allergen declaration.
 - Real dessert photos from Mariam → replace the stock photos (site, Google, Instagram).
 - Instagram account → put the real handle in `public/js/menu.js` and unhide the footer link.
 - Google Business Profile: waiting on video verification; then add products and a "Review us on Google" link.
