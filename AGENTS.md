@@ -57,6 +57,11 @@ If you need to change the other agent's area, keep the change small and note it 
 
 Newest first. One or two lines each: date, agent, what changed, what's left.
 
+- 2026-10-29 · Claude: new menu of five (Golden Carrot Crumb 300, Milk Cloud 300, Toffee Cuddle 400, Cinnamon
+  Kisses 400, Chocolate Crush 350 EGP) replaces the old seven, live and in `data/menu.json`; sizes left blank for
+  Mariam to fill in /admin. Private recipes added (no costing, at the owner's request). Homepage photos, FAQ,
+  meta description and `og.jpg` updated to match. Small fix in `main.js`: no stray "()" or "·" when a dessert
+  has no size.
 - 2026-10-29 · Claude: added this guide. Reviewed Codex's commits up to `50da09d` (heritage redesign, gift
   cards, delivery map, admin publishing fix, couriers): `npm test` passes (17/17), live site checked on desktop
   and phone with no console errors. Fixed a README line that still listed the removed occasions section.

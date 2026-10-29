@@ -140,11 +140,20 @@ The starting photos in `public/assets/photos/` are stand-ins from Unsplash (free
 [Unsplash License](https://unsplash.com/license)). Replace them with photos of Mariam's own desserts from
 /admin. Customers should see what they will get.
 
+Current menu:
+
+- carrot-cake.jpg (Golden Carrot Crumb): https://unsplash.com/photos/a-piece-of-carrot-cake-on-a-plate-with-a-fork-EvfXG4aK9d8 (Orkun Orcan)
+- milk-cloud.jpg (Milk Cloud): https://unsplash.com/photos/slice-of-caramel-cake-on-black-plate-beside-fork-GAauSStia3s (Aliona Gumeniuk)
+- toffee-cuddle.jpg (Toffee Cuddle): https://unsplash.com/photos/caramel-sauce-being-poured-on-dessert-with-ice-cream-ifKtstypv3E (Geoffrey Moffett)
+- cinnamon-kisses.jpg (Cinnamon Kisses): https://unsplash.com/photos/sliced-cinnamon-roll-cake-with-frosting-on-platter-zApCl9Te0Zk (sheri silver)
+- chocolate-crush.jpg (Chocolate Crush): https://unsplash.com/photos/a-chocolate-cake-with-a-slice-taken-out-of-it-F8RKds2YdqA (BraggsDiner)
+- The homepage photos and `assets/og.jpg` (link preview) use milk-cloud.jpg and cinnamon-kisses.jpg.
+
+Previous menu (files kept, no longer shown on the site):
+
 - molten-cake.jpg: https://unsplash.com/photos/chocolate-cake-on-white-ceramic-plate-Pzjez86SsvQ
 - brownies.jpg: https://unsplash.com/photos/a-pile-of-brownies-sitting-on-top-of-a-white-plate-LjtviHokbr4 (Anna Przepiorka)
-- carrot-cake.jpg: https://unsplash.com/photos/a-piece-of-carrot-cake-on-a-plate-with-a-fork-EvfXG4aK9d8 (Orkun Orcan)
 - honey-cake.jpg: https://unsplash.com/photos/sliced-of-cake-on-white-ceramic-plate-diVU8-tGO0U (Diliara Garifullina)
 - souffle-cheesecake.jpg: https://unsplash.com/photos/a-cake-with-berries-and-powdered-sugar-on-a-plate-AHKlSCTEf3c
-- `assets/og.jpg` (link preview) is made from creme-brulee.jpg and honey-cake.jpg.
 - creme-caramel.jpg: https://unsplash.com/photos/sweet-flan-dessert-with-caramel-sauce-and-a-spoon-gynfA2P1dis
 - creme-brulee.jpg: https://unsplash.com/photos/creme-brulee-dessert-with-strawberry-6We0b1jY6ms

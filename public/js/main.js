@@ -177,7 +177,7 @@
     $("boxList").innerHTML = Object.keys(box).map(function (id) {
       var it = byId(id);
       return '<li>' + (it.photo ? '<img src="' + esc(it.photo) + '" alt="" width="64" height="48" loading="lazy">' : '<span class="thumb"></span>') +
-        '<div class="box-item"><strong>' + esc(it.name) + '</strong><span class="muted small">' + esc(it.portion) + " · " + money(it.price) + "</span></div>" +
+        '<div class="box-item"><strong>' + esc(it.name) + '</strong><span class="muted small">' + (it.portion ? esc(it.portion) + " · " : "") + money(it.price) + "</span></div>" +
         '<div class="stepper small" data-id="' + esc(id) + '"><button data-act="dec" aria-label="Remove one ' + esc(it.name) + '">−</button><span>' + box[id] +
         '</span><button data-act="inc" aria-label="Add one more ' + esc(it.name) + '">+</button></div></li>';
     }).join("");
@@ -302,7 +302,7 @@
     var lines = ["Hello Maison de Gaby! I'd like to order:", "Order " + orderRef(), ""];
     Object.keys(box).forEach(function (id) {
       var it = byId(id);
-      lines.push("• " + box[id] + " × " + it.name + " (" + it.portion + ") = " + money(it.price * box[id]));
+      lines.push("• " + box[id] + " × " + it.name + (it.portion ? " (" + it.portion + ")" : "") + " = " + money(it.price * box[id]));
     });
     lines.push("", "Total: " + money(t.sum) + " + delivery", "",
       "Name: " + name,
