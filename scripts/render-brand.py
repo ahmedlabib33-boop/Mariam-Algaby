@@ -38,17 +38,47 @@ def write_lockups(mark):
     small, _ = outlined_text('MAISON DE', 'jost-latin-400-normal.woff2', 110, 30, 11, 3.2)
     name, right = outlined_text('GABY', 'jost-latin-500-normal.woff2', 108, 78, 52, 4)
     width = round(right + 13)
-    for filename, foreground, accent in [('logo.svg', NAVY, '#8b6538'), ('logo-light.svg', PAPER, GOLD)]:
+    for filename, foreground in [('logo.svg', NAVY), ('logo-light.svg', PAPER)]:
         source = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} 100" role="img" aria-label="Maison de Gaby">
   <title>Maison de Gaby</title>
   <!-- Letterforms outlined from bundled Jost; see fonts/jost-LICENSE.txt. -->
   <path fill="{foreground}" d="{mark}"/>
-  <g fill="{accent}">{small}</g>
+  <g fill="{foreground}">{small}</g>
   <g fill="{foreground}">{name}</g>
 </svg>
 '''
         (ASSETS / filename).write_text(source)
-    return width
+    dimensions = {'logo': (width, 100), 'logo-light': (width, 100)}
+    small, small_width = outlined_text('MAISON DE', 'jost-latin-400-normal.woff2', 0, 224, 16, 4.8)
+    name, name_width = outlined_text('GABY', 'jost-latin-500-normal.woff2', 0, 286, 64, 3)
+    for filename, foreground in [('logo-stacked', NAVY), ('logo-stacked-light', PAPER)]:
+        source = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 310" role="img" aria-label="Maison de Gaby">
+  <title>Maison de Gaby — Precision G</title>
+  <!-- Letterforms outlined from bundled Jost; see fonts/jost-LICENSE.txt. -->
+  <g fill="{foreground}">
+    <path transform="translate(20 0) scale(2)" d="{mark}"/>
+    <g transform="translate({(240 - small_width + 4.8) / 2:.3f} 0)">{small}</g>
+    <g transform="translate({(240 - name_width + 3) / 2:.3f} 0)">{name}</g>
+  </g>
+</svg>
+'''
+        (ASSETS / (filename + '.svg')).write_text(source)
+        dimensions[filename] = (240, 310)
+    return dimensions
+
+
+def write_mark_variants(mark):
+    (ASSETS / 'mark-light.svg').write_text(f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Maison de Gaby">
+  <title>Maison de Gaby — Precision G</title>
+  <path fill="{PAPER}" d="{mark}"/>
+</svg>
+''')
+    (ASSETS / 'favicon-g.svg').write_text(f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Maison de Gaby">
+  <title>Maison de Gaby — Precision G</title>
+  <rect width="100" height="100" rx="24" fill="{NAVY}"/>
+  <path fill="{PAPER}" d="{mark}"/>
+</svg>
+''')
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -58,7 +88,8 @@ class Handler(SimpleHTTPRequestHandler):
 
 def render():
     mark = ElementTree.parse(ASSETS / 'mark.svg').getroot().find(NS + 'path').attrib['d']
-    logo_width = write_lockups(mark)
+    write_mark_variants(mark)
+    dimensions = write_lockups(mark)
     server = ThreadingHTTPServer(('127.0.0.1', 0), partial(Handler, directory=str(ROOT / 'public')))
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
@@ -77,8 +108,8 @@ def render():
 <rect width="100" height="100" fill="{NAVY}"/>
 <g transform="translate(6 6) scale(.88)"><path fill="{PAPER}" d="{mark}"/></g></svg></body></html>''')
                 page.screenshot(path=str(ASSETS / filename))
-            for filename in ['logo', 'logo-light']:
-                width, height = 1200, round(120000 / logo_width)
+            for filename, (source_width, source_height) in dimensions.items():
+                width, height = 1200, round(1200 * source_height / source_width)
                 page.set_viewport_size({'width': width, 'height': height})
                 page.set_content(f'''<!doctype html><html><body style="margin:0;background:transparent">
 <img src="{base}/assets/{filename}.svg" width="{width}" height="{height}" style="display:block" alt="Maison de Gaby"></body></html>''')
@@ -110,7 +141,7 @@ def render():
     finally:
         server.shutdown()
         server.server_close()
-    print('Rendered outlined SVG/transparent PNG wordmarks, 180/192/512px app icons, and 1200×630 link preview.')
+    print('Rendered Precision G variants, outlined SVG/transparent PNG lockups, app icons and link preview.')
 
 
 if __name__ == '__main__':

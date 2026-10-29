@@ -142,9 +142,12 @@ cart totals, WhatsApp drafts, removal of saved retired/sold-out items, and cart 
 
 ## Logo assets
 
-The identity pairs a geometric G with an uppercase Jost wordmark. `public/assets/mark.svg` and
+The selected Precision identity pairs a round geometric G and detached diagonal detail with an uppercase
+Jost wordmark. `public/assets/mark.svg` and
 `mark-light.svg` are the monochrome symbols; `logo.svg` and `logo-light.svg` are complete, outlined SVG
 logos for reuse without installing fonts. Matching `logo.png` and `logo-light.png` have transparent backgrounds.
+`logo-stacked.svg` and `logo-stacked-light.svg` preserve the stacked design for print and social use,
+with matching transparent PNG exports at 1200 × 1550 pixels.
 The website wordmark uses accessible text and the bundled Jost font.
 
 The favicon, touch/app icons and link preview use the same mark. The optional `scripts/render-brand.py`

@@ -57,6 +57,8 @@ If you need to change the other agent's area, keep the change small and note it 
 
 Newest first. One or two lines each: date, agent, what changed, what's left.
 
+- 2026-10-29 · Codex: owner selected Precision G (option 1); applied the round G and detached diagonal detail
+  across the site, packaging, icons and OG. Added stacked SVG/PNG exports; responsive and 19 API checks pass.
 - 2026-10-29 · Codex: simplified the logo to a geometric G and Jost wordmark across the site, packaging, icons and OG.
   Added SVG/transparent PNG exports and an optional renderer; responsive, menu, 19 API and 8 courier checks pass.
 - 2026-10-29 · Codex: owner confirmed all five cakes are 20 × 20 cm; updated public menu introduction and starter data.
