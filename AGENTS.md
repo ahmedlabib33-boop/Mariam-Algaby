@@ -57,6 +57,9 @@ If you need to change the other agent's area, keep the change small and note it 
 
 Newest first. One or two lines each: date, agent, what changed, what's left.
 
+- 2026-10-29 · Claude: recipe photos. Each private recipe has `photo` (site path or Blob URL), `photoCredit` and
+  `photoPage`; the admin Recipes tab shows a thumbnail and a photo (small change in `renderRecipe`, styles at the end
+  of `admin.css`), and the PDF shows them beside each title. Twelve new Unsplash photos uploaded via `/api/upload`.
 - 2026-10-29 · Claude: private recipe book now 24 recipes in three groups (current menu; twelve famous house recipes from
   La Viña, Magnolia Bakery, The River Café, Milk Bar, Pierre Hermé, the Palmer House, Le Beccherie, Joe's Stone Crab,
   Chez Panisse, Angelina, Ladurée and the Toll House Inn; previous menu); recipes have a `section` field. The admin password was changed by the owner (Vercel env); nothing in the repo depends on it.

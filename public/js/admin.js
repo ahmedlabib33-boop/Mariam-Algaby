@@ -269,9 +269,14 @@
     var steps = (r.steps || []).map(function (s) {
       return '<li class="rc-step">' + (s.title ? "<strong>" + esc(s.title) + ".</strong> " : "") + esc(s.text) + "</li>";
     }).join("");
+    // Recipe photos are illustrations: site photos (assets/photos/…) or uploads in the Blob store.
+    var photo = typeof r.photo === "string" && /^(assets\/photos\/[\w.-]+|https:\/\/[a-z0-9]+\.public\.blob\.vercel-storage\.com\/[\w.\/-]+)$/i.test(r.photo) ? r.photo : "";
     return '<details class="rc">' +
-      '<summary><span class="rc-name">' + esc(r.name) + '</span><span class="rc-src">' + esc(r.source) + "</span></summary>" +
+      '<summary' + (photo ? ' class="rc-has-photo"' : "") + '>' + (photo ? '<img class="rc-thumb" src="' + esc(photo) + '" alt="" width="72" height="54" loading="lazy">' : "") +
+        '<span class="rc-title"><span class="rc-name">' + esc(r.name) + '</span><span class="rc-src">' + esc(r.source) + "</span></span></summary>" +
       '<div class="rc-body">' +
+        (photo ? '<figure class="rc-photo"><img src="' + esc(photo) + '" alt="' + esc(r.name) + '" loading="lazy">' +
+          (r.photoCredit ? "<figcaption>" + esc(r.photoCredit) + " · illustration only</figcaption>" : "") + "</figure>" : "") +
         (meta ? '<div class="rc-meta">' + meta + "</div>" : "") +
         (r.intro ? '<p class="rc-intro">' + esc(r.intro) + "</p>" : "") +
         (r.equipment && r.equipment.length ? "<h3>Equipment</h3>" + list(r.equipment, "rc-bullets") : "") +

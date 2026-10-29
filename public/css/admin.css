@@ -269,3 +269,11 @@ body.admin { background: var(--cream); min-height: 100vh; padding-bottom: 110px;
   .pt-dish .link-btn { grid-column: 2; justify-self: start; }
   .pt-more .field-row { grid-template-columns: 1fr; }
 }
+
+/* ---------- recipe photos ---------- */
+.rc summary.rc-has-photo { grid-template-columns: 72px 1fr; column-gap: 16px; align-items: center; }
+.rc-thumb { width: 72px; height: 54px; object-fit: cover; display: block; background: var(--sand); }
+.rc-title { display: grid; gap: 4px; min-width: 0; }
+.rc-photo { margin: 6px 0 18px; }
+.rc-photo img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; background: var(--sand); }
+.rc-photo figcaption { font-size: 11.5px; color: var(--muted); margin-top: 6px; }
