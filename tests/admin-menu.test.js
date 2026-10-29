@@ -115,6 +115,25 @@ describe("admin menu storage safety", { concurrency: false }, () => {
     assert.deepEqual(await response.json(), menu);
   });
 
+  it("accepts the weak ETag the CDN sends with a compressed menu", async () => {
+    headReply(200, metadata('"current"'));
+    menuReply(200, 'W/"current"');
+
+    const response = await GET(request());
+
+    assert.equal(response.status, 200);
+    assert.deepEqual(await response.json(), menu);
+  });
+
+  it("still rejects an older menu behind a weak ETag", async () => {
+    headReply();
+    menuReply(200, 'W/"older"');
+
+    const response = await GET(request());
+
+    assert.equal(response.status, 503);
+  });
+
   it("rejects an older cached menu before it can be edited", async () => {
     headReply();
     menuReply(200, "older");

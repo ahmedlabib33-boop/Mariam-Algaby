@@ -9,8 +9,9 @@ const missingMenu = () => Response.json({ items: null }, { status: 404, headers:
 const unavailable = () => Response.json({ error: "The menu is unavailable right now. Please try again." }, { status: 503, headers: noStore });
 const conflict = () => Response.json({ error: "The menu has changed since you opened it. Reload the editor before publishing again." }, { status: 409, headers: noStore });
 
-// The Blob metadata API and CDN can format the same ETag with or without quotes.
-const comparableEtag = (value) => typeof value === "string" ? value.trim().replace(/^"(.*)"$/, "$1") : "";
+// The Blob metadata API and CDN can format the same ETag with or without quotes,
+// and the CDN marks it weak (W/"…") when it serves the menu compressed, as it does to fetch().
+const comparableEtag = (value) => typeof value === "string" ? value.trim().replace(/^W\//i, "").replace(/^"(.*)"$/, "$1") : "";
 
 // GET /api/menu: the published menu, or 404 before the first publish
 // (the site then falls back to data/menu.json). A storage outage is a 503,
