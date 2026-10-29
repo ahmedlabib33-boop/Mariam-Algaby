@@ -19,7 +19,7 @@ What the site does for customers:
 - A delivery map: use the customer's current location with browser permission, or choose another address
   by placing or dragging a pin. The WhatsApp order includes a Google Maps link and any written address details.
 - On phones, a bar at the bottom shows the box total; a **Questions?** button opens a WhatsApp chat.
-- An FAQ, an occasions section, a preview image for links shared on WhatsApp (`assets/og.jpg`), icons for
+- An FAQ, a preview image for links shared on WhatsApp (`assets/og.jpg`), icons for
   "Add to Home Screen", a sitemap and a branded 404 page.
 
 The hero photos (crème brûlée and honey cake) are set in `index.html`, not in /admin.
