@@ -151,13 +151,14 @@
 
   // ---- box ------------------------------------------------------------
   function totals() {
-    var count = 0, sum = 0;
+    var count = 0, sum = 0, pruned = false;
     Object.keys(box).forEach(function (id) {
       var it = byId(id);
-      if (!it || it.soldOut) { delete box[id]; return; }
+      if (!it || it.soldOut) { delete box[id]; pruned = true; return; }
       count += box[id];
       sum += box[id] * it.price;
     });
+    if (pruned) save();
     return { count: count, sum: sum };
   }
 

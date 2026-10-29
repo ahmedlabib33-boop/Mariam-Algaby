@@ -22,7 +22,7 @@ What the site does for customers:
 - An FAQ, a preview image for links shared on WhatsApp (`assets/og.jpg`), icons for
   "Add to Home Screen", a sitemap and a branded 404 page.
 
-The hero photos (crème brûlée and honey cake) are set in `index.html`, not in /admin.
+The hero photos (Milk Cloud and Cinnamon Kisses) are set in `index.html`, not in /admin.
 
 ## Editing the menu: /admin
 
@@ -133,6 +133,9 @@ For the courier browser checks, install Python Playwright (`python3 -m pip insta
 `python3 -m playwright install chromium`), then run `npm run test:browser`. The test starts its own local
 preview and uses fixture sign-in/menu responses. It intercepts WhatsApp opens and never sends a message
 or calls a rider; an existing system Chromium is used when available.
+
+With the same Playwright setup, `npm run test:menu` checks the customer menu on mobile and desktop,
+cart totals, WhatsApp drafts, removal of saved retired/sold-out items, and cart preservation during menu outages.
 
 ## Photos
 

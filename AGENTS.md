@@ -57,6 +57,10 @@ If you need to change the other agent's area, keep the change small and note it 
 
 Newest first. One or two lines each: date, agent, what changed, what's left.
 
+- 2026-10-29 · Codex: reviewed the five-dessert menu; fixed saved-cart cleanup. 19 API and customer browser checks pass.
+  Sizes await owner confirmation; corrected README hero names. Live endpoint access remains blocked here.
+- 2026-10-29 · Codex: read the shared guide and synced this checkout with `main`. Individual rider search
+  awaits activation of saved search-domain access; no real rider contact has been verified yet.
 - 2026-10-29 · Claude: new menu of five (Golden Carrot Crumb 300, Milk Cloud 300, Toffee Cuddle 400, Cinnamon
   Kisses 400, Chocolate Crush 350 EGP) replaces the old seven, live and in `data/menu.json`; sizes left blank for
   Mariam to fill in /admin. Private recipes added (no costing, at the owner's request). Homepage photos, FAQ,
@@ -75,6 +79,7 @@ Newest first. One or two lines each: date, agent, what changed, what's left.
 
 ## Open tasks
 
+- Menu: confirm the size/quantity for each price and the allergen declaration for Milk Cloud's almond extract.
 - Real dessert photos from Mariam → replace the stock photos (site, Google, Instagram).
 - Instagram account → put the real handle in `public/js/menu.js` and unhide the footer link.
 - Google Business Profile: waiting on video verification; then add products and a "Review us on Google" link.
