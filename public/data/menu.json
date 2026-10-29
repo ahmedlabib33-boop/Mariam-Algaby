@@ -5,7 +5,7 @@
       "name": "Golden Carrot Crumb",
       "desc": "A beautifully spiced carrot cake with a tender crumb and luscious cream cheese frosting.",
       "ingredients": "Sponge: freshly grated carrots, toasted pecans, plain flour, sugar, sunflower oil, buttermilk, eggs, cinnamon, vanilla, baking powder, baking soda, salt. Frosting: cream cheese, unsalted butter, icing sugar, vanilla. Contains: eggs, dairy, gluten, nuts (pecans).",
-      "portion": "",
+      "portion": "20 × 20 cm cake",
       "price": 300,
       "photo": "assets/photos/carrot-cake.jpg",
       "soldOut": false
@@ -15,7 +15,7 @@
       "name": "Milk Cloud",
       "desc": "A cloud-soft sponge soaked in three milks, topped with caramel.",
       "ingredients": "Sponge: eggs, sugar, plain flour, baking powder, vanilla, almond extract, salt. Soaked in sweetened condensed milk, evaporated milk and cream. Topped with whipped cream and a caramel of sugar, cream, butter and salt. Contains: eggs, dairy, gluten. Flavoured with almond extract.",
-      "portion": "",
+      "portion": "20 × 20 cm cake",
       "price": 300,
       "photo": "assets/photos/milk-cloud.jpg",
       "soldOut": false
@@ -25,7 +25,7 @@
       "name": "Toffee Cuddle",
       "desc": "Moist, date-infused sticky toffee cake drenched in a rich, buttery caramel.",
       "ingredients": "Cake: dates, unsalted butter, light and dark brown (muscovado) sugar, egg, self-raising flour, baking powder, bicarbonate of soda, sea salt. Toffee sauce: brown sugar, unsalted butter, cream, sea salt. Contains: eggs, dairy, gluten.",
-      "portion": "",
+      "portion": "20 × 20 cm cake",
       "price": 400,
       "photo": "assets/photos/toffee-cuddle.jpg",
       "soldOut": false
@@ -35,7 +35,7 @@
       "name": "Cinnamon Kisses",
       "desc": "Soft, fluffy cinnamon-swirl cake with warm cinnamon sugar and a dreamy cream cheese frosting.",
       "ingredients": "Cake: plain flour, sugar, plain yogurt, melted butter, egg, vanilla, baking powder, salt. Swirl: brown sugar, butter, cinnamon. Frosting: cream cheese, icing sugar. Contains: eggs, dairy, gluten.",
-      "portion": "",
+      "portion": "20 × 20 cm cake",
       "price": 400,
       "photo": "assets/photos/cinnamon-kisses.jpg",
       "soldOut": false
@@ -45,7 +45,7 @@
       "name": "Chocolate Crush",
       "desc": "Rich, decadent chocolate cake layered with irresistible fudge and a smooth, velvety chocolate finish.",
       "ingredients": "Cake: plain flour, sugar, cocoa, buttermilk, sunflower oil, eggs, freshly brewed coffee, vanilla, baking soda, baking powder, salt. Fudge buttercream: dark chocolate, unsalted butter, egg yolk, icing sugar, vanilla, instant coffee. Contains: eggs, dairy, gluten.",
-      "portion": "",
+      "portion": "20 × 20 cm cake",
       "price": 350,
       "photo": "assets/photos/chocolate-crush.jpg",
       "soldOut": false

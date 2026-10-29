@@ -23,6 +23,9 @@ What the site does for customers:
   "Add to Home Screen", a sitemap and a branded 404 page.
 
 The hero photos (Milk Cloud and Cinnamon Kisses) are set in `index.html`, not in /admin.
+All five current cakes are **20 × 20 cm**, as confirmed by the owner. The menu introduction displays this
+size and the starting menu includes it per item. Set the same sizes in /admin and publish to update the
+separately stored live menu; repository changes do not overwrite it.
 
 ## Editing the menu: /admin
 
