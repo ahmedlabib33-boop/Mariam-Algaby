@@ -9,7 +9,7 @@
   <link rel="icon" href="assets/favicon-g.svg?v=3" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=3">
   <link rel="stylesheet" href="css/style.css?v=6">
-  <link rel="stylesheet" href="css/admin.css?v=3">
+  <link rel="stylesheet" href="css/admin.css?v=4">
 </head>
 <body class="admin">
 
@@ -46,6 +46,7 @@
     <button type="button" role="tab" class="ad-tab is-active" id="menuTab" data-tab="menu" aria-controls="editor" aria-selected="true">Menu</button>
     <button type="button" role="tab" class="ad-tab" id="recipesTab" data-tab="recipes" aria-controls="recipes" aria-selected="false" tabindex="-1">Recipes</button>
     <button type="button" role="tab" class="ad-tab" id="couriersTab" data-tab="couriers" aria-controls="couriers" aria-selected="false" tabindex="-1">Couriers</button>
+    <button type="button" role="tab" class="ad-tab" id="partnersTab" data-tab="partners" aria-controls="partners" aria-selected="false" tabindex="-1">Apps</button>
   </nav>
 
   <!-- EDITOR -->
@@ -172,6 +173,51 @@
     </section>
   </main>
 
+  <!-- DELIVERY APPS & LISTINGS -->
+  <main class="ad-main" id="partners" role="tabpanel" aria-labelledby="partnersTab" hidden>
+    <div class="ad-intro">
+      <p class="eyebrow">Sell in more places</p>
+      <h1>Delivery <em>apps</em></h1>
+      <p class="muted">Everything each app asks for is ready here. Press <strong>Start sign-up</strong>, then copy or download what its form asks for. These apps don't let a website connect automatically: each one checks a new partner by hand, so the sign-up is the one step left for you.</p>
+    </div>
+
+    <section class="pt-section" aria-labelledby="ptAppsTitle">
+      <h2 class="pt-title" id="ptAppsTitle">The apps</h2>
+      <div class="pt-apps" id="ptApps"></div>
+    </section>
+
+    <section class="pt-section" aria-labelledby="ptProfileTitle">
+      <div class="courier-section-head">
+        <div>
+          <h2 class="pt-title" id="ptProfileTitle">Your business details</h2>
+          <p class="small muted">Edit anything, then use Copy next to each line when a form asks for it.</p>
+        </div>
+        <button type="button" class="btn btn-outline" id="ptCopyProfile">Copy all</button>
+      </div>
+      <form class="pt-profile" id="ptProfile" novalidate autocomplete="off"></form>
+    </section>
+
+    <section class="pt-section" aria-labelledby="ptMenuTitle">
+      <div class="courier-section-head">
+        <div>
+          <h2 class="pt-title" id="ptMenuTitle">Your menu, ready to upload</h2>
+          <p class="small muted">Taken from your published menu. Apps ask for landscape photos: the website's photos are stand-ins, so upload your own photos to the apps.</p>
+        </div>
+      </div>
+      <ul class="pt-menu" id="ptMenu"><li class="muted">Loading your menu…</li></ul>
+      <div class="pt-actions">
+        <button type="button" class="btn btn-outline" id="ptCopyMenu">Copy menu</button>
+        <button type="button" class="btn btn-outline" id="ptCsv">Download menu (spreadsheet)</button>
+        <a class="btn btn-outline" href="assets/icon-512.png" download="maison-de-gaby-logo.png">Download logo</a>
+      </div>
+    </section>
+
+    <p class="courier-status" id="ptStatus" role="status" aria-live="polite"></p>
+    <div class="courier-storage">
+      <p><strong>Saved on this device.</strong> Your progress and details stay in this browser and are not sent anywhere.</p>
+    </div>
+  </main>
+
   <footer class="ad-bar" id="bar" hidden>
     <p class="ad-status" id="status" role="status">Everything is published.</p>
     <button type="button" class="btn btn-primary" id="publish" disabled>Publish</button>
@@ -266,6 +312,7 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="js/admin-couriers.js?v=1"></script>
-  <script src="js/admin.js?v=3"></script>
+  <script src="js/admin-partners.js?v=1"></script>
+  <script src="js/admin.js?v=4"></script>
 </body>
 </html>

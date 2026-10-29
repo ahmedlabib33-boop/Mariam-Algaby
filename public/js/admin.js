@@ -102,6 +102,7 @@
     $("editor").hidden = true;
     $("recipes").hidden = true;
     $("couriers").hidden = true;
+    $("partners").hidden = true;
     $("tabs").hidden = true;
     $("bar").hidden = true;
     recipesLoaded = false;
@@ -180,11 +181,12 @@
   }
 
   function showTab(name) {
-    if (!signedIn || ["menu", "recipes", "couriers"].indexOf(name) < 0) return;
+    if (!signedIn || ["menu", "recipes", "couriers", "partners"].indexOf(name) < 0) return;
     tab = name;
     $("editor").hidden = name !== "menu";
     $("recipes").hidden = name !== "recipes";
     $("couriers").hidden = name !== "couriers";
+    $("partners").hidden = name !== "partners";
     $("bar").hidden = !(name === "menu" && menuReady);
     Array.prototype.forEach.call(document.querySelectorAll(".ad-tab"), function (b) {
       var on = b.dataset.tab === name;
@@ -194,6 +196,7 @@
     });
     if (name === "recipes" && !recipesLoaded && !recipesLoading) loadRecipes();
     if (name === "couriers") window.MAISON_COURIERS.show();
+    if (name === "partners") window.MAISON_PARTNERS.show();
   }
 
   // ---- recipes (private, read-only here) --------------------------------

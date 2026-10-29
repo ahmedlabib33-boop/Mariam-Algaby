@@ -224,3 +224,48 @@ body.admin { background: var(--cream); min-height: 100vh; padding-bottom: 110px;
   .ad-links { gap: 12px; font-size: 10px; letter-spacing: .12em; white-space: nowrap; }
   .ad-tab { font-size: 10px; letter-spacing: .16em; }
 }
+
+/* ---------- delivery apps & listings ---------- */
+.pt-section { margin-bottom: 44px; }
+.pt-title { font: 400 32px/1.1 var(--serif); margin: 0 0 16px; }
+.courier-section-head .pt-title { margin-bottom: 8px; }
+.pt-apps { display: grid; gap: 14px; }
+.pt-app { background: var(--paper); border: 1px solid var(--line); padding: 22px 22px 18px; }
+.pt-app.is-live { border-color: var(--gold); }
+.pt-app-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.pt-app-head h3 { font: 500 28px/1.1 var(--serif); margin: 4px 0 0; }
+.pt-kind { font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
+.pt-pill { flex: none; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; padding: 6px 10px; background: var(--cream); border: 1px solid var(--line); color: var(--muted); }
+.is-applying .pt-pill, .is-waiting .pt-pill { color: var(--navy); border-color: var(--gold-soft); }
+.is-live .pt-pill { background: var(--navy); border-color: var(--navy); color: var(--cream); }
+.pt-about { margin: 12px 0 16px; color: #3b4254; font-size: 15px; }
+.pt-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+.pt-buttons .btn { padding: 14px 18px; }
+.pt-more { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 12px; }
+.pt-more summary { cursor: pointer; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); padding: 4px 0; }
+.pt-facts { margin: 12px 0; padding-left: 20px; font-size: 14.5px; color: #3b4254; }
+.pt-facts li { margin-bottom: 6px; }
+.pt-sub { margin: 16px 0 6px; font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+.pt-checks { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 8px; }
+.pt-checks .check { font-size: 14.5px; align-items: flex-start; }
+.pt-checks .check input { flex: none; margin-top: 2px; }
+.pt-more .field-row, .pt-more > .field { margin-bottom: 14px; }
+.pt-profile { display: grid; gap: 14px; }
+.pt-field { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: end; }
+.pt-copy { padding-bottom: 12px; font-size: 13px; }
+.pt-menu { list-style: none; margin: 0 0 16px; padding: 0; border-top: 1px solid var(--line); }
+.pt-dish { display: grid; grid-template-columns: 96px 1fr auto; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.pt-dish img, .pt-thumb { width: 96px; height: 72px; object-fit: cover; background: var(--sand); display: block; }
+.pt-dish strong { display: block; font: 500 20px/1.2 var(--serif); }
+.pt-dish .link-btn { font-size: 13px; }
+.pt-menu > li.muted { padding: 16px 0; }
+.pt-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.pt-actions .btn { padding: 14px 18px; }
+@media (max-width: 560px) {
+  .pt-app { padding: 18px 16px 14px; }
+  .pt-buttons .btn, .pt-actions .btn { flex: 1 1 100%; }
+  .pt-dish { grid-template-columns: 72px 1fr; }
+  .pt-dish img, .pt-thumb { width: 72px; height: 54px; }
+  .pt-dish .link-btn { grid-column: 2; justify-self: start; }
+  .pt-more .field-row { grid-template-columns: 1fr; }
+}

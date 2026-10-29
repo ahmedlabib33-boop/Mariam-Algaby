@@ -57,6 +57,10 @@ If you need to change the other agent's area, keep the change small and note it 
 
 Newest first. One or two lines each: date, agent, what changed, what's left.
 
+- 2026-10-29 · Claude: new admin tab **Apps** (`js/admin-partners.js`, styles at the end of `admin.css`): sign-up
+  links, requirements checklists and copy/CSV export for Talabat, Mrsool, elmenus, Google and Instagram; saved in
+  localStorage. Small hook in `admin.js` (`showTab`, `showLogin`). Live per-item sizes still unpublished: needs
+  the owner's go-ahead to publish to the live menu.
 - 2026-10-29 · Codex: owner selected Precision G (option 1); applied the round G and detached diagonal detail
   across the site, packaging, icons and OG. Added stacked SVG/PNG exports; responsive and 19 API checks pass.
 - 2026-10-29 · Codex: simplified the logo to a geometric G and Jost wordmark across the site, packaging, icons and OG.

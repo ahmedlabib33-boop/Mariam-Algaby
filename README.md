@@ -69,6 +69,18 @@ sign-out, while the displayed directory and recipient details are cleared. Custo
 never saved. Browser storage failures show a notice and leave contacts usable for the current session;
 export a backup before leaving. This feature uses the rider's phone and WhatsApp, with no courier API account.
 
+## Delivery apps and listings: /admin → Apps
+
+One place to get Maison de Gaby onto Talabat, Mrsool, elmenus, Google Maps and Instagram. Each app has a
+**Start sign-up** button that opens its official partner page, a **Copy everything** button with the business
+details and menu ready to paste, and a checklist of what it asks for. Business details are editable, the menu
+comes from the published menu, and it can be downloaded as a spreadsheet. Set each app's status as you go and
+paste the listing link once it's live. Progress is saved in that browser only.
+
+None of these apps lets a website connect automatically: each one reviews a new partner by hand. Talabat
+accepts home-based kitchens but requires a Commercial Registration and a one-time registration fee (from
+Talabat's partner page, October 2026).
+
 ## How it works
 
 - `public/`: the website (plain HTML/CSS/JS, no build step)
