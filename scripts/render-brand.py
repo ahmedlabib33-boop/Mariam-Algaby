@@ -120,20 +120,32 @@ def render():
 @font-face{{font-family:Jost;src:url('{base}/assets/fonts/jost-latin-400-normal.woff2')}}
 @font-face{{font-family:Jost;src:url('{base}/assets/fonts/jost-latin-500-normal.woff2');font-weight:500}}
 @font-face{{font-family:Cormorant;src:url('{base}/assets/fonts/cormorant-garamond-latin-400-italic.woff2');font-style:italic}}
-*{{box-sizing:border-box}}body{{margin:0;width:1200px;height:630px;background:{NAVY};color:{PAPER}}}
-.brand{{position:absolute;left:58px;top:67px;width:480px;height:170px;object-fit:contain;object-position:left center}}
-.message{{position:absolute;left:70px;top:348px;margin:0;font:italic 34px/1.3 Cormorant,Georgia,serif}}
-.location{{position:absolute;left:70px;right:670px;bottom:98px;padding-top:24px;border-top:1px solid #cbb38e66;color:{GOLD};font:400 10px Jost,sans-serif;letter-spacing:3.8px}}
-.art{{position:absolute;left:600px;top:0;width:600px;height:630px;background:{PAPER}}}
-.arch{{position:absolute;left:54px;top:54px;width:430px;height:576px;border-radius:230px 230px 0 0;overflow:hidden}}
-.arch::after{{content:'';position:absolute;inset:0;border:1px solid #cbb38e55;border-radius:inherit}}
-.arch img{{width:100%;height:100%;object-fit:cover;object-position:57% center}}
-.inset{{position:absolute;right:38px;bottom:38px;width:178px;height:178px;border-radius:50%;border:6px solid {PAPER};object-fit:cover}}
+*{{box-sizing:border-box}}body{{margin:0;width:1200px;height:630px;background:{PAPER};color:{NAVY}}}
+body::before{{content:'';position:absolute;left:35px;top:30px;bottom:30px;width:1px;background:#cbb38e66}}
+.brand{{position:absolute;left:64px;top:24px;width:204px;height:74px;object-fit:contain;object-position:left center}}
+.edition{{position:absolute;right:64px;top:55px;font:400 10px Jost,sans-serif;letter-spacing:2.5px}}
+.rule{{position:absolute;left:64px;right:64px;top:111px;height:1px;background:#18283f26}}
+.eyebrow{{position:absolute;top:132px;left:0;right:0;text-align:center;color:#7d694a;font:400 9px Jost,sans-serif;letter-spacing:2px}}
+.message{{position:absolute;left:0;right:0;top:156px;margin:0;text-align:center;font:400 52px/1.05 Jost,sans-serif;letter-spacing:-2.3px}}
+.message em{{font:italic 64px/1.06 Cormorant,Georgia,serif;letter-spacing:-1.2px}}
+.photo{{position:absolute;overflow:hidden;background:#e6dece}}
+.photo img{{width:100%;height:100%;object-fit:cover}}
+.cinnamon{{left:97px;top:347px;width:275px;height:205px}}
+.cinnamon img{{object-position:48% 55%}}
+.carrot{{left:400px;top:306px;width:400px;height:280px;border-radius:2px 48px 2px 2px}}
+.carrot img{{object-position:50% 50%}}
+.milk{{left:828px;top:329px;width:275px;height:205px}}
+.milk img{{object-position:55% 50%}}
+.location{{position:absolute;left:0;right:0;bottom:17px;text-align:center;color:#7d694a;font:400 9px Jost,sans-serif;letter-spacing:2.5px}}
 </style></head><body>
-<img class="brand" src="{base}/assets/logo-light.svg" alt="Maison de Gaby">
-<p class="message">Desserts worth the wait.</p><div class="location">PATISSERIE · HELIOPOLIS · CAIRO</div>
-<div class="art"><div class="arch"><img src="{base}/assets/photos/milk-cloud.jpg" alt=""></div>
-<img class="inset" src="{base}/assets/photos/cinnamon-kisses.jpg" alt=""></div></body></html>''')
+<img class="brand" src="{base}/assets/logo.svg" alt="Maison de Gaby">
+<div class="edition">AN INDEPENDENT PATISSERIE</div><div class="rule"></div>
+<div class="eyebrow">FRENCH INSPIRED. CAIRO AT HEART.</div>
+<h1 class="message">Little rituals.<br><em>Beautifully made.</em></h1>
+<div class="photo cinnamon"><img src="{base}/assets/photos/cinnamon-kisses.jpg" alt=""></div>
+<div class="photo carrot"><img src="{base}/assets/photos/carrot-cake.jpg" alt=""></div>
+<div class="photo milk"><img src="{base}/assets/photos/milk-cloud.jpg" alt=""></div>
+<div class="location">HELIOPOLIS · CAIRO</div></body></html>''')
             page.evaluate('document.fonts.ready')
             page.wait_for_function('Array.from(document.images).every(image=>image.complete && image.naturalWidth>0)')
             page.screenshot(path=str(ASSETS / 'og.jpg'), type='jpeg', quality=92)

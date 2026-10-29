@@ -3,29 +3,35 @@
 Website for **Maison de Gaby**, a home patisserie by Mariam Algaby, Heliopolis (Masr El Gedida), Cairo.
 Live at https://maison-mariam.vercel.app
 
+The homepage uses the approved **Daylight Atelier** design: an ivory canvas, three photographic panels,
+a compact tasting sheet and literary gift notes. Its layout is in `public/css/daylight.css`; admin and packaging
+keep their existing styles. The live menu, checkout and delivery map continue to use the existing services.
+
 Customers fill a box from the menu and press **Send order on WhatsApp**. The full order opens in WhatsApp,
 already written out, with an order number (e.g. `MG-2810-K4F`), the items and total, the delivery day and time
 window, the area and address, and, for gifts, the recipient's name and phone and the card message.
 
 What the site does for customers:
 
-- Menu filters (Whole cakes / Boxes / Gluten-free) and allergen tags, read from the "Contains:" part of each
+- Menu filters (Soft & creamy / Warm & spiced / Rich & indulgent for the current collection;
+  Whole cakes / Boxes / Gluten-free when a future mixed menu needs them) and allergen tags, read from the "Contains:" part of each
   dessert's ingredients. A dessert whose allergens don't include gluten gets a **Gluten-free** badge, so keep the
   "Contains:" line accurate in /admin.
 - A **Send it as a gift** option, a delivery time window, and name/area/address remembered on the customer's
   own phone (only there, never sent anywhere else).
 - A literary gift-card collection: two editable messages for each of 13 occasions. Browse the collection on
-  `/packaging#card-collection`, or choose a card directly in the gift order form.
+  the homepage's **Thoughtful notes**, `/packaging#card-collection`, or the gift order form. Choosing a homepage
+  note updates the same gift message used at checkout; it can still be personalised there.
 - A delivery map: use the customer's current location with browser permission, or choose another address
   by placing or dragging a pin. The WhatsApp order includes a Google Maps link and any written address details.
 - On phones, a bar at the bottom shows the box total; a **Questions?** button opens a WhatsApp chat.
 - An FAQ, a preview image for links shared on WhatsApp (`assets/og.jpg`), icons for
   "Add to Home Screen", a sitemap and a branded 404 page.
 
-The hero photos (Milk Cloud and Cinnamon Kisses) are set in `index.html`, not in /admin.
+The hero photos (Golden Carrot Crumb, Cinnamon Kisses and Milk Cloud) are set in `index.html`, not in /admin.
 All five current cakes are **20 × 20 cm**, as confirmed by the owner. The menu introduction displays this
-size and the starting menu includes it per item. Set the same sizes in /admin and publish to update the
-separately stored live menu; repository changes do not overwrite it.
+size and the starting menu includes it per item. These sizes have also been published in the separately
+stored live menu; repository changes do not overwrite it.
 
 ## Editing the menu: /admin
 
@@ -151,6 +157,8 @@ or calls a rider; an existing system Chromium is used when available.
 
 With the same Playwright setup, `npm run test:menu` checks the customer menu on mobile and desktop,
 cart totals, WhatsApp drafts, removal of saved retired/sold-out items, and cart preservation during menu outages.
+`npm run test:daylight` checks homepage gift notes through the real checkout, restoration and reset,
+mobile navigation, the packaging handoff and manual delivery pins. WhatsApp and map tiles use local fixtures.
 
 ## Logo assets
 
@@ -180,7 +188,7 @@ Current menu:
 - toffee-cuddle.jpg (Toffee Cuddle): https://unsplash.com/photos/caramel-sauce-being-poured-on-dessert-with-ice-cream-ifKtstypv3E (Geoffrey Moffett)
 - cinnamon-kisses.jpg (Cinnamon Kisses): https://unsplash.com/photos/sliced-cinnamon-roll-cake-with-frosting-on-platter-zApCl9Te0Zk (sheri silver)
 - chocolate-crush.jpg (Chocolate Crush): https://unsplash.com/photos/a-chocolate-cake-with-a-slice-taken-out-of-it-F8RKds2YdqA (BraggsDiner)
-- The homepage photos and `assets/og.jpg` (link preview) use milk-cloud.jpg and cinnamon-kisses.jpg.
+- The homepage photos and `assets/og.jpg` (link preview) use carrot-cake.jpg, cinnamon-kisses.jpg and milk-cloud.jpg.
 
 Previous menu (files kept, no longer shown on the site):
 

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node --test tests/*.test.js",
     "test:browser": "python3 tests/admin-couriers.browser.py",
-    "test:menu": "python3 tests/menu.browser.py"
+    "test:menu": "python3 tests/menu.browser.py",
+    "test:daylight": "python3 tests/daylight.browser.py"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.2"

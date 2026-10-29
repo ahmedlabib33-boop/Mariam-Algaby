@@ -1,367 +1,786 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Maison de Gaby · Patisserie, Heliopolis</title>
-  <meta name="description" content="Maison de Gaby: French-style desserts baked by hand in small batches in Heliopolis, Cairo. Sticky toffee, tres leches, carrot, cinnamon and chocolate cakes. Order your box on WhatsApp.">
-  <link rel="canonical" href="https://maison-mariam.vercel.app/">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Maison de Gaby">
-  <meta property="og:url" content="https://maison-mariam.vercel.app/">
-  <meta property="og:title" content="Maison de Gaby · Desserts worth the wait">
-  <meta property="og:description" content="Desserts baked by hand in Heliopolis, Cairo, boxed like a gift. Order a day ahead on WhatsApp.">
-  <meta property="og:image" content="https://maison-mariam.vercel.app/assets/og.jpg?v=3">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Maison de Gaby, patisserie in Heliopolis, Cairo">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#18283f">
-  <link rel="icon" href="assets/favicon-g.svg?v=3" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=3">
-  <link rel="manifest" href="site.webmanifest?v=3">
-  <link rel="preload" as="image" href="assets/photos/milk-cloud.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="css/style.css?v=6">
-  <link rel="stylesheet" href="css/cards.css?v=1">
-  <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
-  <link rel="stylesheet" href="css/delivery.css?v=1">
-  <script src="js/delivery.js?v=1" defer></script>
-  <script src="js/cards.js?v=1" defer></script>
-  <link rel="preload" href="assets/fonts/cormorant-garamond-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/jost-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <script>document.documentElement.classList.add("js");</script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Bakery",
-    "name": "Maison de Gaby",
-    "description": "Home patisserie in Heliopolis, Cairo. Desserts baked to order and delivered across Cairo.",
-    "url": "https://maison-mariam.vercel.app/",
-    "image": "https://maison-mariam.vercel.app/assets/og.jpg?v=3",
-    "logo": "https://maison-mariam.vercel.app/assets/icon-512.png?v=3",
-    "telephone": "+201550505386",
-    "servesCuisine": "French patisserie",
-    "priceRange": "EGP",
-    "founder": { "@type": "Person", "name": "Mariam Algaby" },
-    "address": { "@type": "PostalAddress", "addressLocality": "Heliopolis (Masr El Gedida)", "addressRegion": "Cairo", "addressCountry": "EG" },
-    "areaServed": "Cairo",
-    "openingHours": "Mo-Su 10:00-20:00",
-    "acceptsReservations": false
-  }
-  </script>
-</head>
-<body>
-  <a class="skip" href="#menu">Skip to the menu</a>
-
-  <div class="topbar">
-    <span>Handmade in Heliopolis</span>
-    <span class="dot">·</span>
-    <span>Made to order · Delivered across Cairo</span>
-    <span class="dot">·</span>
-    <span>A little care, in every detail</span>
-  </div>
-
-  <header class="nav" id="top">
-    <nav class="nav-links nav-left" aria-label="Primary">
-      <a href="#menu">The menu</a>
-      <a href="#story">Our story</a>
-    </nav>
-    <a class="wordmark" href="#top" aria-label="Maison de Gaby home">
-      <img class="wm-mark" src="assets/mark.svg?v=3" alt="" width="46" height="46">
-      <span class="wm-text">
-        <span class="wm-small">Maison de</span>
-        <span class="wm-big">Gaby</span>
-      </span>
-    </a>
-    <nav class="nav-links nav-right" aria-label="Secondary">
-      <a href="packaging">Packaging</a>
-      <button class="box-btn" id="openBox" aria-label="Open your box" aria-controls="drawer" aria-expanded="false">
-        My box <span class="box-count" id="boxCount">0</span>
-      </button>
-    </nav>
-  </header>
-
-  <main>
-    <!-- THE HOUSE -->
-    <section class="hero" aria-labelledby="heroTitle">
-      <div class="hero-text">
-        <p class="eyebrow"><span class="little-star" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 1v22M1 12h22M4.2 4.2l15.6 15.6M19.8 4.2 4.2 19.8"/></svg></span> An independent patisserie · Cairo</p>
-        <h1 id="heroTitle">A little<br><em>extraordinary.</em></h1>
-        <p class="lead">French-inspired desserts. A Heliopolis soul.<br>Made by hand, for moments that matter.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#menu">Explore the menu <span class="arrow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a>
-          <a class="text-link" href="#story">Meet the maison <span aria-hidden="true">↓</span></a>
-        </div>
-        <p class="hero-next" id="nextDelivery">Made to order. Delivery from tomorrow.</p>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Maison de Gaby · Patisserie, Heliopolis</title>
+    <meta
+      name="description"
+      content="Maison de Gaby: French-style desserts baked by hand in small batches in Heliopolis, Cairo. Sticky toffee, tres leches, carrot, cinnamon and chocolate cakes. Order your box on WhatsApp."
+    />
+    <link rel="canonical" href="https://maison-mariam.vercel.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Maison de Gaby" />
+    <meta property="og:url" content="https://maison-mariam.vercel.app/" />
+    <meta
+      property="og:title"
+      content="Maison de Gaby · Desserts worth the wait"
+    />
+    <meta
+      property="og:description"
+      content="Desserts baked by hand in Heliopolis, Cairo, boxed like a gift. Order a day ahead on WhatsApp."
+    />
+    <meta
+      property="og:image"
+      content="https://maison-mariam.vercel.app/assets/og.jpg?v=4"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Maison de Gaby, patisserie in Heliopolis, Cairo"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#18283f" />
+    <link rel="icon" href="assets/favicon-g.svg?v=3" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=3" />
+    <link rel="manifest" href="site.webmanifest?v=3" />
+    <link
+      rel="preload"
+      as="image"
+      href="assets/photos/carrot-cake.jpg"
+      fetchpriority="high"
+    />
+    <link rel="stylesheet" href="css/daylight.css?v=1" />
+    <link rel="stylesheet" href="css/cards.css?v=1" />
+    <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="css/delivery.css?v=1" />
+    <script src="js/delivery.js?v=1" defer></script>
+    <script src="js/cards.js?v=2" defer></script>
+    <link
+      rel="preload"
+      href="assets/fonts/cormorant-garamond-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/jost-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Bakery",
+        "name": "Maison de Gaby",
+        "description": "Home patisserie in Heliopolis, Cairo. Desserts baked to order and delivered across Cairo.",
+        "url": "https://maison-mariam.vercel.app/",
+        "image": "https://maison-mariam.vercel.app/assets/og.jpg?v=4",
+        "logo": "https://maison-mariam.vercel.app/assets/icon-512.png?v=3",
+        "telephone": "+201550505386",
+        "servesCuisine": "French patisserie",
+        "priceRange": "EGP",
+        "founder": { "@type": "Person", "name": "Mariam Algaby" },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Heliopolis (Masr El Gedida)",
+          "addressRegion": "Cairo",
+          "addressCountry": "EG"
+        },
+        "areaServed": "Cairo",
+        "openingHours": "Mo-Su 10:00-20:00",
+        "acceptsReservations": false
+      }
+    </script>
+    <script src="js/daylight.js?v=1" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#menu">Skip to the collection</a>
+    <header class="site-header wrap" id="top">
+      <a class="brand" href="#top" aria-label="Maison de Gaby home"
+        ><img
+          src="assets/logo.svg?v=3"
+          width="151"
+          height="55"
+          alt="Maison de Gaby"
+      /></a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#menu">The collection</a><a href="#story">Our maison</a
+        ><a href="#notes">Thoughtful notes</a>
+      </nav>
+      <div class="header-actions">
+        <button
+          class="box-link"
+          id="openBox"
+          aria-controls="drawer"
+          aria-expanded="false"
+        >
+          Your box <span id="boxCount">0</span></button
+        ><button
+          class="menu-toggle"
+          data-menu-toggle
+          aria-controls="mobileNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span></span><span></span>
+        </button>
       </div>
-      <figure class="hero-art">
-        <div class="hero-edition"><span>The house signatures</span><span>01 / 02</span></div>
-        <div class="arch">
-          <img src="assets/photos/milk-cloud.jpg" alt="A slice of soft milk-soaked sponge with caramel" width="900" height="675" fetchpriority="high">
-        </div>
-        <div class="hero-inset">
-          <img src="assets/photos/cinnamon-kisses.jpg" alt="Slices of cinnamon swirl cake with cream cheese frosting" width="900" height="675">
-          <span>Cinnamon, swirled by hand.</span>
-        </div>
-        <span class="hero-side" aria-hidden="true">The art of taking your time</span>
-        <figcaption><span>02 — Milk Cloud</span><em>Three milks. One soft cloud.</em></figcaption>
-      </figure>
-      <div class="hero-bottom" aria-hidden="true"><span>Small batches. Beautiful moments.</span><span>Heliopolis, Cairo <span class="small-cross">+</span></span></div>
-    </section>
-
-    <section class="strip" aria-label="Our promise">
-      <ul>
-        <li><span>01</span>Always handmade</li>
-        <li><span>02</span>Beautiful ingredients</li>
-        <li><span>03</span>Baked to order</li>
-        <li><span>04</span>Thoughtfully wrapped</li>
-      </ul>
-    </section>
-
-    <!-- MENU -->
-    <section class="carte" id="menu">
-      <header class="section-head reveal">
-        <div><p class="eyebrow">01 / The collection</p><h2>Something <em>to savour.</em></h2></div>
-        <p class="muted">20 × 20 cm cakes, made to order.<br>Choose a favourite · Prices in EGP</p>
-      </header>
-      <div class="filters" id="filters" role="group" aria-label="Filter the menu" hidden></div>
-      <div class="menu-grid" id="menuGrid" aria-live="polite"></div>
-    </section>
-
-    <!-- THE MAISON -->
-    <section class="story" id="story" aria-labelledby="storyTitle">
-      <div class="story-art reveal" aria-hidden="true">
-        <div class="story-arch"><img src="assets/heliopolis-arcade.svg" alt="" width="480" height="480" loading="lazy"></div>
-        <span class="story-location">Inspired by Heliopolis · Made for today</span>
-      </div>
-      <div class="story-text reveal">
-        <p class="eyebrow">02 / The spirit of the maison</p>
-        <h2 id="storyTitle">Old soul.<br><em>New rituals.</em></h2>
-        <p>There is a certain grace to Heliopolis. Its sunlit arcades, its neighbourhood cafés, the pleasure of slowing down.</p>
-        <p>Maison de Gaby carries that feeling into the everyday. In Mariam’s kitchen, French-inspired desserts are made in small batches, with real butter, fresh cream, and a little patience.</p>
-        <p>Something lovely to bring to the table. Something thoughtful to give.</p>
-        <p class="signature">With care, Mariam <span class="arrow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 19 19 5M5 5h14v14"/></svg></span></p>
-      </div>
-    </section>
-
-    <!-- THE FINISHING TOUCH -->
-    <section class="emballage" aria-labelledby="giftTitle">
-      <div class="emb-text reveal">
-        <p class="eyebrow light">03 / The finishing touch</p>
-        <h2 id="giftTitle">The joy begins<br><em>before the first bite.</em></h2>
-        <p>A cream box. A navy ribbon. A handwritten note.<br>Every order arrives with a little ceremony.</p>
-        <a class="text-link light" href="packaging#card-collection">Choose a card for your gift <span class="arrow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a>
-      </div>
-      <div class="emb-visual reveal" aria-hidden="true">
-        <div class="gift-orbit"></div>
-        <div class="gift-box"><div class="gift-ribbon"></div><div class="gift-ribbon-cross"></div><div class="gift-seal"><img src="assets/mark.svg?v=3" alt="" width="36" height="36"></div><span class="gift-inscription"><img src="assets/logo.svg?v=3" alt="" width="140" height="51"><small>Made with care, in Cairo.</small></span></div>
-        <span class="gift-caption">A thoughtful gesture, beautifully wrapped.</span>
-      </div>
-    </section>
-
-    <!-- HOW TO ORDER -->
-    <section class="commander" id="order">
-      <header class="section-head reveal">
-        <p class="eyebrow">A simple pleasure</p>
-        <h2>Your next <em>sweet moment.</em></h2>
-      </header>
-      <ol class="steps">
-        <li class="reveal">
-          <span class="step-num">01</span>
-          <h3>Choose what you love.</h3>
-          <p>Add desserts from the menu. Mix as many as you like in one order.</p>
-        </li>
-        <li class="reveal">
-          <span class="step-num">02</span>
-          <h3>Make a little space.</h3>
-          <p>Pick a delivery date at least 24 hours ahead, and a time that suits you. Everything is baked fresh for you.</p>
-        </li>
-        <li class="reveal">
-          <span class="step-num">03</span>
-          <h3>Leave the rest to us.</h3>
-          <p>Your order opens in WhatsApp, already written out. Mariam confirms it, the delivery fee and the time.</p>
-        </li>
-      </ol>
-    </section>
-
-    <!-- FAQ -->
-    <section class="faq" id="faq">
-      <header class="section-head reveal">
-        <p class="eyebrow">Good to know</p>
-        <h2>A few <em>little details.</em></h2>
-      </header>
-      <div class="faq-list reveal">
-        <details>
-          <summary>How far ahead should I order?</summary>
-          <p>At least 24 hours, because everything is baked for your order. For large orders or events, message us a few days ahead so we can keep the day for you.</p>
-        </details>
-        <details>
-          <summary>Where do you deliver, and how much does it cost?</summary>
-          <p>Across Heliopolis (Masr El Gedida) and the rest of Cairo, between 13:00 and 21:00. The delivery fee depends on the area, and Mariam confirms it on WhatsApp before your order is baked.</p>
-        </details>
-        <details>
-          <summary>Can I send it as a gift?</summary>
-          <p>Yes. In your box, tick <em>Send it as a gift</em>, add their name and number and a message for the card. It arrives gift-wrapped, with your message on the card.</p>
-        </details>
-        <details>
-          <summary>I have an allergy. What's in each dessert?</summary>
-          <p>Every dessert lists its ingredients and allergens on the menu: tap <em>Ingredients</em>. The Golden Carrot Crumb contains pecans. Our kitchen also uses nuts, gluten, eggs and dairy, so we can't promise a dessert is completely free of traces. Tell us about any allergy in your order note.</p>
-        </details>
-        <details>
-          <summary>How should I keep my desserts?</summary>
-          <p>In the fridge, covered, and best within 3 days. The Milk Cloud is soaked in milk, so keep it chilled. Warm a Toffee Cuddle for 20–30 seconds in the microwave and pour its warm sauce over. Take the Chocolate Crush out 30 minutes before serving so the frosting softens.</p>
-        </details>
-        <details>
-          <summary>Can I write a message on a cake, or change a dessert?</summary>
-          <p>Write what you'd like in the order note. Mariam will tell you on WhatsApp what's possible for your date.</p>
-        </details>
-      </div>
-      <p class="faq-more reveal">Anything else? <a id="askLink2" href="#" target="_blank" rel="noopener">Ask Mariam on WhatsApp →</a></p>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-brand">
-      <img class="footer-mark" src="assets/mark-light.svg?v=3" alt="" width="56" height="56">
-      <span class="wm-small">Maison de</span>
-      <span class="wm-big">Gaby</span>
-      <p class="footer-tag">Heliopolis · Cairo</p>
-    </div>
-    <div class="footer-cols">
-      <div>
-        <h4>Our neighbourhood</h4>
-        <p>Heliopolis (Masr El Gedida)<br>Cairo, Egypt</p>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <p>WhatsApp <a id="waLink" href="#"></a><br><span id="wa2Row" hidden>Also <a id="waLink2" href="#"></a><br></span><a id="igLink" href="#" target="_blank" rel="noopener" hidden>Instagram</a></p>
-      </div>
-      <div>
-        <h4>Hours</h4>
-        <p>Orders: daily, 10:00 to 20:00<br>Deliveries: 13:00 to 21:00</p>
-      </div>
-    </div>
-    <p class="copyright">© <span id="year"></span> Maison de Gaby · Handmade in Cairo · <a href="packaging">Packaging</a></p>
-  </footer>
-
-  <!-- QUICK ACCESS -->
-  <a class="ask" id="askLink" href="#" target="_blank" rel="noopener" aria-label="Ask a question on WhatsApp">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.2 3.6c-.5.4-1.3.1-1.3-.6V16A2.5 2.5 0 0 1 4 13.5z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8.5 9.5h7M8.5 12h4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-    <span>Questions?</span>
-  </a>
-  <button class="mbar" id="mbar" type="button" hidden>
-    <span class="mbar-count" id="mbarCount">0 items</span>
-    <span class="mbar-label">View my box</span>
-    <span class="mbar-total" id="mbarTotal">0 EGP</span>
-  </button>
-
-  <!-- BOX DRAWER -->
-  <div class="scrim" id="scrim" hidden></div>
-  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
-    <header class="drawer-head">
-      <h2 id="drawerTitle">My Box</h2>
-      <button class="icon-btn" id="closeBox" aria-label="Close">×</button>
     </header>
-    <div class="drawer-body">
-      <ul class="box-list" id="boxList"></ul>
-      <p class="box-empty" id="boxEmpty">Your box is empty.<br><a href="#menu" data-close>View the menu →</a></p>
+    <nav
+      class="mobile-nav wrap"
+      id="mobileNav"
+      aria-label="Mobile navigation"
+      hidden
+    >
+      <a href="#menu">The collection</a><a href="#story">Our maison</a
+      ><a href="#notes">Thoughtful notes</a>
+    </nav>
 
-      <form class="order-form" id="orderForm" novalidate>
-        <p class="form-title">Delivery</p>
-        <label>Your name
-          <input type="text" name="name" required autocomplete="name" maxlength="60">
-        </label>
-        <div class="form-row">
-          <label>Date
-            <input type="date" name="date" required>
-          </label>
-          <label>Time
-            <select name="slot">
-              <option>13:00 – 15:00</option>
-              <option>15:00 – 17:00</option>
-              <option>17:00 – 19:00</option>
-              <option>19:00 – 21:00</option>
-              <option selected>Any time</option>
-            </select>
-          </label>
+    <main>
+      <section class="hero wrap" aria-labelledby="heroTitle">
+        <div class="hero-label">
+          <span class="short-rule"></span> French inspired. Cairo at heart.<span
+            class="short-rule"
+          ></span>
         </div>
-        <p class="date-hint small" id="dateHint"></p>
-        <label>Area
-          <select name="area" required>
-            <option>Heliopolis / Masr El Gedida</option>
-            <option>Nasr City</option>
-            <option>El Nozha / Sheraton</option>
-            <option>New Cairo / Fifth Settlement</option>
-            <option>Other (we'll confirm)</option>
-          </select>
-        </label>
-        <section class="delivery-location" aria-labelledby="deliveryLocationTitle">
-          <p class="delivery-location-title" id="deliveryLocationTitle">Where shall we deliver?</p>
-          <p class="delivery-location-help">Use your current location, or choose another destination on the map.</p>
-          <div class="delivery-location-actions">
-            <button type="button" class="btn btn-outline" id="useMyLocation" aria-pressed="false" aria-controls="deliveryMapPanel" aria-expanded="false">Use my location</button>
-            <button type="button" class="btn btn-outline" id="chooseDeliveryLocation" aria-pressed="false" aria-controls="deliveryMapPanel" aria-expanded="false">Choose another address</button>
+        <h1 id="heroTitle">Little rituals.<br /><em>Beautifully made.</em></h1>
+        <p class="hero-description">
+          A Heliopolis soul. A little Parisian spirit.<br />Made by hand, for
+          your everyday extraordinary.
+        </p>
+        <a class="hero-button" href="#menu"
+          >Discover the collection
+          <span class="circle-arrow" aria-hidden="true"
+            ><svg
+              class="arrow-svg"
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.25"
+              aria-hidden="true"
+            >
+              <path d="M5 19 19 5M5 5h14v14" /></svg></span
+        ></a>
+        <p class="hero-next" id="nextDelivery">
+          Made to order. Delivery from tomorrow.
+        </p>
+        <div class="triptych">
+          <figure class="side-image first-image">
+            <div class="photo-frame">
+              <img
+                src="assets/photos/cinnamon-kisses.jpg"
+                width="900"
+                height="675"
+                alt="Cinnamon cake photographic reference"
+              />
+            </div>
+            <figcaption><span>Warm & spiced</span><span>01</span></figcaption>
+          </figure>
+          <figure class="centre-image">
+            <div class="photo-frame">
+              <img
+                src="assets/photos/carrot-cake.jpg"
+                width="900"
+                height="675"
+                alt="Carrot cake photographic reference"
+              />
+            </div>
+            <figcaption>
+              <span>Golden Carrot Crumb</span><span>Made to be shared</span>
+            </figcaption>
+          </figure>
+          <figure class="side-image last-image">
+            <div class="photo-frame">
+              <img
+                src="assets/photos/milk-cloud.jpg"
+                width="900"
+                height="675"
+                alt="Caramel-topped milk cake photographic reference"
+              />
+            </div>
+            <figcaption><span>Soft & creamy</span><span>02</span></figcaption>
+          </figure>
+        </div>
+        <div class="hero-bottom">
+          <span>Small batches. Thoughtful details.</span
+          ><a href="#menu"
+            >A little more to discover
+            <span aria-hidden="true"
+              ><svg
+                class="arrow-svg"
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.25"
+                aria-hidden="true"
+              >
+                <path d="M12 4v16M6 14l6 6 6-6" /></svg></span></a
+          ><span>Heliopolis, Cairo</span>
+        </div>
+      </section>
+
+      <section
+        class="collection wrap section-space"
+        id="menu"
+        aria-labelledby="collectionTitle"
+      >
+        <header class="section-heading">
+          <div>
+            <p class="overline">01 / The tasting sheet</p>
+            <h2 id="collectionTitle">A few <em>favourites.</em></h2>
           </div>
-          <div class="delivery-map-panel" id="deliveryMapPanel" hidden>
-            <div class="delivery-map" id="deliveryMap" role="region" aria-label="Delivery location map" aria-describedby="deliveryMapHelp" tabindex="0"></div>
-            <p class="delivery-map-instructions" id="deliveryMapHelp">Tap the map or drag the pin to the entrance. You can also pan with the arrow keys and choose the map centre.</p>
-            <div class="delivery-map-actions">
-              <button type="button" class="link-btn" id="useMapCenter" disabled>Use map centre</button>
-              <button type="button" class="link-btn" id="clearDeliveryLocation" hidden>Remove pin</button>
+          <p>
+            20 × 20 cm cakes · Made to order<br />A little reason to gather.
+          </p>
+        </header>
+        <div class="collection-tools">
+          <div
+            class="filter-list filters"
+            id="filters"
+            role="group"
+            aria-label="Explore the collection"
+            hidden
+          ></div>
+          <span id="menuCount" class="result-count" aria-live="polite"></span>
+        </div>
+        <div id="menuGrid" class="menu-grid" aria-live="polite"></div>
+        <p class="collection-caption">
+          For birthdays, small wins, and <em>just because.</em>
+        </p>
+      </section>
+
+      <section
+        class="maison wrap section-space"
+        id="story"
+        aria-labelledby="maisonTitle"
+      >
+        <div class="maison-illustration">
+          <img
+            src="assets/heliopolis-arcade.svg"
+            width="220"
+            height="220"
+            alt="Illustration inspired by Heliopolis architecture"
+          /><span>A place. A feeling. A maison.</span>
+        </div>
+        <div class="maison-copy">
+          <p class="overline">02 / From Heliopolis, with care</p>
+          <h2 id="maisonTitle">
+            An old soul.<br />A <em>fresh perspective.</em>
+          </h2>
+          <p>
+            There is a grace to slowing down. To making something by hand. To
+            bringing a little more care to the table.
+          </p>
+          <p>
+            In Mariam’s kitchen, French-inspired desserts meet the warmth of
+            Heliopolis. Small batches, thoughtful details, and something lovely
+            to share.
+          </p>
+          <span class="signature">With care, Mariam</span>
+        </div>
+      </section>
+
+      <section
+        class="notes section-space"
+        id="notes"
+        aria-labelledby="notesTitle"
+      >
+        <div class="wrap">
+          <header class="section-heading">
+            <div>
+              <p class="overline">03 / The finishing thought</p>
+              <h2 id="notesTitle">Good words.<br /><em>Sweet company.</em></h2>
+            </div>
+            <p>
+              Something sweet for the moment.<br />Something beautiful to keep.
+            </p>
+          </header>
+          <div class="notes-grid">
+            <div class="notes-editor" id="homeCardEditor">
+              <p class="notes-intro">
+                The right words make a little gesture feel like everything. Find
+                a note for your occasion.
+              </p>
+              <label for="occasionSelect">Choose your occasion</label
+              ><select
+                id="occasionSelect"
+                aria-controls="messageChoices"
+              ></select>
+              <div
+                id="messageChoices"
+                class="message-choices"
+                role="group"
+                aria-label="Choose a message"
+              ></div>
+              <button
+                class="button button-navy"
+                id="chooseCard"
+                type="button"
+                disabled
+              >
+                Add this note
+                <span aria-hidden="true"
+                  ><svg
+                    class="arrow-svg"
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 19 19 5M5 5h14v14" /></svg
+                ></span>
+              </button>
+              <p id="giftStatus" role="status" class="gift-status"></p>
+              <span id="selectedCardLabel" class="selected-card-label"></span>
+            </div>
+            <div class="note-stage">
+              <article class="note-preview" aria-label="Gift card preview">
+                <div class="note-brand">
+                  <img
+                    src="assets/mark.svg?v=3"
+                    width="35"
+                    height="35"
+                    alt=""
+                  /><span
+                    >Maison de Gaby<small>Handwritten, with care.</small></span
+                  >
+                </div>
+                <p id="cardTitle" class="note-title"></p>
+                <blockquote id="cardQuote"></blockquote>
+                <p id="cardAuthor" class="note-author"></p>
+                <p id="cardMessage" class="note-message"></p>
+                <div class="note-signature">With love.</div>
+                <div class="note-bottom">
+                  A little thought. A lasting feeling.
+                </div>
+              </article>
             </div>
           </div>
-          <div class="delivery-location-summary" id="deliveryLocationSummary" hidden>
-            <p id="deliveryCoordinates"></p>
-            <a id="deliveryMapLink" target="_blank" rel="noopener noreferrer">Check this location in Google Maps</a>
-          </div>
-          <p class="delivery-location-status" id="deliveryLocationStatus" role="status" aria-live="polite"></p>
-          <p class="delivery-location-error" id="deliveryLocationError" role="alert"></p>
-        </section>
-        <label>Address details
-          <input type="text" name="address" autocomplete="street-address" maxlength="160" placeholder="Street, building, floor, flat">
-        </label>
-
-        <label class="check-row"><input type="checkbox" name="gift" id="giftToggle"> <span>Send it as a gift</span></label>
-        <div class="gift-fields" id="giftFields" hidden>
-          <label>Their name
-            <input type="text" name="toName" maxlength="60">
-          </label>
-          <label>Their phone
-            <input type="tel" name="toPhone" inputmode="tel" maxlength="20" placeholder="01x xxxx xxxx">
-          </label>
-          <details class="card-chooser">
-            <summary>Choose a literary card</summary>
-            <p class="card-chooser-intro">Two thoughtful messages for every occasion. Choose one, then make it your own.</p>
-            <div class="card-library" data-card-library data-card-mode="checkout"></div>
-          </details>
-          <label>Message for the card
-            <textarea name="card" rows="5" maxlength="400" placeholder="Choose a literary card, or write a few words of your own…"></textarea>
-          </label>
-          <p class="card-personalise-hint">Add a name, a signature, or a little something only you would say. We’ll handwrite your message.</p>
-          <p class="small muted">Choose the recipient’s location on the map, or enter their full address above.</p>
         </div>
+      </section>
 
-        <label><span>Note <span class="opt">(optional)</span></span>
-          <textarea name="note" rows="2" maxlength="300" placeholder="Allergies, a message on the cake, anything we should know"></textarea>
-        </label>
-        <label class="check-row"><input type="checkbox" name="remember" checked> <span>Remember my details on this device</span></label>
-      </form>
-    </div>
-    <footer class="drawer-foot" id="drawerFoot">
-      <div class="total-row"><span>Total</span><span id="boxTotal">0 EGP</span></div>
-      <p class="muted small">Plus delivery, confirmed on WhatsApp before baking.</p>
-      <button class="btn btn-primary btn-block" id="sendOrder" disabled>Send order on WhatsApp</button>
-      <p class="form-error" id="formError" role="alert"></p>
-      <div class="sent-note" id="sentNote" hidden>
-        <p>Your order is written out in WhatsApp. Press <strong>send</strong> there and Mariam will confirm it.</p>
-        <p class="small"><button type="button" class="link-btn" id="resend">Open WhatsApp again</button> · <button type="button" class="link-btn" id="newBox">Start a new box</button></p>
+      <section
+        class="ritual wrap section-space"
+        id="order"
+        aria-labelledby="ritualTitle"
+      >
+        <header class="section-heading">
+          <div>
+            <p class="overline">04 / The lovely little details</p>
+            <h2 id="ritualTitle">Simply <em>sweet.</em></h2>
+          </div>
+          <a href="#menu" class="text-link"
+            >Find your favourite
+            <span aria-hidden="true"
+              ><svg
+                class="arrow-svg"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.25"
+                aria-hidden="true"
+              >
+                <path d="M5 19 19 5M5 5h14v14" /></svg></span
+          ></a>
+        </header>
+        <ol class="steps">
+          <li>
+            <span>01</span>
+            <h3>Choose a little joy.</h3>
+            <p>Find a cake you love. Or a few to share.</p>
+          </li>
+          <li>
+            <span>02</span>
+            <h3>Make it yours.</h3>
+            <p>Add a handwritten note for your person and your occasion.</p>
+          </li>
+          <li>
+            <span>03</span>
+            <h3>Leave a little time.</h3>
+            <p>Order a day ahead. Mariam confirms the details on WhatsApp.</p>
+          </li>
+        </ol>
+        <div class="questions">
+          <details>
+            <summary>
+              A little about delivery <span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              Delivery is available across Cairo. The fee and time are confirmed
+              with Mariam before your order is baked.
+            </p>
+          </details>
+          <details>
+            <summary>
+              Ingredients and allergies <span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              Each cake lists its ingredients and allergens. The kitchen uses
+              nuts, gluten, eggs and dairy; traces are possible. Tell Mariam
+              about any allergies before ordering.
+            </p>
+          </details>
+        </div>
+        <p class="faq-more">
+          A question for the maison?
+          <a id="askLink2" href="#" target="_blank" rel="noopener"
+            >Ask us on WhatsApp</a
+          >
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-main">
+          <a class="brand" href="#top"
+            ><img
+              src="assets/logo-light.svg?v=3"
+              width="151"
+              height="55"
+              alt="Maison de Gaby"
+          /></a>
+          <p>The pleasure is in <em>the little things.</em></p>
+          <a class="back-to-top" href="#top" aria-label="Back to top"
+            ><svg
+              class="arrow-svg"
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.25"
+              aria-hidden="true"
+            >
+              <path d="M5 19 19 5M5 5h14v14" /></svg
+          ></a>
+        </div>
+        <div class="footer-contact">
+          <div>
+            <h3>Our neighbourhood</h3>
+            <p>Heliopolis (Masr El Gedida)<br />Cairo, Egypt</p>
+          </div>
+          <div>
+            <h3>A little conversation</h3>
+            <p>
+              WhatsApp <a id="waLink" href="#"></a><br /><span
+                id="wa2Row"
+                hidden
+                >Also <a id="waLink2" href="#"></a><br /></span
+              ><a id="igLink" href="#" target="_blank" rel="noopener" hidden
+                >Instagram</a
+              >
+            </p>
+          </div>
+          <div>
+            <h3>At your service</h3>
+            <p>Orders: daily, 10:00 to 20:00<br />Deliveries: 13:00 to 21:00</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>Heliopolis, Cairo · Made with care, by Mariam.</span
+          ><span
+            >© <span id="year"></span> Maison de Gaby ·
+            <a href="packaging">Packaging</a></span
+          >
+        </div>
       </div>
     </footer>
-  </aside>
+    <!-- QUICK ACCESS -->
+    <a
+      class="ask"
+      id="askLink"
+      href="#"
+      target="_blank"
+      rel="noopener"
+      aria-label="Ask a question on WhatsApp"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.2 3.6c-.5.4-1.3.1-1.3-.6V16A2.5 2.5 0 0 1 4 13.5z"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.4"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M8.5 9.5h7M8.5 12h4.5"
+          stroke="currentColor"
+          stroke-width="1.4"
+          stroke-linecap="round"
+        />
+      </svg>
+      <span>Questions?</span>
+    </a>
+    <button class="mbar" id="mbar" type="button" hidden>
+      <span class="mbar-count" id="mbarCount">0 items</span>
+      <span class="mbar-label">View my box</span>
+      <span class="mbar-total" id="mbarTotal">0 EGP</span>
+    </button>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <!-- BOX DRAWER -->
+    <div class="scrim" id="scrim" hidden></div>
+    <aside
+      class="drawer"
+      id="drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="drawerTitle"
+      aria-hidden="true"
+    >
+      <header class="drawer-head">
+        <h2 id="drawerTitle">My Box</h2>
+        <button class="icon-btn" id="closeBox" aria-label="Close">×</button>
+      </header>
+      <div class="drawer-body">
+        <ul class="box-list" id="boxList"></ul>
+        <p class="box-empty" id="boxEmpty">
+          Your box is empty.<br /><a href="#menu" data-close>View the menu →</a>
+        </p>
 
-  <script src="js/menu.js?v=4"></script>
-  <script src="js/main.js?v=9"></script>
-</body>
+        <form class="order-form" id="orderForm" novalidate>
+          <p class="form-title">Delivery</p>
+          <label
+            >Your name
+            <input
+              type="text"
+              name="name"
+              required
+              autocomplete="name"
+              maxlength="60"
+            />
+          </label>
+          <div class="form-row">
+            <label
+              >Date
+              <input type="date" name="date" required />
+            </label>
+            <label
+              >Time
+              <select name="slot">
+                <option>13:00 – 15:00</option>
+                <option>15:00 – 17:00</option>
+                <option>17:00 – 19:00</option>
+                <option>19:00 – 21:00</option>
+                <option selected>Any time</option>
+              </select>
+            </label>
+          </div>
+          <p class="date-hint small" id="dateHint"></p>
+          <label
+            >Area
+            <select name="area" required>
+              <option>Heliopolis / Masr El Gedida</option>
+              <option>Nasr City</option>
+              <option>El Nozha / Sheraton</option>
+              <option>New Cairo / Fifth Settlement</option>
+              <option>Other (we'll confirm)</option>
+            </select>
+          </label>
+          <section
+            class="delivery-location"
+            aria-labelledby="deliveryLocationTitle"
+          >
+            <p class="delivery-location-title" id="deliveryLocationTitle">
+              Where shall we deliver?
+            </p>
+            <p class="delivery-location-help">
+              Use your current location, or choose another destination on the
+              map.
+            </p>
+            <div class="delivery-location-actions">
+              <button
+                type="button"
+                class="btn btn-outline"
+                id="useMyLocation"
+                aria-pressed="false"
+                aria-controls="deliveryMapPanel"
+                aria-expanded="false"
+              >
+                Use my location
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline"
+                id="chooseDeliveryLocation"
+                aria-pressed="false"
+                aria-controls="deliveryMapPanel"
+                aria-expanded="false"
+              >
+                Choose another address
+              </button>
+            </div>
+            <div class="delivery-map-panel" id="deliveryMapPanel" hidden>
+              <div
+                class="delivery-map"
+                id="deliveryMap"
+                role="region"
+                aria-label="Delivery location map"
+                aria-describedby="deliveryMapHelp"
+                tabindex="0"
+              ></div>
+              <p class="delivery-map-instructions" id="deliveryMapHelp">
+                Tap the map or drag the pin to the entrance. You can also pan
+                with the arrow keys and choose the map centre.
+              </p>
+              <div class="delivery-map-actions">
+                <button
+                  type="button"
+                  class="link-btn"
+                  id="useMapCenter"
+                  disabled
+                >
+                  Use map centre
+                </button>
+                <button
+                  type="button"
+                  class="link-btn"
+                  id="clearDeliveryLocation"
+                  hidden
+                >
+                  Remove pin
+                </button>
+              </div>
+            </div>
+            <div
+              class="delivery-location-summary"
+              id="deliveryLocationSummary"
+              hidden
+            >
+              <p id="deliveryCoordinates"></p>
+              <a id="deliveryMapLink" target="_blank" rel="noopener noreferrer"
+                >Check this location in Google Maps</a
+              >
+            </div>
+            <p
+              class="delivery-location-status"
+              id="deliveryLocationStatus"
+              role="status"
+              aria-live="polite"
+            ></p>
+            <p
+              class="delivery-location-error"
+              id="deliveryLocationError"
+              role="alert"
+            ></p>
+          </section>
+          <label
+            >Address details
+            <input
+              type="text"
+              name="address"
+              autocomplete="street-address"
+              maxlength="160"
+              placeholder="Street, building, floor, flat"
+            />
+          </label>
+
+          <label class="check-row"
+            ><input type="checkbox" name="gift" id="giftToggle" />
+            <span>Send it as a gift</span></label
+          >
+          <div class="gift-fields" id="giftFields" hidden>
+            <label
+              >Their name
+              <input type="text" name="toName" maxlength="60" />
+            </label>
+            <label
+              >Their phone
+              <input
+                type="tel"
+                name="toPhone"
+                inputmode="tel"
+                maxlength="20"
+                placeholder="01x xxxx xxxx"
+              />
+            </label>
+            <details class="card-chooser">
+              <summary>Choose a literary card</summary>
+              <p class="card-chooser-intro">
+                Two thoughtful messages for every occasion. Choose one, then
+                make it your own.
+              </p>
+              <div
+                class="card-library"
+                data-card-library
+                data-card-mode="checkout"
+              ></div>
+            </details>
+            <label
+              >Message for the card
+              <textarea
+                name="card"
+                rows="5"
+                maxlength="400"
+                placeholder="Choose a literary card, or write a few words of your own…"
+              ></textarea>
+            </label>
+            <p class="card-personalise-hint">
+              Add a name, a signature, or a little something only you would say.
+              We’ll handwrite your message.
+            </p>
+            <p class="small muted">
+              Choose the recipient’s location on the map, or enter their full
+              address above.
+            </p>
+          </div>
+
+          <label
+            ><span>Note <span class="opt">(optional)</span></span>
+            <textarea
+              name="note"
+              rows="2"
+              maxlength="300"
+              placeholder="Allergies, a message on the cake, anything we should know"
+            ></textarea>
+          </label>
+          <label class="check-row"
+            ><input type="checkbox" name="remember" checked />
+            <span>Remember my details on this device</span></label
+          >
+        </form>
+      </div>
+      <footer class="drawer-foot" id="drawerFoot">
+        <div class="total-row">
+          <span>Total</span><span id="boxTotal">0 EGP</span>
+        </div>
+        <p class="muted small">
+          Plus delivery, confirmed on WhatsApp before baking.
+        </p>
+        <button class="btn btn-primary btn-block" id="sendOrder" disabled>
+          Send order on WhatsApp
+        </button>
+        <p class="form-error" id="formError" role="alert"></p>
+        <div class="sent-note" id="sentNote" hidden>
+          <p>
+            Your order is written out in WhatsApp. Press
+            <strong>send</strong> there and Mariam will confirm it.
+          </p>
+          <p class="small">
+            <button type="button" class="link-btn" id="resend">
+              Open WhatsApp again
+            </button>
+            ·
+            <button type="button" class="link-btn" id="newBox">
+              Start a new box
+            </button>
+          </p>
+        </div>
+      </footer>
+    </aside>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="js/menu.js?v=4"></script>
+    <script src="js/main.js?v=10"></script>
+  </body>
 </html>

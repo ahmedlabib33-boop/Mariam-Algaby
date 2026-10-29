@@ -65,11 +65,20 @@
         }
       });
     });
-    mounts.forEach(function (mount, index) { initialise(mount, data.occasions, index); });
+    var checkoutController = null;
+    mounts.forEach(function (mount, index) {
+      var controller = initialise(mount, data.occasions, index);
+      if (controller) checkoutController = controller;
+    });
+    initialiseHome(data.occasions, checkoutController);
   }).catch(function () {
     mounts.forEach(function (mount) {
       mount.replaceChildren(element("p", "card-library-error", "The card collection couldn’t load just now. You can still write your own message in your box."));
     });
+    var choose = document.getElementById("chooseCard");
+    var status = document.getElementById("giftStatus");
+    if (choose) choose.disabled = true;
+    if (status) status.textContent = "The notes couldn’t load just now. You can still write your own message in your box.";
   });
 
   function initialise(mount, occasions, index) {
@@ -83,6 +92,13 @@
     }
     var selected = pending ? pending.card.id : "";
     var current = pending ? pending.occasion : occasions[0];
+    var listeners = [];
+    var applyingChoice = false;
+
+    function notify(reason) {
+      var choice = selected ? findChoice(occasions, selected) : null;
+      listeners.forEach(function (listener) { listener(choice, reason); });
+    }
 
     mount.replaceChildren();
     var toolbar = element("div", "card-library-toolbar");
@@ -160,28 +176,38 @@
         else status.textContent = "This browser couldn’t save your choice. Copy your favourite words and add them to the gift message in your box.";
         return;
       }
+      applyingChoice = true;
       field.value = cardText(card);
       // Let the existing order form clear a previous sent state before marking the selection.
       field.dispatchEvent(new Event("input", { bubbles: true }));
+      applyingChoice = false;
       selected = card.id;
       remember(card.id);
       gift.checked = true;
       if (focus === false) document.getElementById("giftFields").hidden = false;
       else gift.dispatchEvent(new Event("change", { bubbles: true }));
-      markSelected();
+      var choice = findChoice(occasions, card.id);
+      if (choice && current.id !== choice.occasion.id) {
+        current = choice.occasion;
+        select.value = current.id;
+        render();
+      } else markSelected();
       status.textContent = "“" + card.title + "” is in your gift message. Make it yours below.";
       var disclosure = mount.closest("details");
       if (disclosure) disclosure.open = false;
       if (focus !== false) field.focus();
+      notify("chosen");
     }
 
     if (checkout) {
       field.addEventListener("input", function () {
+        if (applyingChoice) return;
         selected = "";
         remember("");
         markSelected();
         status.textContent = "Your personal message will be handwritten on the card.";
         removeNotice();
+        notify("edited");
       });
       gift.addEventListener("change", function () {
         if (!gift.checked) {
@@ -190,6 +216,7 @@
           markSelected();
           removeNotice();
           status.textContent = "";
+          notify("cleared");
         }
       });
       document.addEventListener("maison:new-box", function () {
@@ -198,6 +225,7 @@
         status.textContent = "";
         markSelected();
         removeNotice();
+        notify("reset");
       });
     }
 
@@ -208,7 +236,96 @@
       var note = element("p", "gift-card-notice", "Your “" + pending.card.title + "” card is saved. Choose your desserts, then personalise it in My box.");
       note.id = "giftCardNotice";
       note.setAttribute("role", "status");
-      document.getElementById("nextDelivery").insertAdjacentElement("afterend", note);
+      var nextDelivery = document.getElementById("nextDelivery");
+      if (nextDelivery) nextDelivery.insertAdjacentElement("afterend", note);
     }
+    if (checkout) return {
+      choose: function (card) { choose(card, false); },
+      selected: function () { return selected ? findChoice(occasions, selected) : null; },
+      subscribe: function (listener) { listeners.push(listener); }
+    };
+  }
+
+  function initialiseHome(occasions, checkout) {
+    var editor = document.getElementById("homeCardEditor");
+    if (!editor) return;
+    var select = document.getElementById("occasionSelect");
+    var choices = document.getElementById("messageChoices");
+    var choose = document.getElementById("chooseCard");
+    var status = document.getElementById("giftStatus");
+    var selectedLabel = document.getElementById("selectedCardLabel");
+    var currentCard = null;
+    var selectedChoice = checkout ? checkout.selected() : null;
+    var currentOccasion = selectedChoice ? selectedChoice.occasion : occasions[0];
+    if (!select || !choices || !choose || !status || !selectedLabel) return;
+    if (!checkout) {
+      choose.disabled = true;
+      status.textContent = "You can choose and personalise a card in your box.";
+      return;
+    }
+
+    function text(id, value) {
+      var field = document.getElementById(id);
+      if (field) field.textContent = value;
+    }
+    function markSelected() {
+      selectedLabel.textContent = selectedChoice ? selectedChoice.occasion.label + " · " + selectedChoice.card.title : "";
+      choose.setAttribute("aria-pressed", String(!!selectedChoice && !!currentCard && selectedChoice.card.id === currentCard.id));
+    }
+    function preview(card) {
+      currentCard = card;
+      text("cardTitle", card.title);
+      text("cardQuote", "“" + card.quote + "”");
+      text("cardAuthor", card.author);
+      text("cardMessage", card.message);
+      choices.querySelectorAll("[data-message-id]").forEach(function (button) {
+        button.setAttribute("aria-pressed", String(button.dataset.messageId === card.id));
+      });
+      choose.disabled = false;
+      markSelected();
+    }
+    function renderChoices(card) {
+      choices.replaceChildren();
+      currentOccasion.cards.forEach(function (entry) {
+        var button = element("button", "message-option");
+        button.type = "button";
+        button.dataset.messageId = entry.id;
+        button.setAttribute("aria-pressed", "false");
+        button.appendChild(element("span", "message-option-title", entry.title));
+        button.appendChild(element("small", "", entry.author));
+        button.addEventListener("click", function () { preview(entry); });
+        choices.appendChild(button);
+      });
+      preview(card || currentOccasion.cards[0]);
+    }
+
+    select.replaceChildren();
+    occasions.forEach(function (occasion) {
+      var option = element("option", "", occasion.label);
+      option.value = occasion.id;
+      select.appendChild(option);
+    });
+    select.value = currentOccasion.id;
+    select.addEventListener("change", function () {
+      currentOccasion = occasions.find(function (occasion) { return occasion.id === select.value; });
+      renderChoices();
+    });
+    choose.addEventListener("click", function () {
+      if (currentCard) checkout.choose(currentCard);
+    });
+    checkout.subscribe(function (choice, reason) {
+      selectedChoice = choice;
+      if (choice) {
+        currentOccasion = choice.occasion;
+        select.value = currentOccasion.id;
+        renderChoices(choice.card);
+        status.textContent = "“" + choice.card.title + "” is in your gift message. Personalise it in Your box.";
+      } else {
+        markSelected();
+        status.textContent = reason === "edited" ? "Your personal message is in your box. Choose a note to replace it." : "";
+      }
+    });
+    renderChoices(selectedChoice ? selectedChoice.card : null);
+    if (selectedChoice) status.textContent = "“" + selectedChoice.card.title + "” is in your gift message. Personalise it in Your box.";
   }
 })();

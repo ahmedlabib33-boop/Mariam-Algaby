@@ -241,6 +241,9 @@ class CourierAdminTests(unittest.TestCase):
         self.page.keyboard.press('Home')
         expect(self.page.locator('#editor')).to_be_visible()
         self.page.keyboard.press('End')
+        expect(self.page.locator('#partners')).to_be_visible()
+        expect(self.page.locator('#partnersTab')).to_be_focused()
+        self.page.keyboard.press('ArrowLeft')
         expect(self.page.locator('#couriers')).to_be_visible()
         expect(self.page.locator('#couriersTab')).to_be_focused()
         for width in [320, 390, 768, 1440]:

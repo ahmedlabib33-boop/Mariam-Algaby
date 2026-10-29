@@ -71,20 +71,30 @@
     ["boxes", "Boxes"],
     ["gf", "Gluten-free"]
   ];
+  var TASTES = { "golden-carrot": "spiced", "milk-cloud": "soft", "toffee-cuddle": "rich", "cinnamon-kisses": "spiced", "chocolate-crush": "rich" };
+  var TASTE_FILTERS = [["all", "All cakes"], ["soft", "Soft & creamy"], ["spiced", "Warm & spiced"], ["rich", "Rich & indulgent"]];
+  function taste(it) { return Object.prototype.hasOwnProperty.call(TASTES, it.id) ? TASTES[it.id] : ""; }
+  function tasteLabel(it) {
+    var group = TASTE_FILTERS.find(function (entry) { return entry[0] === taste(it); });
+    return group ? group[1] : "Made to order";
+  }
   function matches(it) {
     if (filter === "all") return true;
     if (filter === "gf") return glutenFree(it);
+    if (filter === "soft" || filter === "spiced" || filter === "rich") return taste(it) === filter;
     return kind(it) === filter;
   }
   function renderFilters() {
-    var counts = { all: M.items.length, cakes: 0, boxes: 0, gf: 0 };
-    M.items.forEach(function (it) { counts[kind(it)]++; if (glutenFree(it)) counts.gf++; });
-    // Filters only help when the menu actually splits into groups.
-    var useful = M.items.length > 4 && counts.cakes && counts.boxes;
+    var counts = { all: M.items.length, cakes: 0, boxes: 0, gf: 0, soft: 0, spiced: 0, rich: 0 };
+    M.items.forEach(function (it) { counts[kind(it)]++; if (glutenFree(it)) counts.gf++; if (taste(it)) counts[taste(it)]++; });
+    // Unknown future desserts stay in All; do not infer a flavour from their name.
+    var tasting = M.items.length > 1 && M.items.every(function (it) { return !!taste(it); });
+    var options = tasting ? TASTE_FILTERS : FILTERS;
+    var useful = tasting || (M.items.length > 4 && counts.cakes && counts.boxes);
     $("filters").hidden = !useful;
     if (!useful) { filter = "all"; return; }
     if (!counts[filter]) filter = "all";
-    $("filters").innerHTML = FILTERS.filter(function (f) { return counts[f[0]]; }).map(function (f) {
+    $("filters").innerHTML = options.filter(function (f) { return counts[f[0]]; }).map(function (f) {
       return '<button type="button" class="chip-btn" data-filter="' + f[0] + '" aria-pressed="' + (filter === f[0]) + '">' +
         f[1] + ' <span>' + counts[f[0]] + "</span></button>";
     }).join("");
@@ -113,23 +123,24 @@
     var a = allergens(it);
     var gf = glutenFree(it);
     return '<article class="dish' + (it.soldOut ? " is-sold-out" : "") + '" style="--i:' + n + '">' +
+      '<span class="dish-no">' + String(n).padStart(2, "0") + "</span>" +
       '<div class="dish-art">' + (it.photo ? '<img src="' + esc(it.photo) + '" alt="' + esc(it.name) + '" width="900" height="675" loading="lazy" decoding="async">' : "") +
-        '<span class="dish-no">N° ' + String(n).padStart(2, "0") + "</span>" +
         (gf ? '<span class="dish-badge">Gluten-free</span>' : "") +
         (it.soldOut ? '<span class="sold-tag">Sold out today</span>' : "") + "</div>" +
       '<div class="dish-body">' +
-        "<h3>" + esc(it.name) + "</h3>" +
+        '<p class="dish-kicker">' + esc(tasteLabel(it)) + "</p>" +
+        '<div class="dish-heading"><h3>' + esc(it.name) + '</h3><span class="price">' + money(it.price) + "</span></div>" +
         '<p class="dish-desc">' + esc(it.desc) + "</p>" +
         (a && a.length ? '<p class="dish-allergens"><span class="sr">Contains: </span>' + a.map(esc).join('<i aria-hidden="true"> · </i>') + "</p>" : "") +
         (it.ingredients ? '<details class="dish-ingr" data-id="' + esc(it.id) + '"><summary>Ingredients</summary><p>' + esc(it.ingredients) + "</p></details>" : "") +
-        '<div class="dish-meta"><span>' + esc(it.portion) + '</span><span class="price">' + money(it.price) + "</span></div>" +
+        '<div class="dish-meta"><span>' + esc(it.portion) + '</span></div><div class="dish-actions">' +
         (it.soldOut
           ? '<button class="btn btn-outline btn-block" disabled>Sold out</button>'
           : qty
           ? '<div class="stepper" data-id="' + esc(it.id) + '"><button data-act="dec" aria-label="Remove one ' + esc(it.name) + '">−</button><span aria-live="polite">' + qty +
             ' in your box</span><button data-act="inc" aria-label="Add one more ' + esc(it.name) + '">+</button></div>'
           : '<button class="btn btn-outline btn-block" data-act="add" data-id="' + esc(it.id) + '">Add to my box</button>') +
-      "</div></article>";
+      "</div></div></article>";
   }
 
   function renderMenu() {
@@ -143,6 +154,11 @@
     var html = "";
     M.items.forEach(function (it, i) { if (matches(it)) html += dishCard(it, i + 1); });
     $("menuGrid").innerHTML = html;
+    var menuCount = document.getElementById("menuCount");
+    if (menuCount) {
+      var count = M.items.filter(matches).length;
+      menuCount.textContent = count + (count === 1 ? " cake" : " cakes");
+    }
     Object.keys(open).forEach(function (id) {
       var d = $("menuGrid").querySelector('.dish-ingr[data-id="' + CSS.escape(id) + '"]');
       if (d) d.open = true;

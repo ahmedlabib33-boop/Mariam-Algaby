@@ -57,6 +57,8 @@ If you need to change the other agent's area, keep the change small and note it 
 
 Newest first. One or two lines each: date, agent, what changed, what's left.
 
+- 2026-10-30 · Codex: owner approved publishing Daylight Atelier; added the light homepage, tasting filters
+  and shared homepage/checkout gift notes. Menu, 19 API, 8 courier and new ordering/map checks pass; live menu untouched.
 - 2026-10-29 · Claude: recipe photos. Each private recipe has `photo` (site path or Blob URL), `photoCredit` and
   `photoPage`; the admin Recipes tab shows a thumbnail and a photo (small change in `renderRecipe`, styles at the end
   of `admin.css`), and the PDF shows them beside each title. Twelve new Unsplash photos uploaded via `/api/upload`.
